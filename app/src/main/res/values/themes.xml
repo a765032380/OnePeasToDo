@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Theme.OnePeasToDo" parent="SplashScreenTheme" />
 
-    <style name="Theme.OnePeasToDo" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="SplashScreenTheme" parent="SplashScreenTheme.Base">
+<!--        使用windowSplashScreenAnimatedIcon添加可绘制或动画可绘制。其中之一是必需的。-->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+    </style>
+
+
+    <style name="SplashScreenTheme.Base" parent="Theme.SplashScreen">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+
+        <!--  设置启动屏幕背景、动画图标和动画持续时间。-->
+        <item name="windowSplashScreenAnimationDuration">@integer/icon_animator_duration</item>
+        <!-- screen background color -->
+        <item name="windowSplashScreenBackground">@color/primary</item>
+
+        <!--  设置直接跟随启动屏幕的活动主题。-->
+        <item name="postSplashScreenTheme">@style/TargetScreenTheme</item>
+    </style>
+    <style name="TargetScreenTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

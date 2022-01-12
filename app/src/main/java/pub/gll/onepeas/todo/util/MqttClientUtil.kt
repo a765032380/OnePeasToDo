@@ -1,30 +1,37 @@
-package pub.gll.onepeas.todo
+package pub.gll.onepeas.todo.util
 
+import android.util.Log
+import pub.gll.onepeas.todo.util.MqttClientUtil.TAG
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import kotlin.system.exitProcess
 
 object MqttClientUtil {
+    const val TAG = "MqttClientUtil"
+
+    private const val TOPIC = "testtopic"
     fun pubTopic():String{
-        return PUB_TOPIC//这里需要加上UserId
+        return PUB_TOPIC + CacheUtil.getUID()//这里需要加上UserId
     }
     private val persistence = MemoryPersistence()
     //订阅专题
-    private const val SUB_TOPIC = "testtopic/#"
+    private const val SUB_TOPIC = "$TOPIC/#"
     //发送时带的专题 需要加上userId
-    private const val PUB_TOPIC = "testtopic/"
+    private const val PUB_TOPIC = "$TOPIC/"
     //连接质量
     private const val QOS = 2
     //连接地址
     private const val BROKER = "ws://gll.pub:8083"
     //客户端id
-    private const val CLIENT_ID = "emqx_test"
-    private val client = MqttClient(BROKER, CLIENT_ID, persistence)
+    private val CLIENT_ID : String by lazy { "lot"+CacheUtil.getUID() }
+    private val client :MqttClient by lazy {
+        MqttClient(BROKER, CLIENT_ID, persistence)
+    }
 
     private fun options():MqttConnectOptions{
         val connOpts = MqttConnectOptions()
-        connOpts.userName = "emqx_test"
-        connOpts.password = "emqx_test_password".toCharArray()
+        connOpts.userName = "lot"+CacheUtil.getUID()
+        connOpts.password = "lot_password".toCharArray()
         // 保留会话
         connOpts.isCleanSession = true
         return connOpts
@@ -35,26 +42,34 @@ object MqttClientUtil {
             // 设置回调
             client.setCallback(MessageCallback(onMessageCallback))
             // 建立连接
-            println("Connecting to broker: $BROKER")
+            Log.e(TAG,"Connecting to broker: $BROKER")
             client.connect(options())
-            println("Connected")
+            subscribe()
+            Log.e(TAG,"Connected")
         } catch (me: MqttException) {
-            println("reason " + me.reasonCode)
-            println("msg " + me.message)
-            println("loc " + me.localizedMessage)
-            println("cause " + me.cause)
-            println("excep $me")
+            Log.e(TAG,"reason " + me.reasonCode)
+            Log.e(TAG,"msg " + me.message)
+            Log.e(TAG,"loc " + me.localizedMessage)
+            Log.e(TAG,"cause " + me.cause)
+            Log.e(TAG,"excep $me")
             me.printStackTrace()
         }
     }
 
     fun reClient(){
-        client.connect(options())
+        try {
+            client.connect(options())
+            subscribe()
+            Log.e(TAG,"reConnected")
+        }catch (e:Exception){
+            Thread.sleep(200)
+            reClient()
+        }
     }
 
     fun disconnect(){
         client.disconnect()
-        println("Disconnected")
+        Log.e(TAG,"Disconnected")
         client.close()
         exitProcess(0)
     }
@@ -65,19 +80,23 @@ object MqttClientUtil {
     }
 
     fun publish(content:String){
-        println("Publishing message: $content")
-        // 消息发布所需参数
-        val message = MqttMessage(content.toByteArray())
-        message.qos = QOS
-        client.publish(pubTopic(), message)
-        println("Message published")
+        try {
+            Log.e(TAG,"Publishing message: $content")
+            // 消息发布所需参数
+            val message = MqttMessage(content.toByteArray())
+            message.qos = QOS
+            client.publish(pubTopic(), message)
+            Log.e(TAG,"Message published")
+        }catch (e:Exception){
+            showToast("发送失败")
+        }
     }
 }
 
 class MessageCallback(private val onMessageCallback: (topic: String, message: MqttMessage)->Unit) : MqttCallback {
     override fun connectionLost(cause: Throwable) {
         // 连接丢失后，一般在这里面进行重连
-        println("连接断开，可以做重连")
+        Log.e(TAG,"连接断开，可以做重连")
         MqttClientUtil.reClient()
     }
 
@@ -92,6 +111,6 @@ class MessageCallback(private val onMessageCallback: (topic: String, message: Mq
     }
 
     override fun deliveryComplete(token: IMqttDeliveryToken) {
-        println("deliveryComplete---------" + token.isComplete)
+        Log.e(TAG,"deliveryComplete---------" + token.isComplete)
     }
 }
