@@ -1,7 +1,8 @@
 buildscript {
     ext {
 
-        isModularize = true
+        gsonVersion = '2.8.9'
+        hiltAndroidVersion = '2.40.5'
 
         compile_sdk = 31
         min_sdk = 21
@@ -16,8 +17,27 @@ buildscript {
         ktx_version = '1.7.0'
         material3_version = '1.0.0-alpha02'
 
+        kotlin_version = '1.5.31'
+        accompanistVersion = "0.18.0"
+        hiltVersion = "2.38.1"
+        hiltCompilerVersion = "1.0.0"
+        hiltComposeVersion = "1.0.0-alpha03"
+        retrofitVersion = "2.9.0"
+        gsonVersion = "2.8.6"
+        datastoreVersion = "1.0.0-rc02"
+        pagingVersion = "3.1.0-rc01"
+        pagingComposeVersion = "1.0.0-alpha14"
+        constraintComposeVersion = "1.0.0-rc01"
+
     }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.3"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.39"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+    }
+}
 plugins {
     id 'com.android.application' version '7.2.0-alpha06' apply false
     id 'com.android.library' version '7.2.0-alpha06' apply false
