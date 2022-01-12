@@ -3,6 +3,7 @@ package pub.gll.onepeas.todo
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.tencent.mmkv.MMKV
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.todo.data.DataStoreUtils
 
@@ -25,5 +26,6 @@ class MyApp : Application() {
         super.onCreate()
         CONTEXT = this
         DataStoreUtils.init(this)
+        MMKV.initialize(this)
     }
 }

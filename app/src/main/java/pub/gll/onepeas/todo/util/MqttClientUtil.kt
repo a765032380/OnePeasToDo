@@ -1,15 +1,17 @@
 package pub.gll.onepeas.todo.util
 
 import android.util.Log
+import com.google.gson.Gson
 import pub.gll.onepeas.todo.util.MqttClientUtil.TAG
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
+import pub.gll.onepeas.todo.test.Instructions
 import kotlin.system.exitProcess
 
 object MqttClientUtil {
     const val TAG = "MqttClientUtil"
 
-    private const val TOPIC = "testtopic"
+    private const val TOPIC = "lottopic"
     fun pubTopic():String{
         return PUB_TOPIC + CacheUtil.getUID()//这里需要加上UserId
     }
@@ -77,6 +79,15 @@ object MqttClientUtil {
     fun subscribe(){
         // 订阅
         client.subscribe(SUB_TOPIC)
+    }
+    fun publish(instructions: Instructions){
+        publish(Gson().toJson(instructions))
+    }
+    fun publishEnd(end: Int){
+        publish(Gson().toJson(Instructions(0,0, end)))
+    }
+    fun publishStart2End(start:Int,end: Int){
+        publish(Gson().toJson(Instructions(1,start, end)))
     }
 
     fun publish(content:String){

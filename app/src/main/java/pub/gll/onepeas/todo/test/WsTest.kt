@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
                     online()
                 }
                 PROGRESS -> {
-                    publishSeekReceived(instructions.content)
+//                    publishSeekReceived(instructions.content)
                 }
             }
         } catch (e: Exception) {
@@ -56,19 +56,19 @@ fun main(args: Array<String>) {
 }
 
 private fun online(){
-    MqttClientUtil.publish(Gson().toJson(Instructions(ONLINE, 45)))
+//    MqttClientUtil.publish(Gson().toJson(Instructions(ONLINE, 45)))
 }
 private fun openReceived(){
-    MqttClientUtil.publish(Gson().toJson(Instructions(OPEN_RECEIVED, 45)))
+//    MqttClientUtil.publish(Gson().toJson(Instructions(OPEN_RECEIVED, 45)))
 }
 private fun publishSeekReceived(seek: Int){
-    MqttClientUtil.publish(Gson().toJson(Instructions(PROGRESS_RECEIVED, seek)))
+//    MqttClientUtil.publish(Gson().toJson(Instructions(PROGRESS_RECEIVED, seek)))
 }
 
 private fun closeReceived(){
-    MqttClientUtil.publish(Gson().toJson(Instructions(CLOSE_RECEIVED, 45)))
+//    MqttClientUtil.publish(Gson().toJson(Instructions(CLOSE_RECEIVED, 45)))
 }
 
 
 
-data class Instructions(val code:Int,val content:Int)
+data class Instructions(val code:Int,val start:Int,val end:Int)

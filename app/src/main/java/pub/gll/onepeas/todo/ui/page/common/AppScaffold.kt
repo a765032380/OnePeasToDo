@@ -2,10 +2,8 @@ package pub.gll.onepeas.todo.ui.page.common
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -26,6 +24,7 @@ import pub.gll.onepeas.todo.ui.login.LoginPage
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
+import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.fromJson
 
 @OptIn(ExperimentalPagerApi::class)
@@ -42,6 +41,10 @@ fun AppScaffold() {
         modifier = Modifier
             .statusBarsPadding()
             .navigationBarsPadding(),
+        floatingActionButton = {
+            MqttClientUtil.publishStart2End(0,180)
+        },
+        floatingActionButtonPosition = FabPosition.Center,
         bottomBar = {
             when (currentDestination?.route) {
                 RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
