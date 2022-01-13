@@ -13,6 +13,6 @@ sealed class BottomNavRoute(
 ) {
     object Home: BottomNavRoute(RouteName.HOME, R.string.home, Icons.Default.Home)
     object Category: BottomNavRoute(RouteName.CATEGORY, R.string.category, Icons.Default.Menu)
-    object Collection: BottomNavRoute(RouteName.COLLECTION, R.string.collection, Icons.Default.Favorite)
+    object SETTING: BottomNavRoute(RouteName.SETTING, R.string.setting, Icons.Default.Settings)
     object Profile: BottomNavRoute(RouteName.PROFILE, R.string.profile, Icons.Default.Person)
 }

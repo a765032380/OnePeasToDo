@@ -260,7 +260,7 @@ fun BottomNavBarView(navCtrl: NavHostController) {
     val bottomNavList = listOf(
         BottomNavRoute.Home,
         BottomNavRoute.Category,
-        BottomNavRoute.Collection,
+        BottomNavRoute.SETTING,
         BottomNavRoute.Profile
     )
     BottomNavigation {
