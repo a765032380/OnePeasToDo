@@ -57,10 +57,10 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
         floatingActionButton = {
             androidx.compose.material3.FloatingActionButton(
                 onClick = {
-                    settingVM.open()
+                    settingVM.close()
                 },
-                modifier = Modifier.size(50.dp),
-                shape = RoundedCornerShape(25.dp),
+                modifier = Modifier.size(100.dp),
+                shape = RoundedCornerShape(50.dp),
                 contentColor = Color.Blue,
                 elevation = FloatingActionButtonDefaults.elevation(
                     defaultElevation = 8.dp,
@@ -72,8 +72,8 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
 //                Spacer(modifier = Modifier.width(10.dp))
                     androidx.compose.material3.Text(
                         text = "关灯",
-                        fontSize = 12.sp,
-                        color = Color.White
+                        fontSize = 18.sp,
+                        color = Color.Black
                     )
                 }
             }

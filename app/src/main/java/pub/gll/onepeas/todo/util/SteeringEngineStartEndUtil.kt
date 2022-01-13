@@ -5,24 +5,46 @@ import pub.gll.onepeas.todo.bean.UserInfo
 import pub.gll.onepeas.todo.data.DataStoreUtils
 
 object SteeringEngineStartEndUtil {
-    private const val STEERING_ENGINE_START = "steering_engine_start"
-    private const val STEERING_ENGINE_END = "steering_engine_end"
-    var start: Int
-        get() = DataStoreUtils.readIntData(STEERING_ENGINE_START, 0)
-        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_START, value = value)
+    private const val STEERING_ENGINE_OPEN_START = "steering_engine_open_start"
+    private const val STEERING_ENGINE_OPEN_END = "steering_engine_open_end"
 
-    var end: Int
-        get() = DataStoreUtils.readIntData(STEERING_ENGINE_END, 0)
-        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_END, value = value)
+    private const val STEERING_ENGINE_CLOSE_START = "steering_engine_close_start"
+    private const val STEERING_ENGINE_CLOSE_END = "steering_engine_close_end"
 
-    val steeringEngineConfig: SteeringEngineConfig
-        get() = SteeringEngineConfig(start, end)
+    var openStart: Int
+        get() = DataStoreUtils.readIntData(STEERING_ENGINE_OPEN_START, 0)
+        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_START, value = value)
 
-    fun onStart(start: Int) {
-        this.start = start
+    var openEnd: Int
+        get() = DataStoreUtils.readIntData(STEERING_ENGINE_OPEN_END, 0)
+        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_END, value = value)
+
+    var closeStart: Int
+        get() = DataStoreUtils.readIntData(STEERING_ENGINE_OPEN_START, 0)
+        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_START, value = value)
+
+    var closeEnd: Int
+        get() = DataStoreUtils.readIntData(STEERING_ENGINE_OPEN_END, 0)
+        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_END, value = value)
+
+    val steeringEngineStartConfig: SteeringEngineConfig
+        get() = SteeringEngineConfig(openStart, openEnd)
+
+    val steeringEngineEndConfig: SteeringEngineConfig
+        get() = SteeringEngineConfig(openStart, openEnd)
+
+    fun onOpenStart(start: Int) {
+        this.openStart = start
     }
 
-    fun onEnd(end:Int) {
-        this.end = end
+    fun onOpenEnd(end:Int) {
+        this.openEnd = end
+    }
+    fun onCloseStart(start: Int) {
+        this.closeStart = start
+    }
+
+    fun onCloseEnd(end:Int) {
+        this.closeEnd = end
     }
 }

@@ -1,5 +1,6 @@
 package pub.gll.onepeas.todo.ui.setting
 
+import androidx.compose.material.Snackbar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,31 +17,45 @@ class SettingVM @Inject constructor() : ViewModel() {
 
     private val _viewEvents = Channel<SettingPageViewEvent>(Channel.BUFFERED)
     val viewEvents = _viewEvents.receiveAsFlow()
-    var start:Int
-        set(value) {
-            viewModelScope.launch {
-                SteeringEngineStartEndUtil.onStart(value)
-            }
-        }
-        get() = SteeringEngineStartEndUtil.steeringEngineConfig.start
-    var end :Int
-        set(value) {
-            viewModelScope.launch {
-                SteeringEngineStartEndUtil.onEnd(value)
-            }
-        }
-        get() = SteeringEngineStartEndUtil.steeringEngineConfig.end
 
     fun close(){
-        viewModelScope.launch {
-            _viewEvents.send(SettingPageViewEvent.PopBack)
+        viewModelScope.launch (Dispatchers.IO) {
+            MqttClientUtil.publishStart2End(SteeringEngineStartEndUtil.closeStart,SteeringEngineStartEndUtil.closeEnd)
         }
     }
+
     fun open(){
         viewModelScope.launch (Dispatchers.IO) {
-            MqttClientUtil.publishStart2End(start,end)
+            MqttClientUtil.publishStart2End(SteeringEngineStartEndUtil.openStart,SteeringEngineStartEndUtil.openEnd)
         }
+    }
+    fun sendValue(value:Int){
+        viewModelScope.launch (Dispatchers.IO) {
+            MqttClientUtil.publishEnd(value)
+        }
+    }
 
+    fun saveOpenStart(openStart: Int){
+        viewModelScope.launch {
+            SteeringEngineStartEndUtil.onOpenStart(openStart)
+        }
+    }
+    fun saveOpenEnd(openEnd:Int){
+        viewModelScope.launch {
+            SteeringEngineStartEndUtil.onOpenEnd(openEnd)
+        }
+        sendValue(openEnd)
+    }
+    fun saveCloseStart(closeStart:Int){
+        viewModelScope.launch {
+            SteeringEngineStartEndUtil.onCloseStart(closeStart)
+        }
+    }
+    fun saveCloseEnd(closeEnd:Int){
+        viewModelScope.launch {
+            SteeringEngineStartEndUtil.onCloseEnd(closeEnd)
+        }
+        sendValue(closeEnd)
     }
 
 }
