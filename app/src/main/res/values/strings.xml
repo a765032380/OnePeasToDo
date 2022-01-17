@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">OnePeasToDo</string>
     <string name="home">首页</string>
-    <string name="category">分类</string>
+    <string name="wifi">WIFI</string>
     <string name="setting">设置</string>
     <string name="profile">我的</string>
 </resources>

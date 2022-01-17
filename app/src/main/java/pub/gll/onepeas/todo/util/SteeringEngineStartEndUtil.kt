@@ -20,12 +20,12 @@ object SteeringEngineStartEndUtil {
         set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_END, value = value)
 
     var closeStart: Int
-        get() = DataStoreUtils.readIntData(STEERING_ENGINE_OPEN_START, 0)
-        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_START, value = value)
+        get() = DataStoreUtils.readIntData(STEERING_ENGINE_CLOSE_START, 56)
+        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_CLOSE_START, value = value)
 
     var closeEnd: Int
-        get() = DataStoreUtils.readIntData(STEERING_ENGINE_OPEN_END, 0)
-        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_OPEN_END, value = value)
+        get() = DataStoreUtils.readIntData(STEERING_ENGINE_CLOSE_END, 94)
+        set(value) = DataStoreUtils.saveSyncIntData(STEERING_ENGINE_CLOSE_END, value = value)
 
     val steeringEngineStartConfig: SteeringEngineConfig
         get() = SteeringEngineConfig(openStart, openEnd)

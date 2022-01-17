@@ -11,7 +11,7 @@ import kotlin.system.exitProcess
 object MqttClientUtil {
     const val TAG = "MqttClientUtil"
 
-    private const val TOPIC = "lottopic"
+    private const val TOPIC = "lottopic_zyf"
     fun pubTopic():String{
         return PUB_TOPIC + CacheUtil.getUID()//这里需要加上UserId
     }

@@ -259,7 +259,7 @@ fun TabBar(
 fun BottomNavBarView(navCtrl: NavHostController) {
     val bottomNavList = listOf(
         BottomNavRoute.Home,
-        BottomNavRoute.Category,
+        BottomNavRoute.WifiConfig,
         BottomNavRoute.SETTING,
         BottomNavRoute.Profile
     )
