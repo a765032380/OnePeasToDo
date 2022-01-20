@@ -37,6 +37,7 @@ import pub.gll.onepeas.todo.ui.setting.SettingVM
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
+import pub.gll.onepeas.todo.ui.wifi.WifiPage
 import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.fromJson
 
@@ -59,8 +60,8 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                 onClick = {
                     settingVM.close()
                 },
-                modifier = Modifier.size(100.dp),
-                shape = RoundedCornerShape(50.dp),
+                modifier = Modifier.size(120.dp),
+                shape = RoundedCornerShape(60.dp),
                 contentColor = Color.Blue,
                 elevation = FloatingActionButtonDefaults.elevation(
                     defaultElevation = 8.dp,
@@ -71,7 +72,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
 //                Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = Color.Red)
 //                Spacer(modifier = Modifier.width(10.dp))
                     androidx.compose.material3.Text(
-                        text = "关灯",
+                        text = "狗磊请关灯",
                         fontSize = 18.sp,
                         color = Color.Black
                     )
@@ -79,14 +80,14 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
             }
         },
         floatingActionButtonPosition = FabPosition.End,
-        bottomBar = {
-            when (currentDestination?.route) {
-                RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
-                RouteName.CATEGORY -> BottomNavBarView(navCtrl = navCtrl)
-                RouteName.SETTING -> BottomNavBarView(navCtrl = navCtrl)
-                RouteName.PROFILE -> BottomNavBarView(navCtrl = navCtrl)
-            }
-        },
+//        bottomBar = {
+//            when (currentDestination?.route) {
+//                RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
+//                RouteName.WIFI_CONFIG -> BottomNavBarView(navCtrl = navCtrl)
+//                RouteName.SETTING -> BottomNavBarView(navCtrl = navCtrl)
+//                RouteName.PROFILE -> BottomNavBarView(navCtrl = navCtrl)
+//            }
+//        },
         content = {
             var homeIndex = remember { 0 }
             var categoryIndex = remember { 0 }
@@ -101,9 +102,9 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                     HomePage(navCtrl, scaffoldState)
                 }
 
-                //分类
-                composable(route = RouteName.CATEGORY) {
-//                    CategoryPage(navCtrl)
+                //WIFI
+                composable(route = RouteName.WIFI_CONFIG) {
+                    WifiPage(navCtrl,scaffoldState)
                 }
 
                 //设置

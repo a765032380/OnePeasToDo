@@ -63,7 +63,7 @@ fun SettingPage(
                     endValue = it
                     viewModel.sendValue(endValue.toInt())
                 },
-                valueRange = 0f..180f,
+                valueRange = 1f..179f,
             )
         }
         var startValue by remember { mutableStateOf(0f) }
@@ -82,7 +82,7 @@ fun SettingPage(
                     startValue = it
                     viewModel.sendValue(startValue.toInt())
                 },
-                valueRange = 0f..180f,
+                valueRange = 1f..179f,
             )
         }
         TwoButton("保存开灯",Icons.Filled.Favorite,{

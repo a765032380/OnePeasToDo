@@ -12,7 +12,7 @@ sealed class BottomNavRoute(
     var icon: ImageVector
 ) {
     object Home: BottomNavRoute(RouteName.HOME, R.string.home, Icons.Default.Home)
-    object Category: BottomNavRoute(RouteName.CATEGORY, R.string.category, Icons.Default.Menu)
+    object WifiConfig: BottomNavRoute(RouteName.WIFI_CONFIG, R.string.wifi, Icons.Default.Build)
     object SETTING: BottomNavRoute(RouteName.SETTING, R.string.setting, Icons.Default.Settings)
     object Profile: BottomNavRoute(RouteName.PROFILE, R.string.profile, Icons.Default.Person)
 }

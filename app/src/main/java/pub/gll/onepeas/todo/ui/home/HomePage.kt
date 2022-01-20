@@ -1,9 +1,7 @@
 package pub.gll.onepeas.todo.ui.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.absoluteOffset
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Snackbar
 import androidx.compose.material.icons.Icons
@@ -18,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.launch
 import pub.gll.onepeas.todo.ui.setting.SettingVM
@@ -34,22 +33,30 @@ fun HomePage(
 //    if (!AppUserUtil.isLogged){
 //        RouteUtils.navTo(navCtrl, RouteName.LOGIN)
 //    }
-    Box(Modifier.fillMaxHeight().fillMaxWidth(),
+    Box(
+        Modifier
+            .fillMaxHeight()
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center ) {
-        ExtendedFloatingActionButton(
-            onClick = {
-                viewModel.open()
-                scope.launch {
-                    scaffoldState.snackbarHostState.showSnackbar("Snackbar")
-                }
-            },
-            icon = {
-                Icon(
-                    Icons.Filled.Favorite,
-                    contentDescription = "Favorite"
-                )
-            },
-            text = { Text("开灯") }
-        )
+//        Image(
+//            bitmap = rememberImagePainter("images/img.png"),
+//            modifier = Modifier.fillMaxWidth()
+//                .fillMaxHeight()
+//        )
+//        ExtendedFloatingActionButton(
+//            onClick = {
+//                viewModel.open()
+//                scope.launch {
+//                    scaffoldState.snackbarHostState.showSnackbar("Snackbar")
+//                }
+//            },
+//            icon = {
+//                Icon(
+//                    Icons.Filled.Favorite,
+//                    contentDescription = "Favorite"
+//                )
+//            },
+//            text = { Text("开灯") }
+//        )
     }
 }
