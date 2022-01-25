@@ -1,16 +1,15 @@
 package pub.gll.onepeas.todo.ui.wifi
 
-import android.text.TextUtils
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import pub.gll.onepeas.todo.airkiss.AirKissEncoder
-import pub.gll.onepeas.todo.airkiss.Str_Hex
-import pub.gll.onepeas.todo.ui.main.MainActivity
-import pub.gll.onepeas.todo.util.TestUtil.testStr
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
