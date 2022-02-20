@@ -33,7 +33,7 @@ class WifiVM @Inject constructor() : ViewModel() {
         sendJob = viewModelScope.launch (Dispatchers.IO){
                 val dummyData = ByteArray(1500)
                 try {
-//                    while (isActive) {
+                    while (isActive) {
                         val encodedData: IntArray = airKissEncoder.encodedData
                         for (i in encodedData.indices) {
                             if (isActive) {
@@ -48,7 +48,7 @@ class WifiVM @Inject constructor() : ViewModel() {
                             }
                         }
                         Log.e("LLLL", "send finish")
-//                    }
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                     Log.e("LLLL", "sendWifi-Exception")

@@ -11,7 +11,7 @@ import kotlin.system.exitProcess
 object MqttClientUtil {
     const val TAG = "MqttClientUtil"
 
-    private const val TOPIC = "lottopic_zyf"
+    private const val TOPIC = "lottopic_gll"
     fun pubTopic():String{
         return PUB_TOPIC + CacheUtil.getUID()//这里需要加上UserId
     }
@@ -25,7 +25,7 @@ object MqttClientUtil {
     //连接地址
     private const val BROKER = "ws://gll.pub:8083"
     //客户端id
-    private val CLIENT_ID : String by lazy { "lot"+CacheUtil.getUID() }
+    private val CLIENT_ID : String by lazy { "lot_zyf_"+CacheUtil.getUID() }
     private val client :MqttClient by lazy {
         MqttClient(BROKER, CLIENT_ID, persistence)
     }
@@ -108,7 +108,7 @@ class MessageCallback(private val onMessageCallback: (topic: String, message: Mq
     override fun connectionLost(cause: Throwable) {
         // 连接丢失后，一般在这里面进行重连
         Log.e(TAG,"连接断开，可以做重连")
-        MqttClientUtil.reClient()
+//        MqttClientUtil.reClient()
     }
 
     @Throws(Exception::class)
