@@ -38,6 +38,9 @@ object MqttClientUtil {
         connOpts.isCleanSession = true
         return connOpts
     }
+    fun isConnected() = client.isConnected
+
+
     fun mqttClient(onMessageCallback: (topic: String, message: MqttMessage)->Unit){
         try {
             // MQTT 连接选项
@@ -100,6 +103,7 @@ object MqttClientUtil {
             Log.e(TAG,"Message published")
         }catch (e:Exception){
             showToast("发送失败")
+            reClient()
         }
     }
 }
@@ -110,8 +114,6 @@ class MessageCallback(private val onMessageCallback: (topic: String, message: Mq
         Log.e(TAG,"连接断开，可以做重连")
         MqttClientUtil.reClient()
     }
-
-    @Throws(Exception::class)
     override fun messageArrived(topic: String, message: MqttMessage) {
         //如果这个专题是自己的，就移除掉
         if (MqttClientUtil.pubTopic() == topic){
