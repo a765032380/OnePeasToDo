@@ -25,6 +25,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <receiver
+            android:name=".home.FirstGlanceWidgetReceiver"
+             android:enabled="true"
+             android:exported="false">
+             <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+             </intent-filter>
+
+         <!-- 小部件配置信息 -->
+         <meta-data
+             android:name="android.appwidget.provider"
+             android:resource="@xml/first_glance_widget_info" />
+    </receiver>
+
+
+</application>
 
 </manifest>

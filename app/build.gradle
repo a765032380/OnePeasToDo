@@ -135,5 +135,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-placeholder-material:$accompanistVersion"
     //启动页
     implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
+    //桌面小组件
+    implementation "androidx.glance:glance:1.0.0-alpha01"
+    implementation 'androidx.glance:glance-appwidget:+'
 
 }
