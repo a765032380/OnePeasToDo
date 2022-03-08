@@ -80,14 +80,14 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
             }
         },
         floatingActionButtonPosition = FabPosition.End,
-//        bottomBar = {
-//            when (currentDestination?.route) {
-//                RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
-//                RouteName.WIFI_CONFIG -> BottomNavBarView(navCtrl = navCtrl)
-//                RouteName.SETTING -> BottomNavBarView(navCtrl = navCtrl)
-//                RouteName.PROFILE -> BottomNavBarView(navCtrl = navCtrl)
-//            }
-//        },
+        bottomBar = {
+            when (currentDestination?.route) {
+                RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
+                RouteName.WIFI_CONFIG -> BottomNavBarView(navCtrl = navCtrl)
+                RouteName.SETTING -> BottomNavBarView(navCtrl = navCtrl)
+                RouteName.PROFILE -> BottomNavBarView(navCtrl = navCtrl)
+            }
+        },
         content = {
             var homeIndex = remember { 0 }
             var categoryIndex = remember { 0 }

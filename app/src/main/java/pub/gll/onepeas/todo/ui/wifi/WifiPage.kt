@@ -40,10 +40,10 @@ fun WifiPage(
         Text(text = "配置WIFI",
             modifier = Modifier.fillMaxWidth(),
             fontSize = 18.sp)
-//        var wifiName by remember { mutableStateOf("1901") }//1901 --- 202
-        var wifiName by remember { mutableStateOf("202") }//1901 --- 202
-//        var wifiPassword by remember { mutableStateOf("Guo.18222902185.com@") }
-        var wifiPassword by remember { mutableStateOf("4001001111202") }
+        var wifiName by remember { mutableStateOf("1901") }//1901 --- 202
+//        var wifiName by remember { mutableStateOf("202") }//1901 --- 202
+        var wifiPassword by remember { mutableStateOf("Guo.18222902185.com@") }
+//        var wifiPassword by remember { mutableStateOf("4001001111202") }
         //Guo.18222902185.com@ --- 4001001111202
         OutlinedTextField(value = wifiName, onValueChange = {
                   wifiName = it
