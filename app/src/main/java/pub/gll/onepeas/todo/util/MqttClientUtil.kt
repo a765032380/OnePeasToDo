@@ -25,7 +25,7 @@ object MqttClientUtil {
     //连接地址
     private const val BROKER = "ws://gll.pub:8083"
     //客户端id
-    private val CLIENT_ID : String by lazy { "lot_zyf_"+CacheUtil.getUID() }
+    private val CLIENT_ID : String by lazy { "lot_zyf_gll--_"+CacheUtil.getUID() }
     private val client :MqttClient by lazy {
         MqttClient(BROKER, CLIENT_ID, persistence)
     }

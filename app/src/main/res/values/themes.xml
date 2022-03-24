@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.OnePeasToDo" parent="SplashScreenTheme" />
 
     <style name="SplashScreenTheme" parent="SplashScreenTheme.Base">
-<!--        使用windowSplashScreenAnimatedIcon添加可绘制或动画可绘制。其中之一是必需的。-->
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
     </style>
-
 
     <style name="SplashScreenTheme.Base" parent="Theme.SplashScreen">
         <item name="android:colorPrimary">@color/colorPrimary</item>
@@ -16,11 +13,18 @@
         <item name="android:statusBarColor">@color/primary</item>
         <item name="android:navigationBarColor">@color/primary</item>
 
-        <!--  设置启动屏幕背景、动画图标和动画持续时间。-->
+        <!-- icon动画在关闭之前显示的时长：最长时间为1000毫秒-->
         <item name="windowSplashScreenAnimationDuration">@integer/icon_animator_duration</item>
-        <!-- screen background color -->
-        <item name="windowSplashScreenBackground">@color/primary</item>
 
+        <!--启动画面背景颜色-->
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <!-- 启动画面icon图标：这里可以是图片、帧动画等-->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+
+        <item name="windowSplashScreenIconBackgroundColor">@color/primary</item>
+        <!-- 启动画面底部的 Brand 图片-->
+<!--        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">@drawable/icon_desktop</item>-->
+        <!-- Splash退出后的主题-->
         <!--  设置直接跟随启动屏幕的活动主题。-->
         <item name="postSplashScreenTheme">@style/TargetScreenTheme</item>
     </style>
@@ -31,7 +35,7 @@
 
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
-        <item name="android:windowLightNavigationBar">false</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 </resources>
