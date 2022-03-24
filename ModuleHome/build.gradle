@@ -11,7 +11,7 @@ android {
     compileSdk rootProject.compile_sdk
 
     defaultConfig {
-        if (rootProject.isModularize) {
+        if (!rootProject.isModularize) {
             applicationId "pub.gll.onepeas.module.home"
         }
 

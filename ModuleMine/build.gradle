@@ -13,7 +13,7 @@ android {
     compileSdk rootProject.compile_sdk
 
     defaultConfig {
-        if (rootProject.isModularize) {
+        if (!rootProject.isModularize) {
             applicationId "pub.gll.onepeas.module.mine"
         }
         minSdk rootProject.min_sdk
