@@ -1,11 +1,18 @@
 package pub.gll.onepeas.todo.ui.main
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.graphics.Path
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.animation.AnticipateInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -31,6 +38,7 @@ class MainActivity : ComponentActivity() {
         }
         initMqttClient()
     }
+
     private fun initMqttClient(){
         val gson = Gson()
         MqttClientUtil.mqttClient { topic: String, mqttMessage: MqttMessage ->

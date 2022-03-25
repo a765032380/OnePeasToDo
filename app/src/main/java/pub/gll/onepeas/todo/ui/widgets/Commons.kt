@@ -266,17 +266,23 @@ fun BottomNavBarView(navCtrl: NavHostController) {
     BottomNavigation {
         val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
+
         bottomNavList.forEach { screen ->
+            val isSelect = currentDestination?.hierarchy?.any { it.route == screen.routeName } == true
             BottomNavigationItem(
                 modifier = Modifier.background(AppTheme.colors.themeUi),
                 icon = {
                     Icon(
                         imageVector = screen.icon,
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = if (isSelect) Color.Blue else Color.Gray
                     )
                 },
-                label = { Text(text = stringResource(screen.stringId)) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.routeName } == true,
+                label = {
+                    Text(text = stringResource(screen.stringId),
+                        color = if (isSelect) Color.Blue else Color.Gray)
+                        },
+                selected = isSelect,
                 onClick = {
                     println("BottomNavView当前路由 ===> ${currentDestination?.hierarchy?.toList()}")
                     println("当前路由栈 ===> ${navCtrl.graph.nodes}")

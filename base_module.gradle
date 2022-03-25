@@ -99,7 +99,7 @@ dependencies {
 
 
 
-    def lifeVersion = '2.2.0'
+    def lifeVersion = '2.4.1'
     implementation 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
     implementation "androidx.lifecycle:lifecycle-livedata:$lifeVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifeVersion"
@@ -113,13 +113,13 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifeVersion"
 
 
-    def roomVersion = '2.2.5'
+    def roomVersion = '2.4.2'
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-common:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
-    def workVersion = '2.4.0'
+    def workVersion = '2.7.1'
     implementation "androidx.work:work-runtime:$workVersion"
     implementation "androidx.work:work-runtime-ktx:$workVersion"
     def navigation_version = "2.4.1"

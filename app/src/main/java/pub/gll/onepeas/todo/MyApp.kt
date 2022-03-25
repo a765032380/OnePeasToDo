@@ -21,7 +21,7 @@ class MyApp : BaseApp() {
         super.onCreate()
         DataStoreUtils.init(this)
         MMKV.initialize(this)
-        initModuleList(AppConfig.moduleApps)
+//        initModuleList(AppConfig.moduleApps)
     }
 
     override fun initModuleApp(application: Application) {

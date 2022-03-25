@@ -73,7 +73,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
 //                Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = Color.Red)
 //                Spacer(modifier = Modifier.width(10.dp))
                     androidx.compose.material3.Text(
-                        text = "狗磊请关灯",
+                        text = "关灯",
                         fontSize = 18.sp,
                         color = Color.Black
                     )

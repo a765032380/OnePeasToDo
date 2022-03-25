@@ -15,12 +15,11 @@ data class LogBean(
     fun flattenedLog(): String {
         return """
              ${getFlattened()}
-             $content
              """.trimIndent()
     }
 
     private fun getFlattened(): String {
-        return format(timeMillis) + '|' + level + '|' + tag + "|:"
+        return format(timeMillis) + '|' + level + '|' + tag + "|: $content"
     }
 
     private fun format(timeMillis: Long): String {
