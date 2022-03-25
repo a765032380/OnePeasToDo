@@ -2,7 +2,7 @@ package pub.gll.onepeas.todo.bean
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * 作者　: hegaojian

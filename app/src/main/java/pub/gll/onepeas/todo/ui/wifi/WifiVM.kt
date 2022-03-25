@@ -27,8 +27,7 @@ class WifiVM @Inject constructor() : ViewModel() {
 
     fun sendWifi(ssid :String,password:String){
         val airKissEncoder = AirKissEncoder(ssid, password)
-        var sendSocket: DatagramSocket? = null
-        sendSocket = DatagramSocket()
+        var sendSocket = DatagramSocket()
         sendSocket.broadcast = true
         sendJob = viewModelScope.launch (Dispatchers.IO){
                 val dummyData = ByteArray(1500)
@@ -54,8 +53,8 @@ class WifiVM @Inject constructor() : ViewModel() {
                     Log.e("LLLL", "sendWifi-Exception")
                 } finally {
                     Log.e("LLLL", "sendWifi-finally")
-                    sendSocket?.close()
-                    sendSocket?.disconnect()
+                    sendSocket.close()
+                    sendSocket.disconnect()
                 }
             }
         startReceive(airKissEncoder)
@@ -63,10 +62,9 @@ class WifiVM @Inject constructor() : ViewModel() {
     fun startReceive(airKissEncoder:AirKissEncoder){
 
         val buffer = ByteArray(15000)
-        var udpServerSocket: DatagramSocket? = null
+        val udpServerSocket = DatagramSocket(10000)
         val mRandomChar = airKissEncoder.randomChar //获取UDP数据包中的随机字符
 
-        udpServerSocket = DatagramSocket(10000)
         udpServerSocket.soTimeout = 1000 * 60 //设置超时时间
 
         val packet = DatagramPacket(buffer, buffer.size)
@@ -98,8 +96,8 @@ class WifiVM @Inject constructor() : ViewModel() {
                     Log.e("LLLL",e.message?:"")
                 } finally {
                     Log.e("LLLL","udpServerSocket.close()")
-                    udpServerSocket?.close()
-                    udpServerSocket?.disconnect()
+                    udpServerSocket.close()
+                    udpServerSocket.disconnect()
                 }
             }
     }

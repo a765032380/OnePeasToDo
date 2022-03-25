@@ -25,7 +25,7 @@ class LogInterceptor @Inject constructor() : Interceptor {
                 if (it.isSuccessful) {
                     logResponse(it)
                 } else {
-                    logThat(ColorLevel.WARN(it.message ?: "未知异常"))
+                    logThat(ColorLevel.WARN(it.message))
                 }
             }
             .onFailure {
@@ -43,11 +43,11 @@ class LogInterceptor @Inject constructor() : Interceptor {
         response.headers.toMultimap().forEach { header->
             headerText += "请求 Header:{${header.key}=${header.value}}\n"
         }
-        strb.appendln(headerText)
+        strb.appendLine(headerText)
         kotlin.runCatching {
             //peek类似于clone数据流，监视，窥探，不能直接用原来的body的string流数据作为日志，会消费掉io，所有这里是peek，监测
             val peekBody: ResponseBody = response.peekBody(1024 * 1024)
-            strb.appendln(peekBody.string())
+            strb.appendLine(peekBody.string())
         }.getOrNull()
 
         strb.appendLine(
@@ -88,7 +88,7 @@ class LogInterceptor @Inject constructor() : Interceptor {
         request.headers.toMultimap().forEach { header->
             headerStr += "请求 Header:{${header.key}=${header.value}}\n"
         }
-        strb.appendln(headerStr)
+        strb.appendLine(headerStr)
     }
 
     private fun logBasic(strb: StringBuilder, request: Request, connection: Connection?) {
