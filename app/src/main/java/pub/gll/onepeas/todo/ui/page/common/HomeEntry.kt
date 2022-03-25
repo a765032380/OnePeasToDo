@@ -15,7 +15,7 @@ import pub.gll.onepeas.todo.ui.theme.AppTheme
 @ExperimentalComposeUiApi
 @Composable
 fun HomeEntry() {
-    //是否闪屏页
+    //是否闪屏页---暂时保留
     var isSplash by remember { mutableStateOf(false) }
     MaterialTheme {
         ProvideWindowInsets {

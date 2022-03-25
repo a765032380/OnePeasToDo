@@ -29,6 +29,7 @@ import androidx.navigation.navArgument
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
+import pub.gll.onepeas.liblog.e
 import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.ui.home.HomePage
 import pub.gll.onepeas.todo.ui.login.LoginPage
@@ -99,21 +100,25 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
             ) {
                 //首页
                 composable(route = RouteName.HOME) {
+                    it.destination.route?.e()
                     HomePage(navCtrl, scaffoldState)
                 }
 
                 //WIFI
                 composable(route = RouteName.WIFI_CONFIG) {
+                    it.destination.route?.e()
                     WifiPage(navCtrl,scaffoldState)
                 }
 
                 //设置
                 composable(route = RouteName.SETTING) {
+                    it.destination.route?.e()
                     SettingPage(navCtrl, scaffoldState)
                 }
 
                 //我的
                 composable(route = RouteName.PROFILE) {
+                    it.destination.route?.e()
 //                    ProfilePage(navCtrl, scaffoldState)
                 }
 

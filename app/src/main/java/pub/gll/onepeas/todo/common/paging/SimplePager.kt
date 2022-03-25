@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import kotlinx.coroutines.flow.Flow
-import pub.gll.onepeas.todo.MyApp
+import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.todo.bean.BasicBean
 import pub.gll.onepeas.todo.bean.ListWrapper
 import pub.gll.onepeas.todo.data.http.HttpResult
@@ -20,7 +20,7 @@ fun <T : Any> ViewModel.simplePager(
         val response = try {
             HttpResult.Success(callAction.invoke(page))
         } catch (e: Exception) {
-            if (NetCheckUtil.checkNet(MyApp.CONTEXT).not()) {
+            if (NetCheckUtil.checkNet(BaseApp.instance).not()) {
                 showToast("没有网络,请重试")
             } else {
                 showToast("请求失败，请重试")

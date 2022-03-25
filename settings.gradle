@@ -4,14 +4,72 @@ pluginManagement {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        // 华为开源镜像：https://mirrors.huaweicloud.com
+        maven { url 'https://repo.huaweicloud.com/repository/maven' }
+
+        // 添加阿里云 maven 地址
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        //友盟统计
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+
+        maven {url 'https://developer.huawei.com/repo/'}//华为
+        google()
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven {
+            url 'https://artifact.bytedance.com/repository/pangle'
+        }
+        maven {
+            url "https://mvn.mob.com/android"
+        }
     }
 }
+
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        // 华为开源镜像：https://mirrors.huaweicloud.com
+        maven { url 'https://repo.huaweicloud.com/repository/maven' }
+
+        // 添加阿里云 maven 地址
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        //友盟统计
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+
+        maven {url 'https://developer.huawei.com/repo/'}//华为
+        google()
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven {
+            url 'https://artifact.bytedance.com/repository/pangle'
+        }
+        maven {
+            url "https://mvn.mob.com/android"
+        }
     }
 }
 rootProject.name = "OnePeasToDo"
@@ -24,3 +82,4 @@ include ':LibBase'
 include ':LibUI'
 include ':LibNet'
 include ':LibLog'
+include ':LibCore'

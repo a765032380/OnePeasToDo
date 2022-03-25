@@ -2,12 +2,12 @@ package pub.gll.onepeas.todo.ui.theme
 
 
 import androidx.compose.ui.graphics.Color
-import pub.gll.onepeas.todo.MyApp
+import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.todo.R
 
 val Transparent = Color(0x00000000)
 
-val themeColor = Color(MyApp.CONTEXT.resources.getColor(R.color.primary))
+val themeColor = Color(BaseApp.instance.resources.getColor(R.color.primary))
 val splashText = Color(0x25000000)
 val white = Color(0xFFFFFFFF)
 val white1 = Color(0xFFF7F7F7)

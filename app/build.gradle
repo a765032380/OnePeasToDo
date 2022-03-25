@@ -1,24 +1,22 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android'
-    id "kotlin-kapt"
-    id "kotlin-parcelize"
-    id "dagger.hilt.android.plugin"
-    id "androidx.navigation.safeargs.kotlin"
+// 本地配置信息读取
+//def localSettingsFile = rootProject.file("localSettings.properties")
+//def localSettingsProperties = new Properties()
+//localSettingsProperties.load(new FileInputStream(localSettingsFile))
+//def singleModule = localSettingsProperties['SINGLE_MODULE']
+
+//根据是否独立运行，将模块作为apk还是module
+if (rootProject.singleModule) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 
-android {
-    compileSdk rootProject.compile_sdk
+apply from: '../base_module.gradle'
 
+android {
     defaultConfig {
         applicationId "pub.gll.onepeas.todo"
-        minSdk rootProject.min_sdk
-        targetSdk rootProject.target_sdk
-        versionCode rootProject.version_code
-        versionName rootProject.version_name
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -30,113 +28,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-    }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }
 }
 
 dependencies {
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    implementation "androidx.core:core-ktx:$ktx_version"
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material3:material3:$material3_version"
-    implementation "androidx.compose.material:material:1.1.0-rc01"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation "androidx.activity:activity-compose:$compose_ui_version"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
-
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
-
-    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
-    //微信开源项目，替代SP
-    implementation 'com.tencent:mmkv:1.2.11'
-    //kotlin
-    implementation 'androidx.core:core-ktx:1.7.0'
-    //lifecycle
-    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
-    api 'androidx.lifecycle:lifecycle-common-java8:2.4.1'
-    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    // viewModel
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
-    api "androidx.fragment:fragment-ktx:1.4.1"
-    // liveData
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
-//    api 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
-    //navigation
-    api 'androidx.navigation:navigation-runtime-ktx:2.5.0-alpha03'
-    //retrofit
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
-
-    //hilt inject framework
-    implementation "com.google.dagger:hilt-android:2.39"
-    kapt "com.google.dagger:hilt-compiler:2.40.5"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltComposeVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltCompilerVersion"
-
-    //http request
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.google.code.gson:gson:2.8.9"
-
-    //数据保存，用于cookie持久化
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation "androidx.datastore:datastore-core:1.0.0"
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.10'
-
-    //paging分页库
-    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
-    testImplementation "androidx.paging:paging-common-ktx:3.1.1"
-    implementation "androidx.paging:paging-compose:$pagingComposeVersion"
-
-    //约束布局
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
-
-
-
-    /** accompanist辅助插件 */
-    implementation "com.google.accompanist:accompanist-insets:$accompanistVersion"
-    implementation "com.google.accompanist:accompanist-coil:0.15.0"
-    //系统ui控制器
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion"
-    //glide
-    implementation "com.google.accompanist:accompanist-glide:0.15.0"
-    //viewPager
-    implementation "com.google.accompanist:accompanist-pager:0.20.2"
-    implementation "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
-    //下拉刷新
-    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanistVersion"
-    //流式布局
-    implementation "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
-    //placeholder
-    implementation "com.google.accompanist:accompanist-placeholder-material:$accompanistVersion"
-    //启动页
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
-    //桌面小组件
-    implementation "androidx.glance:glance:1.0.0-alpha03"
-    implementation 'androidx.glance:glance-appwidget:1.0.0-alpha03'
 
 }
