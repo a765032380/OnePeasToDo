@@ -12,37 +12,65 @@ buildscript {
         target_sdk = 31
         version_code = 1
         version_name = "1.0"
+
+        libLogVersion = "1.0.5_dev.0"
+        libLogName = "lib-log"
+
+        libBaseVersion = "1.0.5_dev.0"
+        libBaseName = "lib-base"
+
+        libCoreVersion = "1.0.5_dev.0"
+        libCoreName = "lib-core"
+
+        libMqttVersion = "1.0.5_dev.0"
+        libMqttName = "lib-mqtt"
+
+        libNetVersion = "1.0.5_dev.0"
+        libNetName = "lib-net"
+
+        libUdpVersion = "1.0.5_dev.0"
+        libUdpName = "lib-udp"
+
+        libUiVersion = "1.0.5_dev.0"
+        libUiName = "lib-ui"
+
+        moduleHomeVersion = "1.0.5_dev.0"
+        moduleHomeName = "module-home"
+
+        moduleMineVersion = "1.0.5_dev.0"
+        moduleMineName = "module-mine"
+
     }
 
     repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        // 华为开源镜像：https://mirrors.huaweicloud.com
-        maven { url 'https://repo.huaweicloud.com/repository/maven' }
-
-        // 添加阿里云 maven 地址
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+
+        // 华为开源镜像：https://mirrors.huaweicloud.com
+        maven { url 'https://repo.huaweicloud.com/repository/maven' }
+        maven { url 'https://developer.huawei.com/repo/'}
+
+        maven {
+            allowInsecureProtocol = true
+            url 'http://gll.pub:9081/repository/maven-public/'
+        }
         //友盟统计
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+
         maven { url 'https://repo1.maven.org/maven2/' }
         maven { url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
 
-        maven {url 'https://developer.huawei.com/repo/'}//华为
-        google()
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url "https://jitpack.io" }
-        maven { url 'https://dl.bintray.com/umsdk/release' }
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-        maven { url 'https://developer.huawei.com/repo/' }
-        maven {
-            url 'https://artifact.bytedance.com/repository/pangle'
-        }
-        maven {
-            url "https://mvn.mob.com/android"
-        }
+
+        maven { url 'https://artifact.bytedance.com/repository/pangle'}
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.0-alpha07'
@@ -55,6 +83,8 @@ buildscript {
         classpath "org.koin:koin-gradle-plugin:2.2.0-rc-3"
         //阿里 Arouter
         classpath "com.alibaba:arouter-register:1.0.2"
+        //自己服务器发库的插件-aar比源码编译的快，尽量使用aar编译
+        classpath 'pub.gll.lib:gllPush:1.0.0.dev.7'
     }
 }
 

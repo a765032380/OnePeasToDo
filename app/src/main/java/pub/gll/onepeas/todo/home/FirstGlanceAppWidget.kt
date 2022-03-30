@@ -18,6 +18,8 @@ import androidx.glance.appwidget.cornerRadius
 import androidx.glance.layout.Row
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.padding
+import pub.gll.onepeas.libmqtt.MqttManager
+import pub.gll.onepeas.libmqtt.MqttOptions
 import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.SteeringEngineStartEndUtil
@@ -46,10 +48,8 @@ class FirstGlanceAppWidget : GlanceAppWidget() {
 }
 class ActionCallbacks: ActionCallback {
     override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
-        if (!MqttClientUtil.isConnected()){
-            MqttClientUtil.mqttClient { topic, message ->
-
-            }
+        if (!MqttManager.isConnected()){
+            MqttClientUtil.client()
         }
         MqttClientUtil.publishStart2End(
             SteeringEngineStartEndUtil.closeStart,

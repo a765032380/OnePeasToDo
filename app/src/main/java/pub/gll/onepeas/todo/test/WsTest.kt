@@ -1,16 +1,14 @@
 package pub.gll.onepeas.todo.test
 
 import com.google.gson.Gson
-import org.eclipse.paho.client.mqttv3.MqttMessage
-import pub.gll.onepeas.todo.util.MqttClientUtil
+import pub.gll.onepeas.libmqtt.MqttListener
+import pub.gll.onepeas.libmqtt.MqttManager
+import pub.gll.onepeas.libmqtt.MqttOptions
 import pub.gll.onepeas.todo.test.Code.CLOSE
-import pub.gll.onepeas.todo.test.Code.CLOSE_RECEIVED
 import pub.gll.onepeas.todo.test.Code.NOT_ONLINE
-import pub.gll.onepeas.todo.test.Code.ONLINE
 import pub.gll.onepeas.todo.test.Code.OPEN
-import pub.gll.onepeas.todo.test.Code.OPEN_RECEIVED
 import pub.gll.onepeas.todo.test.Code.PROGRESS
-import pub.gll.onepeas.todo.test.Code.PROGRESS_RECEIVED
+import pub.gll.onepeas.todo.util.MqttClientUtil
 
 
 object Code{
@@ -29,30 +27,31 @@ object Code{
 
 fun main(args: Array<String>) {
     val gson = Gson()
-    MqttClientUtil.mqttClient { topic: String, mqttMessage: MqttMessage ->
-        println(topic)
-        try {
-            val instructions = gson.fromJson(String(mqttMessage.payload), Instructions::class.java)
-            when (instructions.code) {
-                OPEN -> {
-                    openReceived()
-                }
-                CLOSE -> {
-                    closeReceived()
-                }
-                NOT_ONLINE -> {
-                    online()
-                }
-                PROGRESS -> {
+    MqttClientUtil.client()
+    MqttManager.registerMqttListener(object :MqttListener{
+        override fun onMessage(topic: String, message:String ) {
+            println(topic)
+            try {
+                val instructions = gson.fromJson(message, Instructions::class.java)
+                when (instructions.code) {
+                    OPEN -> {
+                        openReceived()
+                    }
+                    CLOSE -> {
+                        closeReceived()
+                    }
+                    NOT_ONLINE -> {
+                        online()
+                    }
+                    PROGRESS -> {
 //                    publishSeekReceived(instructions.content)
+                    }
                 }
+            } catch (e: Exception) {
+
             }
-        } catch (e: Exception) {
-
         }
-
-    }
-    MqttClientUtil.subscribe()
+    })
 }
 
 private fun online(){
