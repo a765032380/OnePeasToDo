@@ -12,9 +12,8 @@ import retrofit2.http.*
 interface HttpService {
 
     companion object {
-        const val url = "https://www.wanandroid.com"
+        const val url = "http://www.new.gll.pub:8081"
     }
-
 
     @FormUrlEncoded
     @POST("user/login")

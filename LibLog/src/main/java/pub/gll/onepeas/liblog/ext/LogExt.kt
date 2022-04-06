@@ -1,4 +1,6 @@
-package pub.gll.onepeas.liblog
+package pub.gll.onepeas.liblog.ext
+
+import pub.gll.onepeas.liblog.HiLog
 
 
 /**

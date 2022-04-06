@@ -1,14 +1,18 @@
 package pub.gll.onepeas.todo.ui.page.common
 
-import android.widget.Toast
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toFile
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -29,18 +34,27 @@ import androidx.navigation.navArgument
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
-import pub.gll.onepeas.liblog.e
+import pub.gll.onepeas.libcore.ext.uriToFileQ
+import pub.gll.onepeas.liblog.HiLog
+import pub.gll.onepeas.liblog.ext.e
+import pub.gll.onepeas.libupload.TXUploadManager
+import pub.gll.onepeas.libupload.UpLoadListener
+import pub.gll.onepeas.libupload.UpLoadState
+import pub.gll.onepeas.todo.ActivityResultListenerManager
+import pub.gll.onepeas.todo.IActivityResultListener
 import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.ui.home.HomePage
 import pub.gll.onepeas.todo.ui.login.LoginPage
+import pub.gll.onepeas.todo.ui.main.MainActivity
 import pub.gll.onepeas.todo.ui.setting.SettingPage
 import pub.gll.onepeas.todo.ui.setting.SettingVM
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
-import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
+import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import pub.gll.onepeas.todo.ui.wifi.WifiPage
-import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.fromJson
+import java.io.File
+import java.net.URI
 
 @OptIn(ExperimentalPagerApi::class)
 @ExperimentalComposeUiApi
@@ -51,7 +65,25 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
     val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val scaffoldState = rememberScaffoldState()
+    TXUploadManager.upLoadListener = object : UpLoadListener{
+        override fun uploadState(upLoadState: UpLoadState, urlPath: String?) {
+            urlPath?.let { HiLog.et("LLLLL", it) }
+        }
 
+        override fun uploadProgress(progress: Int) {
+            HiLog.et("LLLLL", progress)
+        }
+    }
+    ActivityResultListenerManager.add(object :IActivityResultListener{
+        override fun onActivityResult(activityResult: ActivityResult) {
+            if(activityResult.resultCode== Activity.RESULT_OK) {
+                activityResult.data?.data?.let {
+                    it.uriToFileQ(navCtrl.context)
+                        ?.let { it1 -> settingVM.upload(navCtrl.context, it1) }
+                }
+            }
+        }
+    })
     Scaffold(
         modifier = Modifier
             .statusBarsPadding()
@@ -59,7 +91,14 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
         floatingActionButton = {
             androidx.compose.material3.FloatingActionButton(
                 onClick = {
-                    settingVM.close()
+                    val intent = Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                    //启动方法
+                    ActivityResultListenerManager.activityResultLauncher?.launch(intent);
+
+//                    settingVM.close()
                 },
                 modifier = Modifier.size(120.dp),
                 shape = RoundedCornerShape(60.dp),
@@ -70,8 +109,6 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                 )
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-//                Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = Color.Red)
-//                Spacer(modifier = Modifier.width(10.dp))
                     androidx.compose.material3.Text(
                         text = "关灯",
                         fontSize = 18.sp,
@@ -142,7 +179,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                     route = RouteName.ARTICLE_SEARCH + "/{id}",
                     arguments = listOf(navArgument("id") { type = NavType.IntType })
                 ) {
-//                    SearchPage(navCtrl, scaffoldState)
+
                 }
             }
         },

@@ -16,6 +16,9 @@ buildscript {
         libLogVersion = "1.0.5_dev.0"
         libLogName = "lib-log"
 
+        libUploadVersion = "1.0.5_dev.0"
+        libUploadName = "lib-load"
+
         libBaseVersion = "1.0.5_dev.0"
         libBaseName = "lib-base"
 

@@ -1,5 +1,6 @@
 package pub.gll.onepeas.todo.ui.setting
 
+import android.content.Context
 import androidx.compose.material.Snackbar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,8 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import pub.gll.onepeas.libupload.FileType
+import pub.gll.onepeas.libupload.TXUploadManager
 import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.SteeringEngineStartEndUtil
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,6 +22,11 @@ class SettingVM @Inject constructor() : ViewModel() {
     private val _viewEvents = Channel<SettingPageViewEvent>(Channel.BUFFERED)
     val viewEvents = _viewEvents.receiveAsFlow()
 
+    fun upload(context: Context,file:File){
+        viewModelScope.launch {
+            TXUploadManager.upload(context,FileType.Image,file)
+        }
+    }
     fun close(){
         viewModelScope.launch (Dispatchers.IO) {
             MqttClientUtil.publishStart2End(SteeringEngineStartEndUtil.closeStart,SteeringEngineStartEndUtil.closeEnd)
