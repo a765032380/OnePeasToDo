@@ -1,7 +1,6 @@
 package pub.gll.onepeas.todo
 
 import android.app.Application
-import com.tencent.mmkv.MMKV
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.todo.data.DataStoreUtils
@@ -20,7 +19,6 @@ class MyApp : BaseApp() {
     override fun onCreate() {
         super.onCreate()
         DataStoreUtils.init(this)
-        MMKV.initialize(this)
 //        initModuleList(AppConfig.moduleApps)
     }
 

@@ -108,6 +108,10 @@ private fun String.isBase64(): Boolean {
         "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$"
     return Pattern.matches(base64Pattern, this)
 }
+fun String.isPhone():Boolean{
+    val patternStr = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}\$"
+    return Pattern.matches(patternStr, this)
+}
 
 /**
  * 手机号中间4位*号显示

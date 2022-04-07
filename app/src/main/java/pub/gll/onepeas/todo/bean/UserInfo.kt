@@ -11,17 +11,35 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class UserInfo(
-    @SerializedName("user_id")
-    var id: Int = 0,
+    @SerializedName("id")
+    var id: String = "",
     @SerializedName("password")
     var password: String = "",
     @SerializedName("phone")
     var phone: String = "",
-    @SerializedName("nick_name")
+    @SerializedName("username")
     var uname: String = "",
-    @SerializedName("headerimg")
-    var headerimg: String = "",
-):Parcelable
+
+    @SerializedName("createdAt")
+    var createdAt: String = "",
+    @SerializedName("grade")
+    var grade: Int = 0,
+    @SerializedName("identity")
+    var identity: Int = 0,
+
+    @SerializedName("imageBaseUrl")
+    var imageBaseUrl: String = "",
+):Parcelable{
+
+    @SerializedName("headImage")
+    var headerimg: String = ""
+        get() {
+            return imageBaseUrl+field
+        }
+        set(value) {
+            field = value
+        }
+}
 
 @Parcelize
 data class WebData(

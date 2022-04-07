@@ -275,12 +275,12 @@ fun BottomNavBarView(navCtrl: NavHostController) {
                     Icon(
                         imageVector = screen.icon,
                         contentDescription = null,
-                        tint = if (isSelect) Color.Blue else Color.Gray
+                        tint = if (isSelect) Color.Black else Color.Gray
                     )
                 },
                 label = {
                     Text(text = stringResource(screen.stringId),
-                        color = if (isSelect) Color.Blue else Color.Gray)
+                        color = if (isSelect) Color.Black else Color.Gray)
                         },
                 selected = isSelect,
                 onClick = {

@@ -38,7 +38,7 @@ class LoginViewModel @Inject constructor(
             flow {
                 emit(service.login(viewStates.account.trim(), viewStates.password.trim()))
             }.map {
-                if (it.errorCode == 0) {
+                if (it.errorCode == 200) {
                     if (it.data != null) {
                         HttpResult.Success(it.data!!)
                     } else {

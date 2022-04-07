@@ -46,6 +46,7 @@ import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.ui.home.HomePage
 import pub.gll.onepeas.todo.ui.login.LoginPage
 import pub.gll.onepeas.todo.ui.main.MainActivity
+import pub.gll.onepeas.todo.ui.mine.ProfilePage
 import pub.gll.onepeas.todo.ui.setting.SettingPage
 import pub.gll.onepeas.todo.ui.setting.SettingVM
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
@@ -65,25 +66,6 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
     val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val scaffoldState = rememberScaffoldState()
-    TXUploadManager.upLoadListener = object : UpLoadListener{
-        override fun uploadState(upLoadState: UpLoadState, urlPath: String?) {
-            urlPath?.let { HiLog.et("LLLLL", it) }
-        }
-
-        override fun uploadProgress(progress: Int) {
-            HiLog.et("LLLLL", progress)
-        }
-    }
-    ActivityResultListenerManager.add(object :IActivityResultListener{
-        override fun onActivityResult(activityResult: ActivityResult) {
-            if(activityResult.resultCode== Activity.RESULT_OK) {
-                activityResult.data?.data?.let {
-                    it.uriToFileQ(navCtrl.context)
-                        ?.let { it1 -> settingVM.upload(navCtrl.context, it1) }
-                }
-            }
-        }
-    })
     Scaffold(
         modifier = Modifier
             .statusBarsPadding()
@@ -91,14 +73,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
         floatingActionButton = {
             androidx.compose.material3.FloatingActionButton(
                 onClick = {
-                    val intent = Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-                    //启动方法
-                    ActivityResultListenerManager.activityResultLauncher?.launch(intent);
-
-//                    settingVM.close()
+                    settingVM.close()
                 },
                 modifier = Modifier.size(120.dp),
                 shape = RoundedCornerShape(60.dp),
@@ -156,7 +131,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                 //我的
                 composable(route = RouteName.PROFILE) {
                     it.destination.route?.e()
-//                    ProfilePage(navCtrl, scaffoldState)
+                    ProfilePage(navCtrl, scaffoldState)
                 }
 
                 //WebView

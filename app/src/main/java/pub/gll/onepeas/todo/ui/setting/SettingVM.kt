@@ -7,26 +7,28 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import pub.gll.onepeas.liblog.HiLog
 import pub.gll.onepeas.libupload.FileType
 import pub.gll.onepeas.libupload.TXUploadManager
+import pub.gll.onepeas.todo.data.http.HttpResult
+import pub.gll.onepeas.todo.data.http.HttpService
+import pub.gll.onepeas.todo.ui.login.LoginViewEvent
+import pub.gll.onepeas.todo.util.AppUserUtil
 import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.SteeringEngineStartEndUtil
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingVM @Inject constructor() : ViewModel() {
+class SettingVM @Inject constructor(
+    private var service: HttpService
+) : ViewModel() {
 
     private val _viewEvents = Channel<SettingPageViewEvent>(Channel.BUFFERED)
     val viewEvents = _viewEvents.receiveAsFlow()
 
-    fun upload(context: Context,file:File){
-        viewModelScope.launch {
-            TXUploadManager.upload(context,FileType.Image,file)
-        }
-    }
     fun close(){
         viewModelScope.launch (Dispatchers.IO) {
             MqttClientUtil.publishStart2End(SteeringEngineStartEndUtil.closeStart,SteeringEngineStartEndUtil.closeEnd)
