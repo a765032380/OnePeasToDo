@@ -17,12 +17,13 @@ import pub.gll.onepeas.todo.data.http.HttpResult
 import pub.gll.onepeas.todo.data.http.HttpService
 import pub.gll.onepeas.todo.ui.login.LoginViewState
 import pub.gll.onepeas.todo.util.AppUserUtil
+import retrofit2.Retrofit
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class UserVM @Inject constructor(
-    private var service: HttpService
+    private var service: HttpService,
 ) : ViewModel()  {
 
     var viewStates by mutableStateOf(UserInfo())
@@ -44,6 +45,11 @@ class UserVM @Inject constructor(
     fun upload(context: Context, file: File){
         viewModelScope.launch {
             TXUploadManager.upload(context, FileType.Image,file)
+//            retrofit.create(FriendService::class.java).requestFriend(FriendService.FriendRequestParam("1")).ifSuccess {
+//
+//            }.ifException {
+//
+//            }
         }
     }
     private fun userInfo(){

@@ -6,6 +6,7 @@ import pub.gll.onepeas.todo.data.http.interceptor.LogInterceptor
 import pub.gll.onepeas.todo.data.http.interceptor.SetCookieInterceptor
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.todo.data.http.interceptor.HeaderInterceptor
+import pub.gll.onepeas.todo.net.ApexCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
@@ -31,6 +32,7 @@ object ApiCall {
                 SERVICE = Retrofit.Builder()
                     .client(okHttp)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(ApexCallAdapterFactory())
                     .baseUrl(if (HttpService.isDebug) HttpService.url else HttpService.debugUrl)
                     .build()
                     .create(HttpService::class.java)
