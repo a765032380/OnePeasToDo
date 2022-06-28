@@ -2,8 +2,11 @@ package pub.gll.onepeas.todo.data.http
 
 import pub.gll.onepeas.todo.bean.BasicBean
 import pub.gll.onepeas.todo.bean.UserInfo
-import retrofit2.Call
-import retrofit2.http.*
+import pub.gll.onepeas.todo.net.NetworkResult
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 /**
  * 网络请求接口
@@ -41,4 +44,9 @@ interface HttpService {
     suspend fun updateUser(
         @Body body: Map<String, String>
     ):  BasicBean<UserInfo>
+
+    @POST("/friend/list")
+    suspend fun requestFriend(
+
+    ): NetworkResult<Any>
 }

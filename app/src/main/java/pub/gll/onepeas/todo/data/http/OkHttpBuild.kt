@@ -6,6 +6,9 @@ import pub.gll.onepeas.todo.data.http.interceptor.LogInterceptor
 import pub.gll.onepeas.todo.data.http.interceptor.SetCookieInterceptor
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.todo.data.http.interceptor.HeaderInterceptor
+import pub.gll.onepeas.todo.net.ApexCallAdapterFactory
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit

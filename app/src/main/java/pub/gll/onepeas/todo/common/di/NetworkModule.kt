@@ -8,6 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.todo.car.remote.CarBrandService
 import pub.gll.onepeas.todo.data.http.OkHttpBuild
+import pub.gll.onepeas.todo.net.ApexCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -28,6 +29,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ApexCallAdapterFactory())
             .baseUrl(if (HttpService.isDebug) HttpService.url else HttpService.debugUrl)
             .build()
     }
