@@ -31,6 +31,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.gll.libnotification.CommonNotification
+import com.gll.libnotification.commonNotification
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -73,7 +75,8 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
         floatingActionButton = {
             androidx.compose.material3.FloatingActionButton(
                 onClick = {
-                    settingVM.close()
+//                    settingVM.close()
+                          commonNotification(navCtrl.context)
                 },
                 modifier = Modifier.size(120.dp),
                 shape = RoundedCornerShape(60.dp),

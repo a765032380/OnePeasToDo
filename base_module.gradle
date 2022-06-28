@@ -97,7 +97,7 @@ dependencies {
 
     //region jetPack libs
 
-
+    implementation "androidx.startup:startup-runtime:1.0.0"
 
     def lifeVersion = '2.4.1'
     implementation 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
@@ -118,6 +118,8 @@ dependencies {
     implementation "androidx.room:room-common:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
+//    implementation "androidx.room:room-paging:2.5.0-alpha02"
+    implementation "androidx.room:room-paging:$roomVersion"
 
     def workVersion = '2.7.1'
     implementation "androidx.work:work-runtime:$workVersion"
@@ -218,6 +220,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
     testImplementation "androidx.paging:paging-common-ktx:3.1.1"
     implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
 
     //约束布局
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"

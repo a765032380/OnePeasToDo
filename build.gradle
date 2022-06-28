@@ -7,9 +7,9 @@ buildscript {
 //        singleModule = false
         singleModule = true
 
-        compile_sdk = 31
+        compile_sdk = 32
         min_sdk = 21
-        target_sdk = 31
+        target_sdk = 32
         version_code = 1
         version_name = "1.0"
 
@@ -48,6 +48,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+//        maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
@@ -60,10 +61,10 @@ buildscript {
         maven { url 'https://repo.huaweicloud.com/repository/maven' }
         maven { url 'https://developer.huawei.com/repo/'}
 
-        maven {
-            allowInsecureProtocol = true
-            url 'http://gll.pub:9081/repository/maven-public/'
-        }
+//        maven {
+//            allowInsecureProtocol = true
+//            url 'http://gll.pub:9081/repository/maven-public/'
+//        }
         //友盟统计
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url "https://dl.bintray.com/thelasterstar/maven/" }
@@ -71,12 +72,11 @@ buildscript {
         maven { url 'https://repo1.maven.org/maven2/' }
         maven { url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
 
-
         maven { url 'https://artifact.bytedance.com/repository/pangle'}
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0-alpha07'
+        classpath 'com.android.tools.build:gradle:7.4.0-alpha05'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1'
@@ -87,7 +87,7 @@ buildscript {
         //阿里 Arouter
         classpath "com.alibaba:arouter-register:1.0.2"
         //自己服务器发库的插件-aar比源码编译的快，尽量使用aar编译
-        classpath 'pub.gll.lib:gllPush:1.0.0.dev.7'
+//        classpath 'pub.gll.lib:gllPush:1.0.0.dev.7'
     }
 }
 

@@ -3,16 +3,16 @@ apply plugin:  'kotlin-android'
 apply plugin:  "kotlin-kapt"//kotlin语言使用注入框架，dataBinding都需要这个
 apply plugin:  "com.android.library"//kotlin语言使用注入框架，dataBinding都需要这个
 
-apply plugin: "plugin.gll.push"
+//apply plugin: "plugin.gll.push"
 
-compileConfig {
-    upload{
-        enable = true
-        proguard = false
-        version =  rootProject.libLogVersion
-        artifactId = rootProject.libLogName
-    }
-}
+//compileConfig {
+//    upload{
+//        enable = true
+//        proguard = false
+//        version =  rootProject.libLogVersion
+//        artifactId = rootProject.libLogName
+//    }
+//}
 android {
     namespace 'pub.gll.onepeas.libupload'
     compileSdk rootProject.compile_sdk
@@ -20,8 +20,6 @@ android {
     defaultConfig {
         minSdk rootProject.min_sdk
         targetSdk rootProject.target_sdk
-        versionCode rootProject.version_code
-        versionName rootProject.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

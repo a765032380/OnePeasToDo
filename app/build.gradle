@@ -12,6 +12,7 @@ if (rootProject.singleModule) {
 }
 
 apply from: '../base_module.gradle'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     defaultConfig {
@@ -28,9 +29,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation project(path: ':LibBase')
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
 }

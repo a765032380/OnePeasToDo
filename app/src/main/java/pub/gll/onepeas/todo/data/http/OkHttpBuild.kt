@@ -6,8 +6,6 @@ import pub.gll.onepeas.todo.data.http.interceptor.LogInterceptor
 import pub.gll.onepeas.todo.data.http.interceptor.SetCookieInterceptor
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.todo.data.http.interceptor.HeaderInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -16,30 +14,15 @@ import javax.net.ssl.*
 /**
  * Created by Superman. 19/5/27
  */
-object ApiCall {
+object OkHttpBuild {
 
     /**
      * 请求超时时间
      */
     private const val DEFAULT_TIMEOUT = 30000
-    private lateinit var SERVICE: HttpService
 
     //手动创建一个OkHttpClient并设置超时时间
-    val retrofit: HttpService
-        get() {
-            if (!ApiCall::SERVICE.isInitialized) {
-                SERVICE = Retrofit.Builder()
-                    .client(okHttp)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(if (HttpService.isDebug) HttpService.url else HttpService.debugUrl)
-                    .build()
-                    .create(HttpService::class.java)
-            }
-            return SERVICE
-        }
-
-    //手动创建一个OkHttpClient并设置超时时间
-    val okHttp: OkHttpClient
+    val okHttpClient: OkHttpClient
         get() {
             return OkHttpClient.Builder().run {
                 connectTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)

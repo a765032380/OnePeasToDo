@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/LibLog" />
             <option value="$PROJECT_DIR$/LibMqtt" />
             <option value="$PROJECT_DIR$/LibNet" />
+            <option value="$PROJECT_DIR$/LibNotification" />
             <option value="$PROJECT_DIR$/LibUI" />
             <option value="$PROJECT_DIR$/LibUdp" />
             <option value="$PROJECT_DIR$/LibUpLoad" />

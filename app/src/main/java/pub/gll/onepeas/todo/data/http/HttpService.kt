@@ -14,8 +14,10 @@ interface HttpService {
 
     companion object {
         const val isDebug = true
-        const val url = "https://new.gll.pub/api/"
-        const val debugUrl = "http://127.0.0.1:8081/api/"
+//        const val url = "https://new.gll.pub/api/"
+//        const val debugUrl = "http://127.0.0.1:8081/api/"
+        const val url = "https://way.jd.com/showapi/"
+        const val debugUrl = "https://way.jd.com/showapi/"
     }
 
     @FormUrlEncoded

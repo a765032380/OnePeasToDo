@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="pub.gll.onepeas.todo">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,33 +15,54 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MyApp"
         android:theme="@style/Theme.OnePeasToDo">
         <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.OnePeasToDo">
+            android:name=".car.activity.CarActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.OnePeasToDo">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
         <receiver
             android:name=".home.FirstGlanceWidgetReceiver"
-             android:enabled="true"
-             android:exported="false">
-             <intent-filter>
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-             </intent-filter>
+            </intent-filter>
 
-         <!-- 小部件配置信息 -->
-         <meta-data
-             android:name="android.appwidget.provider"
-             android:resource="@xml/first_glance_widget_info" />
-    </receiver>
+            <!-- 小部件配置信息 -->
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/first_glance_widget_info" />
+        </receiver>
 
 
-</application>
+        <provider
+            tools:replace="android:authorities"
+            android:authorities="${applicationId}.androidx.startup"
+            android:name="androidx.startup.InitializationProvider"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="pub.gll.onepeas.todo.car.init.AppInitializer"
+                android:value="androidx.startup"
+                />
+        </provider>
+    </application>
 
 </manifest>
