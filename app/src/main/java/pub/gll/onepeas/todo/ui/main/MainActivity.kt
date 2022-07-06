@@ -20,6 +20,9 @@ import pub.gll.onepeas.libmqtt.MqttListener
 import pub.gll.onepeas.libmqtt.MqttManager
 import pub.gll.onepeas.libmqtt.MqttOptions
 import pub.gll.onepeas.todo.ActivityResultListenerManager
+import pub.gll.onepeas.todo.dialog.Dialog0
+import pub.gll.onepeas.todo.dialog.Dialog1
+import pub.gll.onepeas.todo.dialog.Dialog2
 import pub.gll.onepeas.todo.ui.page.common.HomeEntry
 import pub.gll.onepeas.todo.util.MqttClientUtil
 
@@ -28,21 +31,19 @@ class MainActivity : ComponentActivity() {
     private val viewModel: MyViewModel by viewModels()
     private lateinit var splashScreen: SplashScreen
 
-    companion object {
-        lateinit var instance: MainActivity
-    }
 
     @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        instance = this
+
         ActivityResultListenerManager.activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             ActivityResultListenerManager.onActivityResult(it)
         }
         WindowCompat.setDecorFitsSystemWindows(window,false)
         splashScreen = installSplashScreen()
         setContent {
-            HomeEntry()
+            Dialog2()
+//            HomeEntry()
         }
         initMqttClient()
     }

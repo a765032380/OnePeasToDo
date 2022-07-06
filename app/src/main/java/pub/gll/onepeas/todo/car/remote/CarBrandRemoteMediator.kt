@@ -1,7 +1,5 @@
 package pub.gll.onepeas.todo.car.remote
 
-import android.app.Application
-import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -13,7 +11,6 @@ import pub.gll.onepeas.todo.car.db.CarBrandEntity
 import pub.gll.onepeas.todo.car.init.AppHelper
 import pub.gll.onepeas.todo.car.init.isConnectedNetwork
 import pub.gll.onepeas.todo.util.showToast
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class CarBrandRemoteMediator(

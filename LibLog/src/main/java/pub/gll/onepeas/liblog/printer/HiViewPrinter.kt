@@ -6,14 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pub.gll.onepeas.liblog.config.HiLogConfig
@@ -106,19 +98,4 @@ class HiViewPrinter : HiLogPrinter {
 //        }
         viewGroup.addView(initView(viewGroup))
     }
-}
-
-val list = mutableStateListOf<LogBean>()
-
-@Composable
-fun LogListView(list: SnapshotStateList<LogBean>) {
-    LazyColumn {
-        items(list) { logBean ->
-            LogListItem(logBean.flattenedLog())
-        }
-    }
-}
-@Composable
-fun LogListItem(text:String){
-    Text(text = text)
 }

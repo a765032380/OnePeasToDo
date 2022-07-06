@@ -22,8 +22,8 @@ class CarBrandRepositoryImpl(
         return Pager(
             config = PagingConfig(
                 pageSize = 8,//每页的条数
-                prefetchDistance = 1,//距离底部还有多少条的时候去加载
-                initialLoadSize = 16//第一次加载的条数
+                prefetchDistance = 3,//距离底部还有多少条的时候去加载
+                initialLoadSize = 8//第一次加载的条数
             ),
             remoteMediator = CarBrandRemoteMediator(api,database)//请求网络数据，把网络数据放到数据库里面
         ) {

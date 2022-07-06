@@ -1,10 +1,9 @@
 package pub.gll.onepeas.todo.ui.main
 
-import android.app.Application
 import android.os.SystemClock
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 
-class MyViewModel(application: Application): AndroidViewModel(application) {
+class MyViewModel: ViewModel() {
     companion object {
         const val WORK_DURATION = 2000L
     }

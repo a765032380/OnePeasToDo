@@ -4,6 +4,7 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.todo.data.DataStoreUtils
+import javax.inject.Singleton
 
 /**
  * 1. 所有使用 Hilt 的 App 必须包含 一个使用 @HiltAndroidApp 注解的 Application
