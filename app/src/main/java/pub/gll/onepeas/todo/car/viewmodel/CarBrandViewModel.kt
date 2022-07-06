@@ -11,9 +11,13 @@ class CarBrandViewModel @Inject constructor(
     carBrandRepository: Repository
 ): ViewModel() {
 
-    var data  = carBrandRepository.fetchCarBrandList()
+    var dataCompose  = carBrandRepository.fetchCarBrandList()
         .cachedIn(viewModelScope)
         .asLiveData()
         .asFlow()
+
+    var data  = carBrandRepository.fetchCarBrandList()
+        .cachedIn(viewModelScope)
+        .asLiveData()
 
 }
