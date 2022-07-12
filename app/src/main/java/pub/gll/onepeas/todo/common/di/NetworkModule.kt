@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.todo.car.remote.CarBrandService
+import pub.gll.onepeas.todo.comic.home.remote.ComicHomeService
 import pub.gll.onepeas.todo.data.http.OkHttpBuild
 import pub.gll.onepeas.todo.net.ApexCallAdapterFactory
 import retrofit2.Retrofit
@@ -44,6 +45,11 @@ class NetworkModule {
     @Provides
     fun provideCarBrandService(retrofit: Retrofit): CarBrandService {
         return retrofit.create(CarBrandService::class.java)
+    }
+    @Singleton
+    @Provides
+    fun provideComicHomeService(retrofit: Retrofit): ComicHomeService {
+        return retrofit.create(ComicHomeService::class.java)
     }
 
 

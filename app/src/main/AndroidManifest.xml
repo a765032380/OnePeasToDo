@@ -29,6 +29,9 @@
             android:name=".ui.main.MainActivity"
             android:exported="true" />
         <activity
+            android:name=".comic.ComicMainAct"
+            android:exported="true" />
+        <activity
             android:name=".MainTestAct"
             android:exported="true"
             android:theme="@style/Theme.OnePeasToDo">

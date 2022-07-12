@@ -8,6 +8,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pub.gll.onepeas.todo.car.db.AppDatabase
 import pub.gll.onepeas.todo.car.db.CarBrandDao
+import pub.gll.onepeas.todo.comic.home.db.ComicHomeAppDatabase
+import pub.gll.onepeas.todo.comic.home.db.ComicHomeDao
 import javax.inject.Singleton
 
 @Module
@@ -28,6 +30,21 @@ class RoomModule {
     @Provides
     fun provideCarBrandDao(appDatabase: AppDatabase):CarBrandDao{
         return appDatabase.getCarBrandDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideComicHomeAppDatabase(application: Application): ComicHomeAppDatabase {
+        return Room.databaseBuilder(
+            application,
+            ComicHomeAppDatabase::class.java,
+            "comic_home.db"
+        ).build()
+    }
+    @Singleton
+    @Provides
+    fun provideComicHomeDao(appDatabase: ComicHomeAppDatabase):ComicHomeDao{
+        return appDatabase.getComicHomeDao()
     }
 
 }

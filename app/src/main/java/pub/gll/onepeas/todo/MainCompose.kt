@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import pub.gll.onepeas.todo.car.activity.CarActivity
 import pub.gll.onepeas.todo.car.activity.CarComposeActivity
 import pub.gll.onepeas.todo.car.activity.CustomViewAct
+import pub.gll.onepeas.todo.comic.ComicMainAct
 import pub.gll.onepeas.todo.ui.main.MainActivity
 
 @Composable
@@ -41,6 +42,11 @@ fun MainCompose(activity:Activity) {
             activity.startActivity(Intent(activity,CustomViewAct::class.java))
         }) {
            Text(text = "CustomViewAct")
+        }
+        Button(onClick = {
+            activity.startActivity(Intent(activity, ComicMainAct::class.java))
+        }) {
+           Text(text = "ComicMainAct")
         }
 
     }

@@ -1,66 +1,83 @@
-package pub.gll.onepeas.todo.ui.page.common
+package pub.gll.onepeas.todo.comic
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.gll.libnotification.commonNotification
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
-import com.google.accompanist.pager.ExperimentalPagerApi
+import dagger.hilt.android.AndroidEntryPoint
 import pub.gll.onepeas.liblog.ext.e
 import pub.gll.onepeas.todo.bean.WebData
-import pub.gll.onepeas.todo.ui.home.HomePage
+import pub.gll.onepeas.todo.comic.bookshelf.ComicBookShelf
+import pub.gll.onepeas.todo.comic.home.ComicHome
+import pub.gll.onepeas.todo.comic.home.vm.ComicHomeVM
+import pub.gll.onepeas.todo.comic.mine.ComicMine
+import pub.gll.onepeas.todo.comic.ui.ComicBottomNavBarView
 import pub.gll.onepeas.todo.ui.login.LoginPage
-import pub.gll.onepeas.todo.ui.mine.ProfilePage
-import pub.gll.onepeas.todo.ui.setting.SettingPage
-import pub.gll.onepeas.todo.ui.setting.SettingVM
+import pub.gll.onepeas.todo.ui.page.common.RouteName
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
-import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
-import pub.gll.onepeas.todo.ui.wifi.WifiPage
+import pub.gll.onepeas.todo.ui.widgets.SNACK_ERROR
+import pub.gll.onepeas.todo.ui.widgets.popupSnackBar
 import pub.gll.onepeas.todo.util.fromJson
+import javax.inject.Inject
 
-@OptIn(ExperimentalPagerApi::class)
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
+@AndroidEntryPoint
+class ComicMainAct : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Main()
+        }
+    }
+}
+
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalComposeUiApi::class
+)
 @Composable
-fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
+fun Main() {
     val navCtrl = rememberNavController()
     val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val scaffoldState = rememberScaffoldState()
+    val coroutineState = rememberCoroutineScope()
     Scaffold(
         modifier = Modifier
             .statusBarsPadding()
             .navigationBarsPadding(),
         floatingActionButton = {
-            androidx.compose.material3.FloatingActionButton(
+            FloatingActionButton(
                 onClick = {
-//                    settingVM.close()
-                          commonNotification(navCtrl.context)
+                    popupSnackBar(coroutineState, scaffoldState, label = SNACK_ERROR, "关灯")
+//                    commonNotification(navCtrl.context)
                 },
-                modifier = Modifier.size(120.dp),
-                shape = RoundedCornerShape(60.dp),
+                modifier = Modifier.size(60.dp),
+                shape = RoundedCornerShape(30.dp),
                 contentColor = Color.Blue,
                 elevation = FloatingActionButtonDefaults.elevation(
                     defaultElevation = 8.dp,
@@ -68,7 +85,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                 )
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    androidx.compose.material3.Text(
+                    Text(
                         text = "关灯",
                         fontSize = 18.sp,
                         color = Color.Black
@@ -79,47 +96,38 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
         floatingActionButtonPosition = FabPosition.End,
         bottomBar = {
             when (currentDestination?.route) {
-                RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
-                RouteName.WIFI_CONFIG -> BottomNavBarView(navCtrl = navCtrl)
-                RouteName.SETTING -> BottomNavBarView(navCtrl = navCtrl)
-                RouteName.PROFILE -> BottomNavBarView(navCtrl = navCtrl)
+                ComicRouteName.COMIC_HOME -> ComicBottomNavBarView(navCtrl = navCtrl)
+                ComicRouteName.COMIC_BOOKSHELF -> ComicBottomNavBarView(navCtrl = navCtrl)
+                ComicRouteName.COMIC_MINE -> ComicBottomNavBarView(navCtrl = navCtrl)
             }
         },
         content = {
-            var homeIndex = remember { 0 }
-            var categoryIndex = remember { 0 }
-
             NavHost(
-                modifier = Modifier.background(MaterialTheme.colors.background),
+                modifier = Modifier.background(MaterialTheme.colorScheme.background),
                 navController = navCtrl,
-                startDestination = RouteName.HOME
+                startDestination = ComicRouteName.COMIC_HOME
             ) {
                 //首页
-                composable(route = RouteName.HOME) {
+                composable(route = ComicRouteName.COMIC_HOME) {
                     it.destination.route?.e()
-                    HomePage(navCtrl, scaffoldState)
+                    ComicHome()
                 }
 
-                //WIFI
-                composable(route = RouteName.WIFI_CONFIG) {
+                //书架
+                composable(route = ComicRouteName.COMIC_BOOKSHELF) {
                     it.destination.route?.e()
-                    WifiPage(navCtrl,scaffoldState)
-                }
-
-                //设置
-                composable(route = RouteName.SETTING) {
-                    it.destination.route?.e()
-                    SettingPage(navCtrl, scaffoldState)
+                    ComicBookShelf()
                 }
 
                 //我的
-                composable(route = RouteName.PROFILE) {
+                composable(route = ComicRouteName.COMIC_MINE) {
                     it.destination.route?.e()
-                    ProfilePage(navCtrl, scaffoldState)
+                    ComicMine()
                 }
 
                 //WebView
-                composable(route = RouteName.WEB_VIEW + "/{webData}",
+                composable(
+                    route = RouteName.WEB_VIEW + "/{webData}",
                     arguments = listOf(navArgument("webData") { type = NavType.StringType })
                 ) {
                     val args = it.arguments?.getString("webData")?.fromJson<WebData>()
@@ -143,7 +151,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
             }
         },
         snackbarHost = {
-            SnackbarHost(
+            androidx.compose.material.SnackbarHost(
                 hostState = scaffoldState.snackbarHostState
             ) { data ->
                 println("actionLabel = ${data.actionLabel}")
