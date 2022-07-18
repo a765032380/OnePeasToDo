@@ -14,6 +14,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import pub.gll.onepeas.todo.test.ButtonTest
 import pub.gll.onepeas.todo.test.Greeting
+import pub.gll.onepeas.todo.ui.page.splash.SplashPage
 
 
 @ExperimentalFoundationApi
@@ -57,18 +58,17 @@ fun HomeEntry() {
             }
 
         }
-//        ProvideWindowInsets {
-//            ButtonTest()
-//            val systemUiController = rememberSystemUiController()
-//            SideEffect {
-//                systemUiController.setSystemBarsColor(Color.Transparent,true)
-//            }
-//            if (isSplash) {
-//                SplashPage { isSplash = false }
-//            } else {
-//                AppScaffold()
-//            }
-//        }
+        ProvideWindowInsets {
+            val systemUiController = rememberSystemUiController()
+            SideEffect {
+                systemUiController.setSystemBarsColor(Color.Transparent,true)
+            }
+            if (isSplash) {
+                SplashPage { isSplash = false }
+            } else {
+                AppScaffold()
+            }
+        }
     }
 }
 

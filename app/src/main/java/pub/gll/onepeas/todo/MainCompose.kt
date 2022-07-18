@@ -14,17 +14,18 @@ import pub.gll.onepeas.todo.car.activity.CarComposeActivity
 import pub.gll.onepeas.todo.car.activity.CustomViewAct
 import pub.gll.onepeas.todo.comic.ComicMainAct
 import pub.gll.onepeas.todo.ui.main.MainActivity
+import pub.gll.onepeas.todo.web.WebActivity
 
 @Composable
 fun MainCompose(activity:Activity) {
     val scrollState = rememberScrollState()
 
     Column(modifier = Modifier.verticalScroll(scrollState)) {
-        Button(onClick = {
-            activity.startActivity(Intent(activity,CarActivity::class.java))
-        }) {
-           Text(text = "CarActivity")
-        }
+//        Button(onClick = {
+//            activity.startActivity(Intent(activity,CarActivity::class.java))
+//        }) {
+//           Text(text = "CarActivity")
+//        }
 
         Button(onClick = {
             activity.startActivity(Intent(activity,CarComposeActivity::class.java))
@@ -47,6 +48,11 @@ fun MainCompose(activity:Activity) {
             activity.startActivity(Intent(activity, ComicMainAct::class.java))
         }) {
            Text(text = "ComicMainAct")
+        }
+        Button(onClick = {
+            activity.startActivity(Intent(activity, WebActivity::class.java))
+        }) {
+           Text(text = "WebActivity")
         }
 
     }

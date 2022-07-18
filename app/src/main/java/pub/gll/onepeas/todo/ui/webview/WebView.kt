@@ -3,7 +3,6 @@ package pub.gll.onepeas.todo.ui.webview
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.compose.foundation.layout.Box
@@ -11,9 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.tencent.smtt.sdk.WebView
 import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.ui.theme.ToolBarHeight
@@ -24,15 +25,24 @@ import pub.gll.onepeas.todo.util.RouteUtils.back
 @Composable
 fun WebViewPage(
     webData: WebData,
-    navCtrl: NavHostController
+    navCtrl: NavHostController,
+    onFull: (isFull: Boolean) -> Unit
 ) {
     var ctrl: WebViewCtrl? by remember { mutableStateOf(null) }
+
     Box {
         var isRefreshing: Boolean by remember { mutableStateOf(false) }
         val refreshState = rememberSwipeRefreshState(isRefreshing)
+
+        val topHeight = if(webData.showTitle){
+            ToolBarHeight
+        }else{
+            0.dp
+        }
+
         AndroidView(
             modifier = Modifier
-                .padding(top = ToolBarHeight)
+                .padding(top = topHeight)
                 .fillMaxSize(),
             factory = { context ->
                 FrameLayout(context).apply {
@@ -54,11 +64,16 @@ fun WebViewPage(
                             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
                         )
                     }
+                    val fullWebView = FrameLayout(context).apply {
+                        layoutParams = ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                    }
                     addView(webView)
                     addView(progressView)
-                    ctrl = WebViewCtrl(this, webData.url, onWebCall = { isFinish ->
+                    ctrl = WebViewCtrl(this,fullWebView, webData.url, onWebCall = { isFinish ->
                         isRefreshing = !isFinish
-                    })
+                    },onFull)
                     ctrl?.initSettings()
                 }
 
@@ -67,10 +82,11 @@ fun WebViewPage(
 
             }
         )
-
-        AppToolsBar(title = webData.title ?: "标题", onBack = {
-            ctrl?.onDestroy()
-            navCtrl.back()
-        })
+        if(webData.showTitle){
+            AppToolsBar(title = webData.title ?: "标题", onBack = {
+                ctrl?.onDestroy()
+                navCtrl.back()
+            })
+        }
     }
 }

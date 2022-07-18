@@ -1,5 +1,6 @@
 package pub.gll.onepeas.todo.ui.page.common
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -16,17 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.gll.libnotification.commonNotification
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.gson.Gson
 import pub.gll.onepeas.liblog.ext.e
 import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.ui.home.HomePage
@@ -39,7 +41,31 @@ import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
 import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import pub.gll.onepeas.todo.ui.wifi.WifiPage
 import pub.gll.onepeas.todo.util.fromJson
+import pub.gll.onepeas.todo.util.toJson
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
+fun NavController.navigateAndArgument(
+    route: String,
+    args: List<Pair<String, Any>>? = null,
+    navOptions: NavOptions? = null,
+    navigatorExtras: Navigator.Extras? = null,
+
+    ) {
+    navigate(route = route, navOptions = navOptions, navigatorExtras = navigatorExtras)
+
+    if (args == null && args?.isEmpty() == true) {
+        return
+    }
+
+    val bundle = backQueue.lastOrNull()?.arguments
+    if (bundle != null) {
+        bundle.putAll(bundleOf(*args?.toTypedArray()!!))
+    } else {
+        println("The last argument of NavBackStackEntry is NULL")
+    }
+}
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalPagerApi::class)
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
@@ -56,11 +82,16 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
         floatingActionButton = {
             androidx.compose.material3.FloatingActionButton(
                 onClick = {
+                    val webData = WebData("播放器","http://49.232.198.163/video.html",false)
+//                    val webData = WebData("播放器","http://bilibili.com")
+                    val encodedUrl = URLEncoder.encode(webData.toJson(), StandardCharsets.UTF_8.toString())
+                    navCtrl.navigate("${RouteName.WEB_VIEW}/${encodedUrl}")
+
 //                    settingVM.close()
-                          commonNotification(navCtrl.context)
+//                          commonNotification(navCtrl.context)
                 },
-                modifier = Modifier.size(120.dp),
-                shape = RoundedCornerShape(60.dp),
+                modifier = Modifier.size(50.dp),
+                shape = RoundedCornerShape(25.dp),
                 contentColor = Color.Blue,
                 elevation = FloatingActionButtonDefaults.elevation(
                     defaultElevation = 8.dp,
@@ -123,8 +154,11 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
                     arguments = listOf(navArgument("webData") { type = NavType.StringType })
                 ) {
                     val args = it.arguments?.getString("webData")?.fromJson<WebData>()
+
                     if (args != null) {
-                        WebViewPage(webData = args, navCtrl = navCtrl)
+                        WebViewPage(webData = args, navCtrl = navCtrl){
+
+                        }
                     }
                 }
 

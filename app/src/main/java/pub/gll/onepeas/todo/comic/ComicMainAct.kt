@@ -1,6 +1,9 @@
 package pub.gll.onepeas.todo.comic
 
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -11,11 +14,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -33,35 +32,56 @@ import pub.gll.onepeas.liblog.ext.e
 import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.comic.bookshelf.ComicBookShelf
 import pub.gll.onepeas.todo.comic.home.ComicHome
-import pub.gll.onepeas.todo.comic.home.vm.ComicHomeVM
 import pub.gll.onepeas.todo.comic.mine.ComicMine
 import pub.gll.onepeas.todo.comic.ui.ComicBottomNavBarView
 import pub.gll.onepeas.todo.ui.login.LoginPage
 import pub.gll.onepeas.todo.ui.page.common.RouteName
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
-import pub.gll.onepeas.todo.ui.widgets.SNACK_ERROR
-import pub.gll.onepeas.todo.ui.widgets.popupSnackBar
 import pub.gll.onepeas.todo.util.fromJson
-import javax.inject.Inject
+import pub.gll.onepeas.todo.util.toJson
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class ComicMainAct : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            Main()
+            Main{
+                if(it){
+                    //设置横屏
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                }else{
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                }
+            }
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
     }
 }
+
+
 
 @OptIn(
     ExperimentalMaterial3Api::class,
     ExperimentalComposeUiApi::class
 )
 @Composable
-fun Main() {
+fun Main(onFull: (isFull: Boolean) -> Unit) {
     val navCtrl = rememberNavController()
+
     val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val scaffoldState = rememberScaffoldState()
@@ -73,8 +93,10 @@ fun Main() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    popupSnackBar(coroutineState, scaffoldState, label = SNACK_ERROR, "关灯")
-//                    commonNotification(navCtrl.context)
+//                    popupSnackBar(coroutineState, scaffoldState, label = SNACK_ERROR, "关灯")
+                    val webData = WebData("播放器","http://49.232.198.163/video.html",false)
+                    val encodedUrl = URLEncoder.encode(webData.toJson(), StandardCharsets.UTF_8.toString())
+                    navCtrl.navigate("${RouteName.WEB_VIEW}/${encodedUrl}")
                 },
                 modifier = Modifier.size(60.dp),
                 shape = RoundedCornerShape(30.dp),
@@ -132,7 +154,7 @@ fun Main() {
                 ) {
                     val args = it.arguments?.getString("webData")?.fromJson<WebData>()
                     if (args != null) {
-                        WebViewPage(webData = args, navCtrl = navCtrl)
+                        WebViewPage(webData = args, navCtrl = navCtrl,onFull)
                     }
                 }
 

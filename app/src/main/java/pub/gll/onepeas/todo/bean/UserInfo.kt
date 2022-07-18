@@ -44,6 +44,7 @@ data class UserInfo(
 @Parcelize
 data class WebData(
     var title: String?,
-    var url: String
+    var url: String,
+    var showTitle:Boolean=true
 ) : Parcelable
 

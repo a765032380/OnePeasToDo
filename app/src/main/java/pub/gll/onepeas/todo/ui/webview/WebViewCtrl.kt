@@ -1,18 +1,23 @@
 package pub.gll.onepeas.todo.ui.webview
 
 import android.graphics.Bitmap
-import android.net.http.SslError
-import android.os.Build
 import android.view.View
-import android.webkit.*
+import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.widget.FrameLayout
 import android.widget.ProgressBar
-import androidx.annotation.RequiresApi
+import com.tencent.smtt.export.external.TbsCoreSettings
+import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient
+import com.tencent.smtt.export.external.interfaces.SslErrorHandler
+import com.tencent.smtt.export.external.interfaces.WebResourceRequest
+import com.tencent.smtt.sdk.*
+
 
 class WebViewCtrl(
     private val mView: FrameLayout,
+    private val fullWebView: FrameLayout,
     private var linkUrl: String,
-    private val onWebCall: (isFinish: Boolean) -> Unit
+    private val onWebCall: (isFinish: Boolean) -> Unit,
+    private val onFull: (isFull: Boolean) -> Unit
 ) {
 
     private val webView by lazy { mView.getChildAt(0) as WebView }
@@ -31,22 +36,29 @@ class WebViewCtrl(
 
     private fun setWebSettings() {
         val webSettings = webView.settings
-        //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-        webSettings.javaScriptEnabled = false
-        //设置自适应屏幕，两者合用
-        webSettings.useWideViewPort = true //将图片调整到适合webview的大小
-        webSettings.loadWithOverviewMode = true // 缩放至屏幕的大小
-        //缩放操作
-        webSettings.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
-        webSettings.builtInZoomControls = true //设置内置的缩放控件。若为false，则该WebView不可缩放
-        webSettings.displayZoomControls = false //隐藏原生的缩放控件
-
-        //其他细节操作
-        webSettings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK //关闭webview中缓存
-        webSettings.allowFileAccess = true //设置可以访问文件
-        webSettings.javaScriptCanOpenWindowsAutomatically = true //支持通过JS打开新窗口
-        webSettings.loadsImagesAutomatically = true //支持自动加载图片
-        webSettings.defaultTextEncodingName = "UTF-8"//设置编码格式
+        webSettings.apply {
+            loadWithOverviewMode = true
+            builtInZoomControls = true
+            javaScriptEnabled = true
+            useWideViewPort = true
+            setSupportZoom(true)
+            javaScriptCanOpenWindowsAutomatically = true
+            cacheMode = WebSettings.LOAD_DEFAULT
+            mixedContentMode = MIXED_CONTENT_ALWAYS_ALLOW
+            setGeolocationEnabled(true)
+            domStorageEnabled = true
+            databaseEnabled = true
+            useWideViewPort = true
+            allowFileAccess = true
+            loadsImagesAutomatically = true
+            loadWithOverviewMode = true
+            pluginState = WebSettings.PluginState.ON
+            cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+        }
+        val map = HashMap<String, Any>()
+        map[TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER] = true
+        map[TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE] = true
+        QbSdk.initTbsSettings(map)
     }
 
 
@@ -61,6 +73,8 @@ class WebViewCtrl(
     }
 
 
+    private var mCustomView: View? = null
+    private var mCustomViewCallBack: IX5WebChromeClient.CustomViewCallback? = null
     inner class ProgressWebViewChromeClient : WebChromeClient() {
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             super.onProgressChanged(view, newProgress)
@@ -70,12 +84,39 @@ class WebViewCtrl(
         override fun onReceivedTitle(view: WebView?, title: String?) {
             super.onReceivedTitle(view, title)
         }
+
+        override fun onShowCustomView(view: View?, callback: IX5WebChromeClient.CustomViewCallback?) {
+            super.onShowCustomView(view, callback)
+            if (mCustomView != null) {
+                callback?.onCustomViewHidden()
+                return
+            }
+            mCustomView = view
+            mCustomView?.visibility = View.VISIBLE
+            mCustomViewCallBack = callback
+            fullWebView.addView(mCustomView)
+            fullWebView.visibility = View.VISIBLE
+            fullWebView.bringToFront()
+            onFull(true)
+        }
+
+        override fun onHideCustomView() {
+            super.onHideCustomView()
+            if (mCustomView == null) {
+                return
+            }
+            mCustomView?.visibility = View.GONE
+            fullWebView.removeView(mCustomView)
+            mCustomView = null
+            fullWebView.visibility = View.GONE
+            mCustomViewCallBack?.onCustomViewHidden()
+            onFull(false)
+        }
     }
 
 
     inner class NewWebViewClient : WebViewClient() {
 
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun shouldOverrideUrlLoading(
             view: WebView?,
             request: WebResourceRequest?
@@ -103,7 +144,7 @@ class WebViewCtrl(
         override fun onReceivedSslError(
             view: WebView?,
             handler: SslErrorHandler?,
-            error: SslError?
+            p2: com.tencent.smtt.export.external.interfaces.SslError?
         ) {
             handler?.proceed()
         }
