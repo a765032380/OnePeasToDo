@@ -5,7 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import kotlinx.coroutines.delay
+import pub.gll.onepeas.libcore.ext.toDateFormat
 import pub.gll.onepeas.todo.car.db.AppDatabase
 import pub.gll.onepeas.todo.car.db.CarBrandEntity
 import pub.gll.onepeas.todo.car.init.AppHelper
@@ -45,17 +45,15 @@ class CarBrandRemoteMediator(
 
             val page = pageKey?:1
             //第二步：请求分页数据
-            val result = api.fetchCarBrand(page,state.config.pageSize,"4c753f2f20288772bf555d0be98eede0","2015-07-10")
-            delay(3*1000)
+            val time = System.currentTimeMillis().toDateFormat("yyyy-MM-dd")
+            val result = api.fetchCarBrand(page,state.config.pageSize,"4c753f2f20288772bf555d0be98eede0",time)
             val carBrandDao = db.getCarBrandDao()
-
 
             //第三步：插入数据库
             val item = result.result.showapi_res_body.contentlist.map {
                 CarBrandEntity(
                     id = it.id,
                     name  = it.name,
-//                    icon =  "https://image-1251228670.cos.ap-beijing.myqcloud.com/2022/06/16/shuang-ren-13x.png",
                     icon = it.icon,
                     page = page + 1
                 )

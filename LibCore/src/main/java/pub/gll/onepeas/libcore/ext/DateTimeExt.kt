@@ -40,9 +40,11 @@ fun Int.toDateFormat(format: String = "yyyy-MM-dd HH:mm:ss") = SimpleDateFormat(
 fun Long.getFriendlyTimeSpanByNow(): String? {
     val now = System.currentTimeMillis()
     val span = now - this
-    if (TimeUtils.millis2String(TimeUtils.getNowMills(), "yyyy") != TimeUtils.millis2String(this, "yyyy") ) {
+    if (TimeUtils.millis2String(
+            TimeUtils.getNowMills(), "yyyy") != TimeUtils.millis2String(this, "yyyy") ) {
         // 不是同一年
-        return TimeUtils.millis2String(TimeUtils.getNowMills(), "yyyy年MM月dd日")
+        return TimeUtils.millis2String(
+            TimeUtils.getNowMills(), "yyyy年MM月dd日")
     }
     if (span < 0) // U can read http://www.apihome.cn/api/java/Formatter.html to understand it.
 //            return String.format("%tc", millis)
@@ -81,9 +83,11 @@ fun Long.getFriendlyTimeSpanByNow(): String? {
 fun Long.getFriendlyTimeSpanByNow1(): String? {
     val now = System.currentTimeMillis()
     val span = now - this
-    if (TimeUtils.millis2String(TimeUtils.getNowMills(), "yyyy") != TimeUtils.millis2String(this, "yyyy") ) {
+    if (TimeUtils.millis2String(
+            TimeUtils.getNowMills(), "yyyy") != TimeUtils.millis2String(this, "yyyy") ) {
         // 不是同一年
-        return TimeUtils.millis2String(TimeUtils.getNowMills(), "7天以前")
+        return TimeUtils.millis2String(
+            TimeUtils.getNowMills(), "7天以前")
     }
     if (span < 0) // U can read http://www.apihome.cn/api/java/Formatter.html to understand it.
 //            return String.format("%tc", millis)

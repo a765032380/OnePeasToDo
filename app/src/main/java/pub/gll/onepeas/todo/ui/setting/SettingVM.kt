@@ -1,7 +1,5 @@
 package pub.gll.onepeas.todo.ui.setting
 
-import android.content.Context
-import androidx.compose.material.Snackbar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,16 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import pub.gll.onepeas.liblog.HiLog
-import pub.gll.onepeas.libupload.FileType
-import pub.gll.onepeas.libupload.TXUploadManager
-import pub.gll.onepeas.todo.data.http.HttpResult
 import pub.gll.onepeas.todo.data.http.HttpService
-import pub.gll.onepeas.todo.ui.login.LoginViewEvent
-import pub.gll.onepeas.todo.util.AppUserUtil
 import pub.gll.onepeas.todo.util.MqttClientUtil
 import pub.gll.onepeas.todo.util.SteeringEngineStartEndUtil
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel

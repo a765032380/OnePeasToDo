@@ -15,9 +15,7 @@ import pub.gll.onepeas.libupload.TXUploadManager
 import pub.gll.onepeas.todo.bean.UserInfo
 import pub.gll.onepeas.todo.data.http.HttpResult
 import pub.gll.onepeas.todo.data.http.HttpService
-import pub.gll.onepeas.todo.ui.login.LoginViewState
 import pub.gll.onepeas.todo.util.AppUserUtil
-import retrofit2.Retrofit
 import java.io.File
 import javax.inject.Inject
 

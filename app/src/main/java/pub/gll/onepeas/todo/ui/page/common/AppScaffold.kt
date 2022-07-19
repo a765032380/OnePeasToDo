@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
@@ -27,7 +26,6 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.gson.Gson
 import pub.gll.onepeas.liblog.ext.e
 import pub.gll.onepeas.todo.bean.WebData
 import pub.gll.onepeas.todo.ui.home.HomePage
@@ -44,25 +42,9 @@ import pub.gll.onepeas.todo.util.toJson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-fun NavController.navigateAndArgument(
-    route: String,
-    args: List<Pair<String, Any>>? = null,
-    navOptions: NavOptions? = null,
-    navigatorExtras: Navigator.Extras? = null,
-
-    ) {
-    navigate(route = route, navOptions = navOptions, navigatorExtras = navigatorExtras)
-
-    if (args == null && args?.isEmpty() == true) {
-        return
-    }
-
-    val bundle = backQueue.lastOrNull()?.arguments
-    if (bundle != null) {
-        bundle.putAll(bundleOf(*args?.toTypedArray()!!))
-    } else {
-        println("The last argument of NavBackStackEntry is NULL")
-    }
+fun NavController.navigateAndArgument(route: String, args: Any? = null) {
+    val encodedUrl = URLEncoder.encode(args.toJson(), StandardCharsets.UTF_8.toString())
+    navigate("${route}/${encodedUrl}")
 }
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalPagerApi::class)
@@ -82,12 +64,7 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
             androidx.compose.material3.FloatingActionButton(
                 onClick = {
                     val webData = WebData("播放器","http://49.232.198.163/video.html",false)
-//                    val webData = WebData("播放器","http://bilibili.com")
-                    val encodedUrl = URLEncoder.encode(webData.toJson(), StandardCharsets.UTF_8.toString())
-                    navCtrl.navigate("${RouteName.WEB_VIEW}/${encodedUrl}")
-
-//                    settingVM.close()
-//                          commonNotification(navCtrl.context)
+                    navCtrl.navigateAndArgument(RouteName.WEB_VIEW,webData)
                 },
                 modifier = Modifier.size(50.dp),
                 shape = RoundedCornerShape(25.dp),

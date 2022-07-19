@@ -23,7 +23,18 @@
             android:name=".car.activity.CarActivity"
             android:theme="@style/Theme.AppCompat"/>
         <activity
-            android:name=".car.activity.CarComposeActivity"/>
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:name=".car.activity.CarComposeActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".car.activity.CustomViewAct"
             android:theme="@style/Theme.AppCompat" />
@@ -39,11 +50,6 @@
             android:name=".MainTestAct"
             android:exported="true"
             android:theme="@style/Theme.OnePeasToDo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity

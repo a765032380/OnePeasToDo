@@ -19,7 +19,7 @@ abstract class BaseApp:Application(),IApp{
     override fun onCreate() {
         super.onCreate()
         instance = this
-        initLog()
+//        initLog()
         initModuleApp(this)
         initModuleData(this)
     }

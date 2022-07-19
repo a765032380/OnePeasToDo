@@ -3,7 +3,6 @@ package pub.gll.onepeas.todo.test
 import com.google.gson.Gson
 import pub.gll.onepeas.libmqtt.MqttListener
 import pub.gll.onepeas.libmqtt.MqttManager
-import pub.gll.onepeas.libmqtt.MqttOptions
 import pub.gll.onepeas.todo.test.Code.CLOSE
 import pub.gll.onepeas.todo.test.Code.NOT_ONLINE
 import pub.gll.onepeas.todo.test.Code.OPEN

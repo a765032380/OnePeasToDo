@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
 //            Swipeable()
 //            AnimateItemPlacement()
         }
-        initMqttClient()
+//        initMqttClient()
     }
 
     private fun initMqttClient(){

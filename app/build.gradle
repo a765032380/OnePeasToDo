@@ -7,33 +7,13 @@ if (rootProject.singleModule) {
 }
 
 apply from: '../base_module.gradle'
-apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     defaultConfig {
         applicationId "pub.gll.onepeas.todo"
-
-        vectorDrawables {
-            useSupportLibrary true
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    buildFeatures{
-        dataBinding = true
-        viewBinding = true
     }
 }
 
 dependencies {
-    implementation project(path: ':LibBase')
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    api 'com.tencent.tbs:tbssdk:44199'
+
 }

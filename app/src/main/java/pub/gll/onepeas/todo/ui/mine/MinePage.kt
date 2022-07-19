@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import pub.gll.onepeas.libcore.ext.uriToFileQ
-import pub.gll.onepeas.liblog.HiLog
 import pub.gll.onepeas.libupload.TXUploadManager
 import pub.gll.onepeas.libupload.UpLoadListener
 import pub.gll.onepeas.libupload.UpLoadState

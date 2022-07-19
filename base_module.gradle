@@ -15,6 +15,9 @@ android {
         versionCode rootProject.version_code
         versionName rootProject.version_name
 
+        vectorDrawables {
+            useSupportLibrary true
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         //kotlin ARouter 的配置方式
@@ -32,6 +35,23 @@ android {
         }
     }
 
+    signingConfigs {
+        debug {
+            storeFile file("kk_comic_google.jks")
+            storePassword "kk_comic123456"
+            keyAlias "kk_comic_google"
+            keyPassword "kk_comic123456"
+        }
+
+        release {
+            storeFile file("kk_comic_google")
+            storePassword "kk_comic123456"
+            keyAlias "kk_comic_google"
+            keyPassword "kk_comic123456"
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -41,10 +61,6 @@ android {
         jvmTarget = '1.8'
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",]
     }
-
-    buildFeatures {
-        compose true
-    }
     composeOptions {
         kotlinCompilerExtensionVersion '1.2.0-rc01'
     }
@@ -52,6 +68,19 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures{
+        compose true
+        dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -77,8 +106,8 @@ dependencies {
     //endregion
 
     // okHttp
-    api 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
-    api 'com.squareup.okio:okio:3.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
+    implementation 'com.squareup.okio:okio:3.0.0'
 
     // koin 为依赖注入库 考虑使用中 或许可以用Hilt代替
     // Koin for Kotlin
@@ -185,19 +214,19 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
 
     //lifecycle
-    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
-    api 'androidx.lifecycle:lifecycle-common-java8:2.5.0'
-    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     // viewModel
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
     // liveData
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
 //    api 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
     //navigation
-    api 'androidx.navigation:navigation-runtime-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.0'
     //retrofit
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
 
 
@@ -249,4 +278,6 @@ dependencies {
     //桌面小组件
     implementation "androidx.glance:glance:1.0.0-alpha03"
     implementation 'androidx.glance:glance-appwidget:1.0.0-alpha03'
+
+    implementation 'com.tencent.tbs:tbssdk:44199'
 }

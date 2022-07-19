@@ -2,16 +2,15 @@ package pub.gll.onepeas.todo.web
 
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.widget.FrameLayout
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient
 import com.tencent.smtt.sdk.*
+import pub.gll.onepeas.libcore.util.StatusBarUtil
 import pub.gll.onepeas.todo.R
 
 class WebActivity : AppCompatActivity() {
@@ -20,10 +19,10 @@ class WebActivity : AppCompatActivity() {
     lateinit var mWebView: WebView
     lateinit var mFlVideo: FrameLayout
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
+        StatusBarUtil.setStatusBarDarkTheme(this,true)
         mWebView = findViewById(R.id.web_view)
         mFlVideo = findViewById(R.id.fl_video)
         mWebView.webChromeClient = object : WebChromeClient() {

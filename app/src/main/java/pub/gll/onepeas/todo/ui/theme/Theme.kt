@@ -9,7 +9,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 //夜色主题
 private val DarkColorPalette = AppColors(
-    themeUi = black1,
+    themeUi = themeColor,
     background = black2,
     listItem = black3,
     divider = black4,

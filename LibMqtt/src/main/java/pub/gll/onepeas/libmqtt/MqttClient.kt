@@ -82,10 +82,14 @@ internal object MqttClient {
     }
 
     fun disconnect(){
-        mMqttOptions = null
-        client.disconnect()
-        Log.e(TAG,"Disconnected")
-        client.close()
+        try{
+            mMqttOptions = null
+            client.disconnect()
+            Log.e(TAG,"Disconnected")
+            client.close()
+        }catch(e:Exception){
+
+        }
     }
 
 

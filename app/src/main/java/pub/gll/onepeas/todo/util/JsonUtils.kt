@@ -1,9 +1,8 @@
 package pub.gll.onepeas.todo.util
 
-import android.os.Parcelable
 import com.google.gson.Gson
 
-fun Parcelable.toJson(): String {
+fun Any?.toJson(): String {
     return Gson().toJson(this)
 }
 
