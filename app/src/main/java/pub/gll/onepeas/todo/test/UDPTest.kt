@@ -1,7 +1,7 @@
 package pub.gll.onepeas.todo.test
 
 import pub.gll.onepeas.todo.udp.client.ClientServiceImpl
-import pub.gll.onepeas.todo.util.NetCheckUtil
+import pub.gll.onepeas.libcore.util.NetCheckUtil
 
 val mUdpClient = ClientServiceImpl()
 

@@ -31,6 +31,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import pub.gll.onepeas.module.cookbook.CookBookHome
 import pub.gll.onepeas.todo.car.model.CarBrandItemModel
 import pub.gll.onepeas.todo.car.viewmodel.CarBrandViewModel
 import pub.gll.onepeas.todo.ui.theme.AppTheme
@@ -85,13 +86,14 @@ class CarComposeActivity : ComponentActivity() {
                         },
                         floatingActionButtonPosition = FabPosition.End,
                         content = {
-                            SwipeRefresh(state = refreshState, onRefresh = {
-                                data.refresh()
-                            }) {
-                                Greeting(data) {
-
-                                }
-                            }
+                            CookBookHome()
+//                            SwipeRefresh(state = refreshState, onRefresh = {
+//                                data.refresh()
+//                            }) {
+//                                Greeting(data) {
+//
+//                                }
+//                            }
                         }
                     )
                 }

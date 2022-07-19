@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply from: '../base_module.gradle'
+
 android {
     namespace 'pub.gll.onepeas.libbase'
     compileSdk rootProject.compile_sdk

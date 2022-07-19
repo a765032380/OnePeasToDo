@@ -1,8 +1,7 @@
 package pub.gll.onepeas.todo.util
 
 import pub.gll.onepeas.todo.bean.SteeringEngineConfig
-import pub.gll.onepeas.todo.bean.UserInfo
-import pub.gll.onepeas.todo.data.DataStoreUtils
+import pub.gll.onepeas.libbase.di.http.DataStoreUtils
 
 object SteeringEngineStartEndUtil {
     private const val STEERING_ENGINE_OPEN_START = "steering_engine_open_start"

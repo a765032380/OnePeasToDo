@@ -15,5 +15,7 @@ android {
 }
 
 dependencies {
+    implementation project (path: ':LibBase')
+    implementation project (path:":ModuleCookbook")
 
 }

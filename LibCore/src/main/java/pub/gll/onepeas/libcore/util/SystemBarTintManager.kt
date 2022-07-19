@@ -26,7 +26,7 @@ import java.lang.reflect.Method
  * Class to manage status and navigation bar tint effects when using KitKat
  * translucent system UI modes.
  */
-class SystemBarTintManager @SuppressLint("ResourceType") @TargetApi(19) constructor(activity: Activity) {
+class SystemBarTintManager constructor(activity: Activity) {
     companion object {
         /**
          * The default system bar tint color value.

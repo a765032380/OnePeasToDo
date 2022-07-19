@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import pub.gll.onepeas.libupload.FileType
 import pub.gll.onepeas.libupload.TXUploadManager
-import pub.gll.onepeas.todo.bean.UserInfo
+import pub.gll.onepeas.libbase.util.UserInfo
 import pub.gll.onepeas.todo.data.http.HttpResult
 import pub.gll.onepeas.todo.data.http.HttpService
-import pub.gll.onepeas.todo.util.AppUserUtil
+import pub.gll.onepeas.libbase.util.AppUserUtil
 import java.io.File
 import javax.inject.Inject
 

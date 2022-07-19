@@ -70,7 +70,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "OnePeasToDo"
 include ':app'
-include ':LibUdp'
 include ':LibMqtt'
 include ':ModuleHome'
 include ':ModuleMine'
@@ -80,4 +79,4 @@ include ':LibNet'
 include ':LibLog'
 include ':LibCore'
 include ':LibUpLoad'
-include ':LibNotification'
+include ':ModuleCookbook'

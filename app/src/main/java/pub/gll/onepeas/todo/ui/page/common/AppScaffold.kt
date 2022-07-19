@@ -27,7 +27,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
 import pub.gll.onepeas.liblog.ext.e
-import pub.gll.onepeas.todo.bean.WebData
+import pub.gll.onepeas.libbase.util.WebData
 import pub.gll.onepeas.todo.ui.home.HomePage
 import pub.gll.onepeas.todo.ui.login.LoginPage
 import pub.gll.onepeas.todo.ui.mine.ProfilePage
@@ -37,8 +37,8 @@ import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
 import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import pub.gll.onepeas.todo.ui.wifi.WifiPage
-import pub.gll.onepeas.todo.util.fromJson
-import pub.gll.onepeas.todo.util.toJson
+import pub.gll.onepeas.libcore.util.fromJson
+import pub.gll.onepeas.libcore.util.toJson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 

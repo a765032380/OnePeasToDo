@@ -16,7 +16,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.tencent.smtt.sdk.WebView
 import pub.gll.onepeas.todo.R
-import pub.gll.onepeas.todo.bean.WebData
+import pub.gll.onepeas.libbase.util.WebData
 import pub.gll.onepeas.todo.ui.theme.ToolBarHeight
 import pub.gll.onepeas.todo.ui.widgets.AppToolsBar
 import pub.gll.onepeas.todo.util.RouteUtils.back

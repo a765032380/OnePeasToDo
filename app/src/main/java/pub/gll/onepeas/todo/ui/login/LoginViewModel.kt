@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import pub.gll.onepeas.todo.data.http.HttpResult
 import pub.gll.onepeas.todo.data.http.HttpService
-import pub.gll.onepeas.todo.util.AppUserUtil
+import pub.gll.onepeas.libbase.util.AppUserUtil
 import javax.inject.Inject
 
 @HiltViewModel

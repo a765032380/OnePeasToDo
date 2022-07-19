@@ -29,7 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import pub.gll.onepeas.liblog.ext.e
-import pub.gll.onepeas.todo.bean.WebData
+import pub.gll.onepeas.libbase.util.WebData
 import pub.gll.onepeas.todo.comic.bookshelf.ComicBookShelf
 import pub.gll.onepeas.todo.comic.home.ComicHome
 import pub.gll.onepeas.todo.comic.mine.ComicMine
@@ -38,8 +38,8 @@ import pub.gll.onepeas.todo.ui.login.LoginPage
 import pub.gll.onepeas.todo.ui.page.common.RouteName
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
-import pub.gll.onepeas.todo.util.fromJson
-import pub.gll.onepeas.todo.util.toJson
+import pub.gll.onepeas.libcore.util.fromJson
+import pub.gll.onepeas.libcore.util.toJson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 

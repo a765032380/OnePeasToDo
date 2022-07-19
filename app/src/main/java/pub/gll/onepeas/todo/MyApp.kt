@@ -4,7 +4,7 @@ import android.app.Application
 import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
-import pub.gll.onepeas.todo.data.DataStoreUtils
+import pub.gll.onepeas.libbase.di.http.DataStoreUtils
 
 /**
  * 1. 所有使用 Hilt 的 App 必须包含 一个使用 @HiltAndroidApp 注解的 Application
@@ -35,9 +35,30 @@ class MyApp : BaseApp() {
             }
         })
         QbSdk.setDownloadWithoutWifi(true)
-//        initModuleList(AppConfig.moduleApps)
+        initModuleList(AppConfig.moduleApps)
     }
-
+    /**
+     * 这个方法主要在主工程调用，其他工程不要调用
+     * 通过反射的方式获取到其他module的Application
+     */
+    private fun initModuleList(list: Array<String>){
+        list.forEach {
+            try {
+                val clazz = Class.forName(it)
+                val baseApp: BaseApp = clazz.newInstance() as BaseApp
+                baseApp.initModuleApp(this)
+                baseApp.initModuleData(this)
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: IllegalAccessException) {
+                e.printStackTrace()
+            } catch (e: InstantiationException) {
+                e.printStackTrace()
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+    }
     override fun initModuleApp(application: Application) {
 
     }

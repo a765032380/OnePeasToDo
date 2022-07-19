@@ -8,9 +8,9 @@ package pub.gll.onepeas.todo
  */
 object AppConfig {
     private const val HOME_APP = "pub.gll.onepeas.module.home.HomeApp"
-    private const val MINE_APP = "pub.gll.onepeas.module.mine.MineApp"
+    private const val COOKBOOK_APP = "pub.gll.onepeas.module.cookbook.CookbookApp"
     var moduleApps = arrayOf(
         HOME_APP,
-        MINE_APP,
+        COOKBOOK_APP,
     )
 }

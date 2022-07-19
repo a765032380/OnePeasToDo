@@ -1,8 +1,8 @@
 package pub.gll.onepeas.todo.data.http
 
 import pub.gll.onepeas.todo.bean.BasicBean
-import pub.gll.onepeas.todo.bean.UserInfo
-import pub.gll.onepeas.todo.net.NetworkResult
+import pub.gll.onepeas.libbase.util.UserInfo
+import pub.gll.onepeas.libbase.di.http.NetworkResult
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

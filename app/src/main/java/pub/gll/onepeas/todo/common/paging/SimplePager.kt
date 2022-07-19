@@ -8,7 +8,7 @@ import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.todo.bean.BasicBean
 import pub.gll.onepeas.todo.bean.ListWrapper
 import pub.gll.onepeas.todo.data.http.HttpResult
-import pub.gll.onepeas.todo.util.NetCheckUtil
+import pub.gll.onepeas.libcore.util.NetCheckUtil
 import pub.gll.onepeas.todo.util.showToast
 
 fun <T : Any> ViewModel.simplePager(

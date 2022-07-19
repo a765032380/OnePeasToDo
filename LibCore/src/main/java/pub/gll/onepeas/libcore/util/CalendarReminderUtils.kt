@@ -43,7 +43,6 @@ object CalendarReminderUtils {
      * 检查是否已经添加了日历账户，如果没有添加先添加一个日历账户再查询
      * 获取账户成功返回账户id，否则返回-1
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private fun checkAndAddCalendarAccount(context: Context): Int {
         val oldId = checkCalendarAccount(context)
         return if (oldId >= 0) {
@@ -83,7 +82,6 @@ object CalendarReminderUtils {
     /**
      * 添加日历账户，账户创建成功则返回账户id，否则返回-1
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private fun addCalendarAccount(context: Context): Long {
         val timeZone = TimeZone.getDefault()
         val value = ContentValues()

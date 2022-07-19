@@ -13,14 +13,6 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 
-/**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/08/02
- *     desc  : utils about time
- * </pre>
- */
 public final class TimeUtils {
 
     private static final ThreadLocal<Map<String, SimpleDateFormat>> SDF_THREAD_LOCAL

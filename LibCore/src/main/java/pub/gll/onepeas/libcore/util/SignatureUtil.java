@@ -7,12 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-/**
- * @Description 接口参数签名工具类
- * @Author Guo Jian Peng
- * @Date 2020-11-17
- * @Version 1.0
- **/
 public class SignatureUtil {
 
     private static final String SECRET = "MJwUzkDiL2aUEo6s";
