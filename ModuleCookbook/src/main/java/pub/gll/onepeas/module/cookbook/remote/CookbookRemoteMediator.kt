@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import kotlinx.coroutines.delay
+import pub.gll.onepeas.libcore.ext.toDateFormat
 import pub.gll.onepeas.module.cookbook.db.CookbookAppDatabase
 import pub.gll.onepeas.module.cookbook.db.CookbookEntity
 
@@ -42,8 +43,8 @@ class CookbookRemoteMediator(
 
             val page = pageKey?:1
             //第二步：请求分页数据
-            val result = api.fetchCookbook(page,state.config.pageSize,"4c753f2f20288772bf555d0be98eede0","2015-07-10")
-            delay(3*1000)
+            val time = System.currentTimeMillis().toDateFormat("yyyy-MM-dd")
+            val result = api.fetchCookbook(page,state.config.pageSize,"4c753f2f20288772bf555d0be98eede0",time)
             val comicHomeDao = db.getCookbookDao()
 
 
@@ -51,7 +52,7 @@ class CookbookRemoteMediator(
             val item = result.result.showapi_res_body.contentlist.map {
                 CookbookEntity(
                     id = it.id,
-                    page = page,
+                    page = page+ 1,
                     name = it.name,
                     icon = it.icon
                 )
