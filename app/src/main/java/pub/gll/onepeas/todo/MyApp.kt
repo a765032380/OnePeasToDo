@@ -1,10 +1,15 @@
 package pub.gll.onepeas.todo
 
 import android.app.Application
+import com.jeffmony.downloader.VideoDownloadManager
+import com.jeffmony.downloader.common.DownloadConstants
+import com.jeffmony.downloader.utils.VideoStorageUtils
 import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.libbase.di.http.DataStoreUtils
+import java.io.File
+
 
 /**
  * 1. 所有使用 Hilt 的 App 必须包含 一个使用 @HiltAndroidApp 注解的 Application
@@ -36,6 +41,21 @@ class MyApp : BaseApp() {
         })
         QbSdk.setDownloadWithoutWifi(true)
         initModuleList(AppConfig.moduleApps)
+        initWebDownload()
+    }
+    private fun initWebDownload(){
+        val file: File = VideoStorageUtils.getVideoCacheDir(this)
+        if (!file.exists()) {
+            file.mkdir()
+        }
+        val config = VideoDownloadManager.Build(this)
+            .setCacheRoot(file.absolutePath)
+            .setTimeOut(DownloadConstants.READ_TIMEOUT, DownloadConstants.CONN_TIMEOUT)
+            .setConcurrentCount(DownloadConstants.CONCURRENT)
+            .setIgnoreCertErrors(false)
+            .setShouldM3U8Merged(false)
+            .buildConfig()
+        VideoDownloadManager.getInstance().initConfig(config)
     }
     /**
      * 这个方法主要在主工程调用，其他工程不要调用

@@ -17,5 +17,7 @@ android {
 dependencies {
     implementation project (path: ':LibBase')
     implementation project (path:":ModuleCookbook")
-
+    implementation 'com.github.JeffMony:VideoDownloader:5.8.0'
+    implementation 'com.github.JeffMony:JeffM3U8Lib:1.2.0'
+    implementation 'com.github.imherrera:compose-video-player:0.1.0-alpha'
 }
