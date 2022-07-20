@@ -124,7 +124,6 @@ class DownloadListVM  @Inject constructor() : ViewModel() {
         override fun onDownloadSuccess(item: VideoTaskItem) {
             LogUtils.w(TAG, "onDownloadSuccess: $item")
             notifyChanged(item)
-            DownloadUtil.doConvertVideo(item.filePath)
         }
     }
 

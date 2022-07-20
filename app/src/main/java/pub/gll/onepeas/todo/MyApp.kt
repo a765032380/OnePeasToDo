@@ -53,7 +53,7 @@ class MyApp : BaseApp() {
             .setTimeOut(DownloadConstants.READ_TIMEOUT, DownloadConstants.CONN_TIMEOUT)
             .setConcurrentCount(DownloadConstants.CONCURRENT)
             .setIgnoreCertErrors(false)
-            .setShouldM3U8Merged(false)
+            .setShouldM3U8Merged(true)
             .buildConfig()
         VideoDownloadManager.getInstance().initConfig(config)
     }
