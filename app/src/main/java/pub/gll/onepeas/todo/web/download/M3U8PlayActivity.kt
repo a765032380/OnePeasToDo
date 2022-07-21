@@ -4,6 +4,8 @@ import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -34,6 +36,25 @@ class M3U8PlayActivity: BaseActivity() {
             setContent {
                 ProvideWindowInsets {
                     val playerState = rememberVideoPlayerState()
+
+                    val callback = remember {
+                        object : OnBackPressedCallback(true) {
+                            override fun handleOnBackPressed() {
+                                if(playerState.isFullscreen.value){
+                                    playerState.control.setFullscreen(!playerState.isFullscreen.value)
+                                }else{
+                                    finish()
+                                }
+                            }
+                        }
+                    }
+                    val dispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+                    DisposableEffect(key1 = Unit, effect = {
+                        dispatcher?.addCallback(callback)
+                        onDispose {
+                            callback.remove()
+                        }
+                    })
                     var text by remember { mutableStateOf("x1.0") }
                     if(playerState.isFullscreen.value){
                         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -62,7 +83,7 @@ class M3U8PlayActivity: BaseActivity() {
                             }
                         ){
                             NiaDropdownMenuButton(
-                                modifier = Modifier.size(SmallIconButtonSize),
+                                modifier = Modifier.size(BigIconButtonSize),
                                 items = listOf("x1.0", "x1.25", "x1.5", "x2"),
                                 onItemClick = {
                                     text = it

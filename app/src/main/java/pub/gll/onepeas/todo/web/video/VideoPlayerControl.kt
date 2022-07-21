@@ -16,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.todo.web.video.icons.*
 import pub.gll.onepeas.todo.web.video.icons.Forward10
 import pub.gll.onepeas.todo.web.video.icons.Fullscreen
@@ -84,13 +86,16 @@ private fun ControlHeader(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (onBackClick != null) {
-            Icon(
-                modifier = Modifier.clickable {
-                    onBackClick.invoke()
-                },
-                painter = rememberVectorPainter(image = Icons.Default.Clear),
-                contentDescription = ""
-            )
+            AdaptiveIconButton(
+                modifier = Modifier.size(SmallIconButtonSize),
+                onClick = {onBackClick()}
+            ) {
+
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                    contentDescription = ""
+                )
+            }
         }
         Column(verticalArrangement = Arrangement.SpaceBetween) {
             Text(
@@ -246,8 +251,7 @@ private fun AdaptiveIconButton(
         CompositionLocalProvider(LocalContentAlpha provides contentAlpha, content = content)
     }
 }
-
-private val BigIconButtonSize = 52.dp
+val BigIconButtonSize = 52.dp
 val SmallIconButtonSize = 32.dp
 
 

@@ -47,13 +47,9 @@ class DownloadListVM  @Inject constructor() : ViewModel() {
 
     private val iDownloadInfosCallback: IDownloadInfosCallback = IDownloadInfosCallback {
         if (it!=null) {
-//            list = it.toMutableList().filter {
-//                it.taskState == VideoTaskState.DEFAULT
-//            }
             videoTaskList.addAll(it.filter {
                 it.taskState != VideoTaskState.DEFAULT
             })
-//            videoTaskList.value = it
             uiState.tryEmit(UiState.Success(it))
         }
     }
@@ -81,24 +77,6 @@ class DownloadListVM  @Inject constructor() : ViewModel() {
                 videoTaskList.add(item)
             }
         }
-
-//        viewModelScope.launch {
-//            val newList = arrayListOf<VideoTaskItem>()
-//            var isHave = false
-//            list.forEach {
-//                if(it.url == item.url){
-//                    isHave = true
-//                    newList.add(item)
-//                }else{
-//                    newList.add(it)
-//                }
-//            }
-//            if(!isHave){
-//                newList.add(item)
-//            }
-//            list = newList
-//            uiState.tryEmit(UiState.Success(newList))
-//        }
     }
 
 

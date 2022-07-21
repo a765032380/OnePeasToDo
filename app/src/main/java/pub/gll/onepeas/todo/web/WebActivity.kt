@@ -1,6 +1,7 @@
 package pub.gll.onepeas.todo.web
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -11,6 +12,7 @@ import android.view.WindowManager
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.widget.Button
 import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.jeffmony.downloader.VideoDownloadManager
@@ -39,66 +41,7 @@ class WebActivity : AppCompatActivity() {
     lateinit var mBTDownloadList: Button
     val TAG = "LLLLLLLL"
 
-    private var mLastProgressTimeStamp: Long = 0
-    private var mLastSpeedTimeStamp: Long = 0
-
     private fun startDownload(url:String){
-        VideoDownloadManager.getInstance().setGlobalDownloadListener(object : DownloadListener() {
-            override fun onDownloadDefault(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadDefault: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadPending(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadPending: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadPrepare(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadPrepare: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadStart(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadStart: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadProgress(item: VideoTaskItem) {
-                val currentTimeStamp = System.currentTimeMillis()
-                if (currentTimeStamp - mLastProgressTimeStamp > 1000) {
-                    LogUtils.w(
-                        TAG,
-                        "onDownloadProgress: " + item.percentString + ", curTs=" + item.curTs + ", totalTs=" + item.totalTs
-                    )
-//                    notifyChanged(item)
-                    mLastProgressTimeStamp = currentTimeStamp
-                }
-            }
-
-            override fun onDownloadSpeed(item: VideoTaskItem?) {
-                val currentTimeStamp = System.currentTimeMillis()
-                if (currentTimeStamp - mLastSpeedTimeStamp > 1000) {
-//                    notifyChanged(item)
-                    mLastSpeedTimeStamp = currentTimeStamp
-                }
-            }
-
-            override fun onDownloadPause(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadPause: " + item.url)
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadError(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadError: " + item.url)
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadSuccess(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadSuccess: $item")
-//                notifyChanged(item)
-            }
-        })
         val item = VideoTaskItem(
             url,
             "",
@@ -235,9 +178,13 @@ class WebActivity : AppCompatActivity() {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            mBTDownload.visibility = View.GONE
+            mBTDownloadList.visibility = View.GONE
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            mBTDownload.visibility = View.VISIBLE
+            mBTDownloadList.visibility = View.VISIBLE
         }
     }
 
