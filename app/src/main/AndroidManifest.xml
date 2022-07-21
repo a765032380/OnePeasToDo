@@ -42,6 +42,8 @@
             android:name=".web.download.DownloadListActivity"
             android:exported="true" />
         <activity
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
             android:name=".web.download.M3U8PlayActivity"
             android:exported="true" />
         <activity

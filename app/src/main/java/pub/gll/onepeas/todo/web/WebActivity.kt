@@ -113,6 +113,48 @@ class WebActivity : AppCompatActivity() {
             VideoDownloadManager.getInstance().resumeDownload(item.url)
         }
     }
+    private val list = arrayListOf (
+        "https://jx.parwix.com:4433/player/?url=",
+        "https://jx.bozrc.com:4433/player/?url=",
+        "https://www.mtosz.com/m3u8.php?url=",
+        "https://vip.bljiex.com/?v=",
+        "https://z1.m1907.cn/?jx=",
+        "https://www.administratorw.com/video.php?url=",
+        "http://17kyun.com/api.php?url=",
+        "https://vip.66parse.club/?url=",
+        "http://jx.rdhk.net/?v=",
+        "https://www.8090g.cn/?url=",
+        "https://www.8090g.cn/jiexi/?url=",
+        "http://www.1717yun.com/jx/vip/index.php?url=",
+        "https://www.ckmov.vip/api.php?url=",
+        "http://jx.yparse.com/?url=",
+        "https://jx.m3u8.tv/jiexi/?url=",
+        "https://www.kpezp.cn/jlexi.php?url=",
+        "https://www.xymav.com/?url=",
+        "https://2.08bk.com/?url=",
+        "https://okjx.cc/?url=",
+        "https://api.v6.chat/?url="
+    )
+
+    private fun intercept(request: WebResourceRequest?){
+        val url = request?.url.toString()
+        if (url.contains(".m3u8")||url.contains(".mp4")){
+            lifecycleScope.launch(Dispatchers.Main){
+                mBTDownload.visibility = View.VISIBLE
+                mBTDownload.setOnClickListener {
+                    startDownload(request?.url.toString())
+                }
+            }
+        }else {
+            list.forEach {
+                if (url.contains(it)){
+                    lifecycleScope.launch(Dispatchers.Main){
+                        mBTDownload.visibility = View.GONE
+                    }
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,22 +172,7 @@ class WebActivity : AppCompatActivity() {
             // API 21 开始引入
             override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
                 Log.e(TAG,"url=${request?.url.toString()}")
-                if (request?.url.toString().contains(".m3u8")){
-                    lifecycleScope.launch(Dispatchers.Main){
-                        mBTDownload.visibility = View.VISIBLE
-                        mBTDownload.setOnClickListener {
-                            startDownload(request?.url.toString())
-                        }
-                    }
-                }
-                if (request?.url.toString().contains(".mp4")) {
-                    lifecycleScope.launch(Dispatchers.Main){
-                        mBTDownload.visibility = View.VISIBLE
-                        mBTDownload.setOnClickListener {
-                            startDownload(request?.url.toString())
-                        }
-                    }
-                }
+                intercept(request)
                 return super.shouldInterceptRequest(view, request)
             }
         }

@@ -1,14 +1,17 @@
 package pub.gll.onepeas.todo.web.download
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeffmony.downloader.VideoDownloadManager
 import com.jeffmony.downloader.listener.DownloadListener
 import com.jeffmony.downloader.listener.IDownloadInfosCallback
 import com.jeffmony.downloader.model.VideoTaskItem
+import com.jeffmony.downloader.model.VideoTaskState
 import com.jeffmony.downloader.utils.LogUtils
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,9 +20,9 @@ class DownloadListVM  @Inject constructor() : ViewModel() {
     val TAG ="LLLLL"
     val uiState  = MutableStateFlow<UiState>(UiState.Loading)
     var list = mutableListOf<VideoTaskItem>()
+    val videoTaskList =  mutableStateListOf<VideoTaskItem>()
 
-    override fun onCleared() {
-        super.onCleared()
+    fun close() {
         VideoDownloadManager.getInstance().removeDownloadInfosCallback(iDownloadInfosCallback)
     }
     fun getData(){
@@ -38,72 +41,103 @@ class DownloadListVM  @Inject constructor() : ViewModel() {
     }
     fun delete(item:VideoTaskItem){
         VideoDownloadManager.getInstance().deleteVideoTask(item,true)
+        videoTaskList.remove(item)
     }
 
 
     private val iDownloadInfosCallback: IDownloadInfosCallback = IDownloadInfosCallback {
-        list = it
-        uiState.tryEmit(UiState.Success(it))
+        if (it!=null) {
+//            list = it.toMutableList().filter {
+//                it.taskState == VideoTaskState.DEFAULT
+//            }
+            videoTaskList.addAll(it.filter {
+                it.taskState != VideoTaskState.DEFAULT
+            })
+//            videoTaskList.value = it
+            uiState.tryEmit(UiState.Success(it))
+        }
     }
 
 
-    private fun notifyChanged(item: VideoTaskItem) {
-        viewModelScope.launch {
-            val newList = arrayListOf<VideoTaskItem>()
+    private fun notifyChanged(item: VideoTaskItem?) {
+        item?:return
+        if (item.taskState == VideoTaskState.DEFAULT){
+            videoTaskList.remove(item)
+            return
+        }
+        viewModelScope.launch(Dispatchers.Main) {
             var isHave = false
-            list.forEach {
-                if(it.url == item.url){
+            val list: List<VideoTaskItem> = videoTaskList.toMutableList().map {
+                if (it.url == item.url){
                     isHave = true
-                    newList.add(item)
+                    item
                 }else{
-                    newList.add(it)
+                    it
                 }
             }
-            if(!isHave){
-                newList.add(item)
+            videoTaskList.clear()
+            videoTaskList.addAll(list)
+            if (!isHave) {
+                videoTaskList.add(item)
             }
-            list = newList
-            uiState.tryEmit(UiState.Success(newList))
         }
+
+//        viewModelScope.launch {
+//            val newList = arrayListOf<VideoTaskItem>()
+//            var isHave = false
+//            list.forEach {
+//                if(it.url == item.url){
+//                    isHave = true
+//                    newList.add(item)
+//                }else{
+//                    newList.add(it)
+//                }
+//            }
+//            if(!isHave){
+//                newList.add(item)
+//            }
+//            list = newList
+//            uiState.tryEmit(UiState.Success(newList))
+//        }
     }
 
 
     private var mLastProgressTimeStamp: Long = 0
     private var mLastSpeedTimeStamp: Long = 0
     private val downloadListener = object : DownloadListener() {
-        override fun onDownloadDefault(item: VideoTaskItem) {
+        override fun onDownloadDefault(item: VideoTaskItem?) {
             LogUtils.w(TAG, "onDownloadDefault: $item")
             notifyChanged(item)
         }
 
-        override fun onDownloadPending(item: VideoTaskItem) {
+        override fun onDownloadPending(item: VideoTaskItem?) {
             LogUtils.w(TAG, "onDownloadPending: $item")
             notifyChanged(item)
         }
 
-        override fun onDownloadPrepare(item: VideoTaskItem) {
+        override fun onDownloadPrepare(item: VideoTaskItem?) {
             LogUtils.w(TAG, "onDownloadPrepare: $item")
             notifyChanged(item)
         }
 
-        override fun onDownloadStart(item: VideoTaskItem) {
+        override fun onDownloadStart(item: VideoTaskItem?) {
             LogUtils.w(TAG, "onDownloadStart: $item")
             notifyChanged(item)
         }
 
-        override fun onDownloadProgress(item: VideoTaskItem) {
+        override fun onDownloadProgress(item: VideoTaskItem?) {
             val currentTimeStamp = System.currentTimeMillis()
             if (currentTimeStamp - mLastProgressTimeStamp > 1000) {
                 LogUtils.w(
                     TAG,
-                    "onDownloadProgress: " + item.percentString + ", curTs=" + item.curTs + ", totalTs=" + item.totalTs
+                    "onDownloadProgress: " + item?.percentString + ", curTs=" + item?.curTs + ", totalTs=" + item?.totalTs
                 )
                 notifyChanged(item)
                 mLastProgressTimeStamp = currentTimeStamp
             }
         }
 
-        override fun onDownloadSpeed(item: VideoTaskItem) {
+        override fun onDownloadSpeed(item: VideoTaskItem?) {
             val currentTimeStamp = System.currentTimeMillis()
             if (currentTimeStamp - mLastSpeedTimeStamp > 1000) {
                 notifyChanged(item)
@@ -111,17 +145,17 @@ class DownloadListVM  @Inject constructor() : ViewModel() {
             }
         }
 
-        override fun onDownloadPause(item: VideoTaskItem) {
-            LogUtils.w(TAG, "onDownloadPause: " + item.url)
+        override fun onDownloadPause(item: VideoTaskItem?) {
+            LogUtils.w(TAG, "onDownloadPause: " + item?.url)
             notifyChanged(item)
         }
 
-        override fun onDownloadError(item: VideoTaskItem) {
-            LogUtils.w(TAG, "onDownloadError: " + item.url)
+        override fun onDownloadError(item: VideoTaskItem?) {
+            LogUtils.w(TAG, "onDownloadError: " + item?.url)
             notifyChanged(item)
         }
 
-        override fun onDownloadSuccess(item: VideoTaskItem) {
+        override fun onDownloadSuccess(item: VideoTaskItem?) {
             LogUtils.w(TAG, "onDownloadSuccess: $item")
             notifyChanged(item)
         }
