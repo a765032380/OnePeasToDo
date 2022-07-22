@@ -17,9 +17,9 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.tencent.smtt.sdk.WebView
 import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.libbase.util.WebData
-import pub.gll.onepeas.todo.ui.theme.ToolBarHeight
+import pub.gll.onepeas.libbase.ui.theme.ToolBarHeight
 import pub.gll.onepeas.todo.ui.widgets.AppToolsBar
-import pub.gll.onepeas.todo.util.RouteUtils.back
+import pub.gll.onepeas.libbase.util.RouteUtils.back
 
 @SuppressLint("UseCompatLoadingForDrawables")
 @Composable
@@ -57,7 +57,7 @@ fun WebViewPage(
                         progressDrawable =
                             context.resources.getDrawable(R.drawable.horizontal_progressbar)
                         indeterminateTintList =
-                            ColorStateList.valueOf(context.resources.getColor(R.color.teal_200))
+                            ColorStateList.valueOf(context.resources.getColor(pub.gll.onepeas.libbase.R.color.teal_200))
                     }
                     val webView = WebView(context).apply {
                         layoutParams = ViewGroup.LayoutParams(

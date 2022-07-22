@@ -17,28 +17,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.*
+import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
-import com.google.accompanist.pager.ExperimentalPagerApi
-import pub.gll.onepeas.liblog.ext.e
 import pub.gll.onepeas.libbase.util.WebData
-import pub.gll.onepeas.todo.ui.home.HomePage
+import pub.gll.onepeas.libcore.util.fromJson
+import pub.gll.onepeas.libcore.util.toJson
+import pub.gll.onepeas.lib.log.ext.e
 import pub.gll.onepeas.todo.ui.login.LoginPage
 import pub.gll.onepeas.todo.ui.mine.ProfilePage
-import pub.gll.onepeas.todo.ui.setting.SettingPage
-import pub.gll.onepeas.todo.ui.setting.SettingVM
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
 import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
 import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
-import pub.gll.onepeas.todo.ui.wifi.WifiPage
-import pub.gll.onepeas.libcore.util.fromJson
-import pub.gll.onepeas.libcore.util.toJson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -47,11 +43,10 @@ fun NavController.navigateAndArgument(route: String, args: Any? = null) {
     navigate("${route}/${encodedUrl}")
 }
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@OptIn(ExperimentalPagerApi::class)
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
-fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
+fun AppScaffold() {
     val navCtrl = rememberNavController()
     val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -99,25 +94,9 @@ fun AppScaffold(settingVM: SettingVM = hiltViewModel()) {
             NavHost(
                 modifier = Modifier.background(MaterialTheme.colors.background),
                 navController = navCtrl,
-                startDestination = RouteName.HOME
+                startDestination = RouteName.PROFILE
             ) {
-                //首页
-                composable(route = RouteName.HOME) {
-                    it.destination.route?.e()
-                    HomePage(navCtrl, scaffoldState)
-                }
 
-                //WIFI
-                composable(route = RouteName.WIFI_CONFIG) {
-                    it.destination.route?.e()
-                    WifiPage(navCtrl,scaffoldState)
-                }
-
-                //设置
-                composable(route = RouteName.SETTING) {
-                    it.destination.route?.e()
-                    SettingPage(navCtrl, scaffoldState)
-                }
 
                 //我的
                 composable(route = RouteName.PROFILE) {

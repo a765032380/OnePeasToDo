@@ -1,0 +1,10 @@
+apply from: '../base_lib.gradle'
+
+android {
+    namespace 'pub.gll.onepeas.lib.download'
+}
+
+
+dependencies {
+//    implementation project (path: ':LibBase')
+}

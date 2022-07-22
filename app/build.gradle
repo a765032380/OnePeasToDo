@@ -16,9 +16,15 @@ android {
 
 dependencies {
     implementation project (path: ':LibBase')
+    implementation project (path:":ModuleAccount")
+    implementation project (path:":ModuleCar")
+    implementation project (path:":ModuleComic")
     implementation project (path:":ModuleCookbook")
+    implementation project (path:":ModuleMine")
+    implementation project (path:":ModuleWidget")
+    implementation project (path:":ModuleEsp8266")
     implementation 'com.github.JeffMony:VideoDownloader:5.8.0'
     implementation 'com.github.JeffMony:JeffM3U8Lib:1.2.0'
 
-    implementation api("com.google.android.exoplayer:exoplayer-core:2.16.1")
+    implementation "com.google.android.exoplayer:exoplayer-core:2.18.0"
 }

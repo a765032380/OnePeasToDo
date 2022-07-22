@@ -1,9 +1,9 @@
 package pub.gll.onepeas.libbase
 
 import android.app.Application
-import pub.gll.onepeas.liblog.config.HiLogConfig
-import pub.gll.onepeas.liblog.HiLogManager
-import pub.gll.onepeas.liblog.printer.HiViewPrinter
+import pub.gll.onepeas.lib.log.config.HiLogConfig
+import pub.gll.onepeas.lib.log.HiLogManager
+import pub.gll.onepeas.lib.log.printer.HiViewPrinter
 
 /**
  * 基础的Application
@@ -22,7 +22,7 @@ abstract class BaseApp:Application(){
         initModuleData(this)
     }
     private fun initLog(){
-        HiLogManager.init(HiLogConfig(), this,HiViewPrinter())
+        HiLogManager.init(HiLogConfig(), this, HiViewPrinter())
     }
 
     /**

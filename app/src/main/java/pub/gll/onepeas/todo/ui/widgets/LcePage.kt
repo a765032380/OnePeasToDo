@@ -12,8 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import pub.gll.onepeas.todo.data.http.PageState
-import pub.gll.onepeas.todo.ui.theme.AppTheme
+import pub.gll.onepeas.libbase.di.http.result.PageState
+import pub.gll.onepeas.libbase.ui.theme.AppTheme
 
 /**
  * 通过State进行控制的Loading、Content、Error页面

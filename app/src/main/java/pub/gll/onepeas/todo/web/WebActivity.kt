@@ -1,7 +1,5 @@
 package pub.gll.onepeas.todo.web
 
-import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -12,26 +10,24 @@ import android.view.WindowManager
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.widget.Button
 import android.widget.FrameLayout
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jeffmony.downloader.VideoDownloadManager
-import com.jeffmony.downloader.listener.DownloadListener
 import com.jeffmony.downloader.model.VideoTaskItem
-import com.jeffmony.downloader.utils.LogUtils
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse
 import com.tencent.smtt.sdk.*
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pub.gll.onepeas.libbase.arouter.ArouterPath
 import pub.gll.onepeas.libcore.util.StatusBarUtil
 import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.todo.web.download.DownloadListActivity
-import kotlin.coroutines.CoroutineContext
 
 
+@Route(path = ArouterPath.WEB_ACTIVITY)
 class WebActivity : AppCompatActivity() {
     private var mCustomView: View? = null
     private var mCustomViewCallBack: IX5WebChromeClient.CustomViewCallback? = null

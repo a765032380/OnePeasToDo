@@ -20,7 +20,7 @@
 //         *
 //         * @param text 文本
 //         */
-//        fun copyText(text: CharSequence?) {
+//        fun copyText(context: Context,text: CharSequence?) {
 //            val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 //            cm.setPrimaryClip(ClipData.newPlainText("text", text))
 //        }

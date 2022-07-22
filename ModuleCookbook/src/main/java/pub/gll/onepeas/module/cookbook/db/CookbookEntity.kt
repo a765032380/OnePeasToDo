@@ -2,6 +2,7 @@ package pub.gll.onepeas.module.cookbook.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import pub.gll.onepeas.libbase.ext.PagerEntity
 
 @Entity(tableName = "CookbookEntity")
 data class CookbookEntity(
@@ -9,4 +10,5 @@ data class CookbookEntity(
     val id:String,
     val name:String,
     val icon:String,
-    val page:Int=0,)
+    override var page:Int=0,
+): PagerEntity
