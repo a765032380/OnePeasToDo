@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.placeholder.material.placeholder
 import pub.gll.onepeas.todo.R
-import pub.gll.onepeas.todo.ui.theme.AppTheme
-import pub.gll.onepeas.todo.ui.theme.white
+import pub.gll.onepeas.libbase.ui.theme.AppTheme
+import pub.gll.onepeas.libbase.ui.theme.white
 
 
 @OptIn(ExperimentalComposeUiApi::class)

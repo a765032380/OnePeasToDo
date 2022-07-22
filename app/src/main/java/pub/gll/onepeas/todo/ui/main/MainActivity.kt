@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.compose.animation.*
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.animateFloat
@@ -36,45 +35,25 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
-import pub.gll.onepeas.libmqtt.MqttListener
-import pub.gll.onepeas.libmqtt.MqttManager
-import pub.gll.onepeas.todo.ActivityResultListenerManager
-import pub.gll.onepeas.todo.ui.page.common.HomeEntry
-import pub.gll.onepeas.todo.util.MqttClientUtil
+import pub.gll.onepeas.todo.ui.page.common.AppScaffold
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel: MyViewModel by viewModels()
     private lateinit var splashScreen: SplashScreen
 
-
-    @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
+    @OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        ActivityResultListenerManager.activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            ActivityResultListenerManager.onActivityResult(it)
-        }
         WindowCompat.setDecorFitsSystemWindows(window,false)
         splashScreen = installSplashScreen()
         setContent {
+            AppScaffold()
 //            Dialog2()
-            HomeEntry()
 //            Draggable()
 //            Swipeable()
 //            AnimateItemPlacement()
         }
-//        initMqttClient()
-    }
-
-    private fun initMqttClient(){
-        MqttClientUtil.client()
-        MqttManager.registerMqttListener(object :MqttListener{
-            override fun onMessage(topic: String, message: String) {
-                println("$topic ---- $message")
-            }
-        })
     }
 }
 

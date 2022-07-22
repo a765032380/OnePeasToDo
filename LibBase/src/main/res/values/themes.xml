@@ -11,9 +11,6 @@
         <item name="android:statusBarColor">@color/primary</item>
         <item name="android:navigationBarColor">@color/primary</item>
 
-        <!-- icon动画在关闭之前显示的时长：最长时间为1000毫秒-->
-        <item name="windowSplashScreenAnimationDuration">@integer/icon_animator_duration</item>
-
         <!--启动画面背景颜色-->
         <item name="windowSplashScreenBackground">@color/primary</item>
         <!-- 启动画面icon图标：这里可以是图片、帧动画等-->

@@ -15,6 +15,7 @@ buildscript {
         target_sdk = 32
         version_code = 1
         version_name = "1.0"
+        compose_version = '1.2.0-beta01'
 
     }
 
@@ -46,7 +47,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.0-alpha07'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.41'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.42'
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.5.0'
         //解决组件化引入aar
         classpath 'com.kezong:fat-aar:1.2.12'

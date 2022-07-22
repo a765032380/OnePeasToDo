@@ -13,8 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
-import pub.gll.onepeas.todo.ui.theme.AppTheme
-import pub.gll.onepeas.todo.ui.theme.white
+import pub.gll.onepeas.libbase.ui.theme.AppTheme
+import pub.gll.onepeas.libbase.ui.theme.white
 
 @Composable
 fun SplashPage(onNextPage: () -> Unit) {

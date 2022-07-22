@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.placeholder.material.placeholder
 import org.jetbrains.annotations.NotNull
-import pub.gll.onepeas.todo.ui.theme.AppTheme
-import pub.gll.onepeas.todo.ui.theme.buttonCorner
-import pub.gll.onepeas.todo.ui.theme.buttonHeight
-import pub.gll.onepeas.todo.ui.theme.white1
+import pub.gll.onepeas.libbase.ui.theme.AppTheme
+import pub.gll.onepeas.libbase.ui.theme.buttonCorner
+import pub.gll.onepeas.libbase.ui.theme.buttonHeight
+import pub.gll.onepeas.libbase.ui.theme.white1
 
 
 @Composable

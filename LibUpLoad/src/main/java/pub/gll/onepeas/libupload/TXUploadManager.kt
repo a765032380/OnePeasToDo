@@ -30,7 +30,6 @@ object TXUploadManager {
         val myCredentialProvider: QCloudCredentialProvider =
             ShortTimeCredentialProvider(SECRET_ID, SECRET_KEY, KEY_DURATION)
         // 创建 CosXmlServiceConfig 对象，根据需要修改默认的配置参数
-        val cdnCustomDomain = "new.gll.pub.com"
         val serviceConfig = CosXmlServiceConfig.Builder()
             .setRegion(REGION)
             .isHttps(true) // 使用 HTTPS 请求, 默认为 HTTP 请求

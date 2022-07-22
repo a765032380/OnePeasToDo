@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.libbase.di.http.ApexCallAdapterFactory
 import pub.gll.onepeas.libbase.di.http.OkHttpBuild
+import pub.gll.onepeas.libbase.di.http.result.HttpService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -30,5 +31,12 @@ class BaseNetworkModule {
             .baseUrl("https://way.jd.com/showapi/")
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit: Retrofit): HttpService {
+        return retrofit.create(HttpService::class.java)
+    }
+
 
 }

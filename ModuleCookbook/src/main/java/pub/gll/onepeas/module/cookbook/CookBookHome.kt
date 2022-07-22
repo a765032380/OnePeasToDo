@@ -30,7 +30,10 @@ fun CookBookHome(homeViewModel: CookbookVM = hiltViewModel()) {
     val data = homeViewModel.data.collectAsLazyPagingItems()
     refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
 
-    SwipeRefresh(state = refreshState, onRefresh = {
+    SwipeRefresh(
+        state = refreshState,
+        modifier = Modifier.fillMaxSize(),
+        onRefresh = {
         data.refresh()
     }) {
         Greeting(data = data){

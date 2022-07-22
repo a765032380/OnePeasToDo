@@ -13,6 +13,6 @@ sealed class BottomNavRoute(
 ) {
     object Home: BottomNavRoute(RouteName.HOME, R.string.home, Icons.Default.Home)
     object WifiConfig: BottomNavRoute(RouteName.WIFI_CONFIG, R.string.wifi, Icons.Default.Build)
-    object SETTING: BottomNavRoute(RouteName.SETTING, R.string.setting, Icons.Default.Settings)
-    object Profile: BottomNavRoute(RouteName.PROFILE, R.string.profile, Icons.Default.Person)
+    object SETTING: BottomNavRoute(RouteName.SETTING, R.string.wifi, Icons.Default.Settings)
+    object Profile: BottomNavRoute(RouteName.PROFILE, R.string.home, Icons.Default.Person)
 }

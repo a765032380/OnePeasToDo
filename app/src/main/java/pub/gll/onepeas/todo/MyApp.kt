@@ -1,6 +1,7 @@
 package pub.gll.onepeas.todo
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.jeffmony.downloader.VideoDownloadManager
 import com.jeffmony.downloader.common.DownloadConstants
 import com.jeffmony.downloader.utils.VideoStorageUtils
@@ -24,6 +25,7 @@ class MyApp : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
+        ARouter.init(this)
         DataStoreUtils.init(this)
         QbSdk.initX5Environment(this, object : QbSdk.PreInitCallback {
 

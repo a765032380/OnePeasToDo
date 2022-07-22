@@ -10,7 +10,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import com.google.accompanist.placeholder.material.placeholder
-import pub.gll.onepeas.todo.ui.theme.*
+import pub.gll.onepeas.libbase.ui.theme.*
 
 @Composable
 fun LargeTitle(

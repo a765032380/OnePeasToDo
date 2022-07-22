@@ -1,6 +1,5 @@
 package pub.gll.onepeas.todo.web
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -13,23 +12,22 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jeffmony.downloader.VideoDownloadManager
-import com.jeffmony.downloader.listener.DownloadListener
 import com.jeffmony.downloader.model.VideoTaskItem
-import com.jeffmony.downloader.utils.LogUtils
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse
 import com.tencent.smtt.sdk.*
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pub.gll.onepeas.libbase.arouter.ArouterPath
 import pub.gll.onepeas.libcore.util.StatusBarUtil
 import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.todo.web.download.DownloadListActivity
-import kotlin.coroutines.CoroutineContext
 
 
+@Route(path = ArouterPath.WEB_ACTIVITY)
 class WebActivity : AppCompatActivity() {
     private var mCustomView: View? = null
     private var mCustomViewCallBack: IX5WebChromeClient.CustomViewCallback? = null
@@ -39,66 +37,7 @@ class WebActivity : AppCompatActivity() {
     lateinit var mBTDownloadList: Button
     val TAG = "LLLLLLLL"
 
-    private var mLastProgressTimeStamp: Long = 0
-    private var mLastSpeedTimeStamp: Long = 0
-
     private fun startDownload(url:String){
-        VideoDownloadManager.getInstance().setGlobalDownloadListener(object : DownloadListener() {
-            override fun onDownloadDefault(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadDefault: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadPending(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadPending: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadPrepare(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadPrepare: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadStart(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadStart: $item")
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadProgress(item: VideoTaskItem) {
-                val currentTimeStamp = System.currentTimeMillis()
-                if (currentTimeStamp - mLastProgressTimeStamp > 1000) {
-                    LogUtils.w(
-                        TAG,
-                        "onDownloadProgress: " + item.percentString + ", curTs=" + item.curTs + ", totalTs=" + item.totalTs
-                    )
-//                    notifyChanged(item)
-                    mLastProgressTimeStamp = currentTimeStamp
-                }
-            }
-
-            override fun onDownloadSpeed(item: VideoTaskItem?) {
-                val currentTimeStamp = System.currentTimeMillis()
-                if (currentTimeStamp - mLastSpeedTimeStamp > 1000) {
-//                    notifyChanged(item)
-                    mLastSpeedTimeStamp = currentTimeStamp
-                }
-            }
-
-            override fun onDownloadPause(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadPause: " + item.url)
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadError(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadError: " + item.url)
-//                notifyChanged(item)
-            }
-
-            override fun onDownloadSuccess(item: VideoTaskItem) {
-                LogUtils.w(TAG, "onDownloadSuccess: $item")
-//                notifyChanged(item)
-            }
-        })
         val item = VideoTaskItem(
             url,
             "",
@@ -111,6 +50,48 @@ class WebActivity : AppCompatActivity() {
             VideoDownloadManager.getInstance().pauseDownloadTask(item.url)
         } else if (item.isInterruptTask) {
             VideoDownloadManager.getInstance().resumeDownload(item.url)
+        }
+    }
+    private val list = arrayListOf (
+        "https://jx.parwix.com:4433/player/?url=",
+        "https://jx.bozrc.com:4433/player/?url=",
+        "https://www.mtosz.com/m3u8.php?url=",
+        "https://vip.bljiex.com/?v=",
+        "https://z1.m1907.cn/?jx=",
+        "https://www.administratorw.com/video.php?url=",
+        "http://17kyun.com/api.php?url=",
+        "https://vip.66parse.club/?url=",
+        "http://jx.rdhk.net/?v=",
+        "https://www.8090g.cn/?url=",
+        "https://www.8090g.cn/jiexi/?url=",
+        "http://www.1717yun.com/jx/vip/index.php?url=",
+        "https://www.ckmov.vip/api.php?url=",
+        "http://jx.yparse.com/?url=",
+        "https://jx.m3u8.tv/jiexi/?url=",
+        "https://www.kpezp.cn/jlexi.php?url=",
+        "https://www.xymav.com/?url=",
+        "https://2.08bk.com/?url=",
+        "https://okjx.cc/?url=",
+        "https://api.v6.chat/?url="
+    )
+
+    private fun intercept(request: WebResourceRequest?){
+        val url = request?.url.toString()
+        if (url.contains(".m3u8")||url.contains(".mp4")){
+            lifecycleScope.launch(Dispatchers.Main){
+                mBTDownload.visibility = View.VISIBLE
+                mBTDownload.setOnClickListener {
+                    startDownload(request?.url.toString())
+                }
+            }
+        }else {
+            list.forEach {
+                if (url.contains(it)){
+                    lifecycleScope.launch(Dispatchers.Main){
+                        mBTDownload.visibility = View.GONE
+                    }
+                }
+            }
         }
     }
 
@@ -130,22 +111,7 @@ class WebActivity : AppCompatActivity() {
             // API 21 开始引入
             override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
                 Log.e(TAG,"url=${request?.url.toString()}")
-                if (request?.url.toString().contains(".m3u8")){
-                    lifecycleScope.launch(Dispatchers.Main){
-                        mBTDownload.visibility = View.VISIBLE
-                        mBTDownload.setOnClickListener {
-                            startDownload(request?.url.toString())
-                        }
-                    }
-                }
-                if (request?.url.toString().contains(".mp4")) {
-                    lifecycleScope.launch(Dispatchers.Main){
-                        mBTDownload.visibility = View.VISIBLE
-                        mBTDownload.setOnClickListener {
-                            startDownload(request?.url.toString())
-                        }
-                    }
-                }
+                intercept(request)
                 return super.shouldInterceptRequest(view, request)
             }
         }
@@ -208,9 +174,13 @@ class WebActivity : AppCompatActivity() {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            mBTDownload.visibility = View.GONE
+            mBTDownloadList.visibility = View.GONE
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            mBTDownload.visibility = View.VISIBLE
+            mBTDownloadList.visibility = View.VISIBLE
         }
     }
 
