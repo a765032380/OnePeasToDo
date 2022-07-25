@@ -12,7 +12,6 @@ sealed class NetworkResult<T> {
         val responseBody by lazy { response.body()!! }
         override val code by lazy { response.code() }
         override val headers: Headers by lazy { response.headers() }
-        override val url by lazy { response.raw().request().url().toString()}
     }
 
     /**
@@ -26,7 +25,6 @@ sealed class NetworkResult<T> {
             val responseErrorMessage: String by lazy { response.errorBody()?.string().orEmpty() }
             override val code by lazy { response.code() }
             override val headers: Headers by lazy { response.headers() }
-            override val url by lazy { response.raw().request().url().toString() }
         }
 
         /**
