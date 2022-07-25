@@ -30,10 +30,10 @@ inline fun <reified T> NetworkResult<T>.ifException(action: (NetworkResult.Failu
 inline fun <reified T> NetworkResult<T>.ifFailure(action: (errorMsg: String) -> Unit): NetworkResult<T> {
     ifServerError {
         //errorBodyString()方法在下篇文章中会提到
-//        action(it.errorBodyString())
+        action(it.responseErrorMessage)
     }.ifException {
         //exceptionMessage()方法在下篇文章中会提到
-//        action(it.exceptionMessage())
+        action(it.exceptionMessage)
     }
     return this
 }
