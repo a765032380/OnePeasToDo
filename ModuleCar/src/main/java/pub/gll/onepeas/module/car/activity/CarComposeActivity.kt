@@ -2,7 +2,6 @@ package pub.gll.onepeas.module.car.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -33,6 +32,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import pub.gll.onepeas.libbase.activity.BaseActivity
 import pub.gll.onepeas.libbase.arouter.ArouterPath
 import pub.gll.onepeas.libbase.ui.theme.AppTheme
 import pub.gll.onepeas.module.car.model.CarBrandItemModel
@@ -41,7 +41,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class CarComposeActivity : ComponentActivity() {
+class CarComposeActivity : BaseActivity() {
 
     @Inject
     lateinit var mViewModel: CarBrandViewModel
@@ -53,7 +53,6 @@ class CarComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window,false)
-
         setContent {
             val refreshState = rememberSwipeRefreshState(isRefreshing = false)
             val data = mViewModel.dataCompose.collectAsLazyPagingItems()
@@ -125,7 +124,7 @@ fun Greeting(data: LazyPagingItems<CarBrandItemModel>, goImagePreview:(icon:Stri
                                 .height(50.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(text = "加载中。。。")
+                            Text(text = "加载中...")
                         }
                     }
                 }
