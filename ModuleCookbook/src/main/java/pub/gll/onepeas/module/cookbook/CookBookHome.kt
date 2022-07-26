@@ -63,7 +63,19 @@ fun Greeting(data: LazyPagingItems<CookbookItemModel>, goImagePreview:(icon:Stri
                             .height(50.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = "加载中。。。")
+                        Text(text = "加载中...")
+                    }
+                }
+            }
+            is LoadState.Error->{
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "--加载错误--")
                     }
                 }
             }

@@ -25,6 +25,7 @@ class MyApp : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
+        ARouter.openDebug()
         ARouter.init(this)
         DataStoreUtils.init(this)
         QbSdk.initX5Environment(this, object : QbSdk.PreInitCallback {
