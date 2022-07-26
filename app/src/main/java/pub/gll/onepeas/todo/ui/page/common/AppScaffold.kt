@@ -30,10 +30,10 @@ import pub.gll.onepeas.libbase.util.WebData
 import pub.gll.onepeas.libcore.util.fromJson
 import pub.gll.onepeas.libcore.util.toJson
 import pub.gll.onepeas.lib.log.ext.e
-import pub.gll.onepeas.todo.ui.login.LoginPage
-import pub.gll.onepeas.todo.ui.mine.ProfilePage
+import pub.gll.onepeas.module.account.login.LoginPage
+import pub.gll.onepeas.module.account.mine.ProfilePage
 import pub.gll.onepeas.todo.ui.webview.WebViewPage
-import pub.gll.onepeas.todo.ui.widgets.AppSnackBar
+import pub.gll.onepeas.libbase.widget.AppSnackBar
 import pub.gll.onepeas.todo.ui.widgets.BottomNavBarView
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets

@@ -1,5 +1,6 @@
-package pub.gll.onepeas.libbase.di.http.result
+package pub.gll.onepeas.module.account
 
+import pub.gll.onepeas.libbase.di.http.result.BasicBean
 import pub.gll.onepeas.libbase.util.UserInfo
 import pub.gll.onepeas.libnet.NetworkResult
 import retrofit2.http.Body
@@ -14,14 +15,6 @@ import retrofit2.http.POST
  */
 interface HttpService {
 
-    companion object {
-        const val isDebug = true
-//        const val url = "https://new.gll.pub/api/"
-//        const val debugUrl = "http://127.0.0.1:8081/api/"
-        const val url = "https://way.jd.com/showapi/"
-        const val debugUrl = "https://way.jd.com/showapi/"
-    }
-
     @FormUrlEncoded
     @POST("user/login")
     suspend fun login(
@@ -33,16 +26,16 @@ interface HttpService {
     @POST("user/select")
     suspend fun select(
         @Field("uuid") uuid: String
-    ):  BasicBean<UserInfo>
+    ): BasicBean<UserInfo>
 
     @POST("user/user_info")
     suspend fun userInfo(
-    ):  BasicBean<UserInfo>
+    ): BasicBean<UserInfo>
 
     @POST("user/update")
     suspend fun updateUser(
         @Body body: Map<String, String>
-    ):  BasicBean<UserInfo>
+    ): BasicBean<UserInfo>
 
     @POST("/friend/list")
     suspend fun requestFriend(

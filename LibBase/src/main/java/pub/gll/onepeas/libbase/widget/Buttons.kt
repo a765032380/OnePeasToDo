@@ -1,4 +1,4 @@
-package pub.gll.onepeas.todo.ui.widgets
+package pub.gll.onepeas.libbase.widget
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

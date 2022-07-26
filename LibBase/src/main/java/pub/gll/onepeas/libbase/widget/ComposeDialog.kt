@@ -1,4 +1,4 @@
-package pub.gll.onepeas.todo.dialog
+package pub.gll.onepeas.libbase.widget
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

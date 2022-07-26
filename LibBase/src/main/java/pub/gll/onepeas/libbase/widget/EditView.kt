@@ -1,4 +1,4 @@
-package pub.gll.onepeas.todo.ui.widgets
+package pub.gll.onepeas.libbase.widget
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pub.gll.onepeas.libbase.ui.theme.AppTheme
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginEditView(
     text: String,

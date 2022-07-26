@@ -7,7 +7,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.libbase.di.http.OkHttpBuild
 import pub.gll.onepeas.libbase.di.http.interceptor.ToDoGlobalNetworkResultInterceptor
-import pub.gll.onepeas.libbase.di.http.result.HttpService
 import pub.gll.onepeas.libnet.GlobalNetworkResultInterceptor
 import pub.gll.onepeas.libnet.adapter.ApexCallAdapterFactory
 import retrofit2.CallAdapter
@@ -68,13 +67,5 @@ class BaseNetworkModule {
             .baseUrl(baseUrl)
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun provideApiService(retrofit: Retrofit): HttpService {
-        return retrofit.create(HttpService::class.java)
-    }
-
-
 
 }

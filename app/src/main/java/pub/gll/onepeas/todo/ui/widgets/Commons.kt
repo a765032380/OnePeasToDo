@@ -27,6 +27,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.placeholder.material.placeholder
 import pub.gll.onepeas.libbase.ui.theme.*
+import pub.gll.onepeas.libbase.widget.MediumTitle
+import pub.gll.onepeas.libbase.widget.MiniTitle
+import pub.gll.onepeas.libbase.widget.TextContent
 import pub.gll.onepeas.todo.ui.page.common.BottomNavRoute
 import pub.gll.onepeas.todo.R
 

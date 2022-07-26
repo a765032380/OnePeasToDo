@@ -1,4 +1,4 @@
-package pub.gll.onepeas.todo.ui.mine
+package pub.gll.onepeas.module.account.mine
 
 import android.content.Context
 import androidx.compose.runtime.getValue
@@ -14,7 +14,7 @@ import pub.gll.onepeas.libupload.FileType
 import pub.gll.onepeas.libupload.TXUploadManager
 import pub.gll.onepeas.libbase.util.UserInfo
 import pub.gll.onepeas.libbase.di.http.result.HttpResult
-import pub.gll.onepeas.libbase.di.http.result.HttpService
+import pub.gll.onepeas.module.account.HttpService
 import pub.gll.onepeas.libbase.util.AppUserUtil
 import java.io.File
 import javax.inject.Inject

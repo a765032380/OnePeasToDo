@@ -1,4 +1,4 @@
-package pub.gll.onepeas.todo.ui.mine
+package pub.gll.onepeas.module.account.mine
 
 import android.app.Activity
 import android.content.Intent
