@@ -2,7 +2,7 @@ apply plugin:  'org.jetbrains.kotlin.android'
 apply plugin:  'kotlin-android'
 apply plugin:  "kotlin-kapt"//kotlin语言使用注入框架，dataBinding都需要这个
 apply plugin:  "com.android.library"//kotlin语言使用注入框架，dataBinding都需要这个
-
+apply plugin:  "dagger.hilt.android.plugin"
 
 android {
     compileSdk rootProject.compile_sdk
@@ -13,6 +13,15 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        //kotlin ARouter 的配置方式
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("room.schemaLocation": "$projectDir/schemas".toString())
+
+            }
+        }
     }
 
     buildTypes {
@@ -28,6 +37,20 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.0'
+
+    def lifeVersion = '2.4.1'
+    implementation 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifeVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifeVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifeVersion"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifeVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifeVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.42"
+    kapt "com.google.dagger:hilt-compiler:2.42"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

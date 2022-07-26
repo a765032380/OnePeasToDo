@@ -5,11 +5,16 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import pub.gll.onepeas.libbase.di.http.ApexCallAdapterFactory
 import pub.gll.onepeas.libbase.di.http.OkHttpBuild
+import pub.gll.onepeas.libbase.di.http.interceptor.ToDoGlobalNetworkResultInterceptor
 import pub.gll.onepeas.libbase.di.http.result.HttpService
+import pub.gll.onepeas.libnet.GlobalNetworkResultInterceptor
+import pub.gll.onepeas.libnet.adapter.ApexCallAdapterFactory
+import retrofit2.CallAdapter
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -21,14 +26,46 @@ class BaseNetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient = OkHttpBuild.okHttpClient
 
+
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideGlobalNetworkResultInterceptor(
+        wanGlobalNetworkResultInterceptor: ToDoGlobalNetworkResultInterceptor
+    ): GlobalNetworkResultInterceptor {
+        return wanGlobalNetworkResultInterceptor
+    }
+
+    @Singleton
+    @Provides
+    fun provideCallAdapterFactory(
+        apexCallAdapterFactory: ApexCallAdapterFactory
+    ): CallAdapter.Factory {
+        return apexCallAdapterFactory
+    }
+
+    @Named("baseUrl")
+    @Provides
+    fun provideBaseUrl(): String {
+        return "https://way.jd.com/showapi/"
+    }
+
+    @Provides
+    fun provideConverterFactory(): Converter.Factory {
+        return GsonConverterFactory.create()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient,
+                        converterFactory: Converter.Factory,
+                        callAdapterFactory: CallAdapter.Factory,
+                        @Named("baseUrl") baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(ApexCallAdapterFactory())
-            .baseUrl("https://way.jd.com/showapi/")
+            .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(callAdapterFactory)
+            .baseUrl(baseUrl)
             .build()
     }
 
@@ -37,6 +74,7 @@ class BaseNetworkModule {
     fun provideApiService(retrofit: Retrofit): HttpService {
         return retrofit.create(HttpService::class.java)
     }
+
 
 
 }
