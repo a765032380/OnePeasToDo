@@ -1,0 +1,67 @@
+apply plugin:  'org.jetbrains.kotlin.android'
+apply plugin:  'kotlin-android'
+apply plugin:  "kotlin-kapt"//kotlin语言使用注入框架，dataBinding都需要这个
+apply plugin:  "kotlin-parcelize"
+
+
+android {
+    compileSdk rootProject.compile_sdk
+
+    defaultConfig {
+        minSdk rootProject.min_sdk
+        targetSdk rootProject.target_sdk
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //使用jetPack的组件，会要求jdk 1.8最好，有的时候会遇到报错，需要配置如下，避免target jvm 1.8的那个报错
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",]
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0-rc01'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures{
+        compose true
+    }
+}
+
+dependencies {
+    implementation "androidx.compose.ui:ui:1.1.1"
+    implementation "androidx.compose.material3:material3:1.0.0-alpha14"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.1.1"
+    implementation "androidx.compose.runtime:runtime-livedata:1.1.1"
+    implementation "androidx.compose.material:material:1.1.1"
+    implementation "androidx.compose.material:material-icons-extended:1.1.1"
+    implementation "com.google.android.material:compose-theme-adapter:1.1.14"
+    implementation "androidx.activity:activity-compose:1.5.0"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha15"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+    implementation 'io.coil-kt:coil-compose:2.1.0'
+
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.1.1"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.1.1"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:1.1.1"
+
+}
