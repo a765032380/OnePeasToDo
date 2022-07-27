@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import pub.gll.onepeas.module.car.db.AppDatabase
 import pub.gll.onepeas.module.car.db.CarBrandEntity
-import pub.gll.onepeas.module.car.mapper.Mapper
+import pub.gll.onepeas.libbase.mapper.Mapper
 import pub.gll.onepeas.module.car.model.CarBrandItemModel
 import pub.gll.onepeas.module.car.remote.CarBrandRemoteMediator
 import pub.gll.onepeas.module.car.remote.CarBrandService

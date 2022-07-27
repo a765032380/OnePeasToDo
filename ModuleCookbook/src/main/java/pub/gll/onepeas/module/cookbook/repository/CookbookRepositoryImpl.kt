@@ -1,11 +1,11 @@
 package pub.gll.onepeas.module.cookbook.repository
 
 import androidx.paging.*
-import coil.map.Mapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import pub.gll.onepeas.libbase.mapper.Mapper
 import pub.gll.onepeas.module.cookbook.db.CookbookAppDatabase
 import pub.gll.onepeas.module.cookbook.db.CookbookEntity
 import pub.gll.onepeas.module.cookbook.model.CookbookItemModel

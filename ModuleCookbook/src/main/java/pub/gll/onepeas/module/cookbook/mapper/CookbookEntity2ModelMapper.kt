@@ -1,6 +1,6 @@
 package pub.gll.onepeas.module.cookbook.mapper
 
-import coil.map.Mapper
+import pub.gll.onepeas.libbase.mapper.Mapper
 import pub.gll.onepeas.module.cookbook.db.CookbookEntity
 import pub.gll.onepeas.module.cookbook.model.CookbookItemModel
 
