@@ -38,7 +38,7 @@ fun PhotographerCard(modifier: Modifier = Modifier) {
             color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
         ){
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(id = R.drawable.post_1),
                 contentDescription = null
             )
         }
