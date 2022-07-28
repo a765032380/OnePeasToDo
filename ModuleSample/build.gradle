@@ -1,5 +1,5 @@
 
-if (rootProject.singleModule){
+if (!rootProject.singleModule){
     apply plugin:  'com.android.library'
 }else {
     apply plugin:  'com.android.application'
@@ -10,7 +10,7 @@ android {
     namespace 'pub.gll.onepeas.module.sample'
 
     defaultConfig {
-        if (!rootProject.singleModule) {
+        if (rootProject.singleModule) {
             applicationId "pub.gll.onepeas.module.sample"
         }
         versionCode rootProject.version_code

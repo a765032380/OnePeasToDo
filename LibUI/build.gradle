@@ -1,9 +1,0 @@
-apply from: '../base_lib.gradle'
-
-android {
-    namespace 'pub.gll.onepeas.lib.ui'
-}
-
-dependencies {
-//    implementation project (path: ':LibBase')
-}

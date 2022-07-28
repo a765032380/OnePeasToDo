@@ -35,17 +35,34 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file("kk_comic_google.jks")
+            storeFile file("../kk_comic_google.jks")
             storePassword "kk_comic123456"
             keyAlias "kk_comic_google"
             keyPassword "kk_comic123456"
         }
 
         release {
-            storeFile file("kk_comic_google")
+            storeFile file("../kk_comic_google")
             storePassword "kk_comic123456"
             keyAlias "kk_comic_google"
             keyPassword "kk_comic123456"
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (rootProject.singleModule) {
+                //独立运行
+                manifest.srcFile 'src/main/single/AndroidManifest.xml'
+            } else {
+                //合并到宿主
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    //正式版本时，排除alone文件夹下所有调试文件
+                    exclude 'src/main/single/*'
+                }
+            }
         }
     }
 

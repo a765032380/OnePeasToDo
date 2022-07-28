@@ -4,11 +4,7 @@ apply plugin: 'koin'
 
 buildscript {
     ext {
-        // 本地配置信息读取
-        def localSettingsFile = rootProject.file("gradle.properties")
-        def localSettingsProperties = new Properties()
-        localSettingsProperties.load(new FileInputStream(localSettingsFile))
-        singleModule = localSettingsProperties['isModularize']
+        singleModule = false
 
         compile_sdk = 32
         min_sdk = 24

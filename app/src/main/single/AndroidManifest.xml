@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="pub.gll.onepeas.todo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".MyApp">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:name=".ui.main.MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".web.download.DownloadListActivity"
+            android:exported="true" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:name=".web.download.M3U8PlayActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainTestAct"
+            android:exported="true"
+            android:theme="@style/Theme.OnePeasToDo">
+        </activity>
+
+        <activity
+            android:name=".web.WebActivity"
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true">
+        </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx.startup"
+            android:exported="false"
+            tools:node="merge"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="pub.gll.onepeas.module.car.init.AppInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+
+</manifest>
