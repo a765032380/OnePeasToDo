@@ -10,7 +10,7 @@ import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.module.comic.comic.home.db.ComicHomeAppDatabase
 import pub.gll.onepeas.module.comic.comic.home.db.ComicHomeEntity
 import pub.gll.onepeas.libbase.util.showToast
-import pub.gll.onepeas.libcore.util.NetCheckUtil
+import pub.gll.onepeas.libbase.util.NetCheckUtil
 
 @OptIn(ExperimentalPagingApi::class)
 class ComicHomeRemoteMediator(

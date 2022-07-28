@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import pub.gll.onepeas.libupload.FileType
 import pub.gll.onepeas.libupload.TXUploadManager
 import pub.gll.onepeas.libbase.util.UserInfo
 import pub.gll.onepeas.libbase.di.http.result.HttpResult
@@ -42,7 +41,7 @@ class UserVM @Inject constructor(
 
     fun upload(context: Context, file: File){
         viewModelScope.launch {
-            TXUploadManager.upload(context, FileType.Image,file)
+            TXUploadManager.upload(context,file)
         }
     }
     private fun userInfo(){

@@ -44,16 +44,9 @@ object TXUploadManager {
     }
 
 
-    fun upload(context: Context, fileType: FileType, sourceFile: File) {
+    fun upload(context: Context, sourceFile: File) {
         upLoadListener?.uploadState(UpLoadState.START)
-        when(fileType){
-            FileType.Image->{
-                initCos(context,sourceFile)
-            }
-            FileType.Log->{
-                initCos(context,sourceFile)
-            }
-        }
+        initCos(context,sourceFile)
 
     }
 

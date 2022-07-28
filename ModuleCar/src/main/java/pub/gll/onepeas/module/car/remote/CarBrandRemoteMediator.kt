@@ -8,7 +8,7 @@ import androidx.room.withTransaction
 import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.libbase.util.showToast
 import pub.gll.onepeas.libcore.ext.toDateFormat
-import pub.gll.onepeas.libcore.util.NetCheckUtil
+import pub.gll.onepeas.libbase.util.NetCheckUtil
 import pub.gll.onepeas.module.car.db.AppDatabase
 import pub.gll.onepeas.module.car.db.CarBrandEntity
 

@@ -1,10 +1,10 @@
 package pub.gll.onepeas.libbase.di.http.interceptor
 
 import pub.gll.onepeas.libbase.di.http.internal.WanBeanWrapper
-import pub.gll.onepeas.libnet.GlobalNetworkResultInterceptor
-import pub.gll.onepeas.libnet.NetworkResult
-import pub.gll.onepeas.libnet.exception.MsgException
-import pub.gll.onepeas.libnet.ext.toExceptionResult
+import pub.gll.onepeas.libbase.net.GlobalNetworkResultInterceptor
+import pub.gll.onepeas.libbase.net.NetworkResult
+import pub.gll.onepeas.libbase.net.exception.MsgException
+import pub.gll.onepeas.libbase.net.ext.toExceptionResult
 import javax.inject.Inject
 
 class ToDoGlobalNetworkResultInterceptor @Inject constructor() : GlobalNetworkResultInterceptor {

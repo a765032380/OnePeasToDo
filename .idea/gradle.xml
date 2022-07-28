@@ -12,11 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LibBase" />
-            <option value="$PROJECT_DIR$/LibCore" />
-            <option value="$PROJECT_DIR$/LibDownload" />
             <option value="$PROJECT_DIR$/LibLog" />
-            <option value="$PROJECT_DIR$/LibMqtt" />
-            <option value="$PROJECT_DIR$/LibNet" />
             <option value="$PROJECT_DIR$/LibUpLoad" />
             <option value="$PROJECT_DIR$/ModuleAccount" />
             <option value="$PROJECT_DIR$/ModuleCar" />

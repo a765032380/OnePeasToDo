@@ -1,7 +1,5 @@
 package pub.gll.onepeas.libbase.util
 
-import pub.gll.onepeas.libcore.util.fromJson
-import pub.gll.onepeas.libcore.util.toJson
 import pub.gll.onepeas.libbase.di.http.DataStoreUtils
 
 object AppUserUtil {

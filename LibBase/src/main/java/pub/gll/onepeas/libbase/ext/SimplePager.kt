@@ -6,7 +6,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import pub.gll.onepeas.libbase.BaseApp
 import pub.gll.onepeas.libbase.util.showToast
-import pub.gll.onepeas.libcore.util.NetCheckUtil
+import pub.gll.onepeas.libbase.util.NetCheckUtil
 
 interface PagerEntity{
     var page:Int

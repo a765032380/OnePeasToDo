@@ -22,7 +22,7 @@ import com.tencent.smtt.sdk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pub.gll.onepeas.libbase.arouter.ArouterPath
-import pub.gll.onepeas.libcore.util.StatusBarUtil
+import pub.gll.onepeas.libbase.util.StatusBarUtil
 import pub.gll.onepeas.todo.R
 import pub.gll.onepeas.todo.web.download.DownloadListActivity
 

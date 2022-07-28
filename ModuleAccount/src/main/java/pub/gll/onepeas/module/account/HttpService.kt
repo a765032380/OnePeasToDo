@@ -2,7 +2,7 @@ package pub.gll.onepeas.module.account
 
 import pub.gll.onepeas.libbase.di.http.result.BasicBean
 import pub.gll.onepeas.libbase.util.UserInfo
-import pub.gll.onepeas.libnet.NetworkResult
+import pub.gll.onepeas.libbase.net.NetworkResult
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

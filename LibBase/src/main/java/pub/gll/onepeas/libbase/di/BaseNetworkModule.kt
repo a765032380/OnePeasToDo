@@ -7,8 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import pub.gll.onepeas.libbase.di.http.OkHttpBuild
 import pub.gll.onepeas.libbase.di.http.interceptor.ToDoGlobalNetworkResultInterceptor
-import pub.gll.onepeas.libnet.GlobalNetworkResultInterceptor
-import pub.gll.onepeas.libnet.adapter.ApexCallAdapterFactory
+import pub.gll.onepeas.libbase.net.GlobalNetworkResultInterceptor
+import pub.gll.onepeas.libbase.net.adapter.ApexCallAdapterFactory
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
