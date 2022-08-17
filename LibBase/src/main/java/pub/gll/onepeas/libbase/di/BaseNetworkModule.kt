@@ -47,6 +47,11 @@ class BaseNetworkModule {
     fun provideBaseUrl(): String {
         return "https://way.jd.com/showapi/"
     }
+    @Named("videoUrl")
+    @Provides
+    fun provideVideoUrl(): String {
+        return "http://49.232.198.163:8080/"
+    }
 
     @Provides
     fun provideConverterFactory(): Converter.Factory {
@@ -60,6 +65,20 @@ class BaseNetworkModule {
                         converterFactory: Converter.Factory,
                         callAdapterFactory: CallAdapter.Factory,
                         @Named("baseUrl") baseUrl: String): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(callAdapterFactory)
+            .baseUrl(baseUrl)
+            .build()
+    }
+    @Named("videoUrl")
+    @Singleton
+    @Provides
+    fun provideVideoRetrofit(okHttpClient: OkHttpClient,
+                        converterFactory: Converter.Factory,
+                        callAdapterFactory: CallAdapter.Factory,
+                        @Named("videoUrl") baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(converterFactory)

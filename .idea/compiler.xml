@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="OnePeasToDo.app" target="11" />
+      <module name="OnePeasToDo.LibBase" target="11" />
+      <module name="OnePeasToDo.LibLog" target="11" />
+      <module name="OnePeasToDo.LibUpLoad" target="11" />
+      <module name="OnePeasToDo.ModuleAccount" target="11" />
+      <module name="OnePeasToDo.ModuleCar" target="11" />
+      <module name="OnePeasToDo.ModuleComic" target="11" />
+      <module name="OnePeasToDo.ModuleCookbook" target="11" />
+      <module name="OnePeasToDo.ModuleEsp8266" target="11" />
+      <module name="OnePeasToDo.ModuleHome" target="11" />
+      <module name="OnePeasToDo.ModuleMine" target="11" />
+      <module name="OnePeasToDo.ModuleSample" target="11" />
+      <module name="OnePeasToDo.ModuleWidget" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

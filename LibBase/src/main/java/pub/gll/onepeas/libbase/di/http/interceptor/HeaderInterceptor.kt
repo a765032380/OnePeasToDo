@@ -12,6 +12,7 @@ class HeaderInterceptor: Interceptor {
         AppUserUtil.userInfo?.id?.let {
             builder.addHeader("uuid", it)
         }
+        builder.addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
         return chain.proceed(builder.build())
     }
 }

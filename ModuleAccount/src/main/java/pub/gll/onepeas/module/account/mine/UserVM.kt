@@ -15,12 +15,14 @@ import pub.gll.onepeas.libbase.util.UserInfo
 import pub.gll.onepeas.libbase.di.http.result.HttpResult
 import pub.gll.onepeas.module.account.HttpService
 import pub.gll.onepeas.libbase.util.AppUserUtil
+import pub.gll.onepeas.module.account.VideoService
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class UserVM @Inject constructor(
     private var service: HttpService,
+    private var videoService: VideoService,
 ) : ViewModel()  {
 
     var viewStates by mutableStateOf(UserInfo())
@@ -40,12 +42,16 @@ class UserVM @Inject constructor(
     }
 
     fun upload(context: Context, file: File){
-        viewModelScope.launch {
-            TXUploadManager.upload(context,file)
-        }
+//        viewModelScope.launch {
+//            TXUploadManager.upload(context,file)
+//        }
+        userInfo()
     }
     private fun userInfo(){
         viewModelScope.launch {
+            flow {
+                emit(videoService.getlist())
+            }.collect()
             flow {
                 emit(service.userInfo())
             }.map {
