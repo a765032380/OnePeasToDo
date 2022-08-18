@@ -4,7 +4,14 @@ import android.util.Log
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.drag
+import androidx.compose.foundation.gestures.forEachGesture
+import androidx.compose.foundation.interaction.DragInteraction
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -17,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -36,17 +44,18 @@ fun VideoPlayerControl(
     subtitle: String? = null,
     background: Color = Color.Black.copy(0.30f),
     contentColor: Color = Color.White,
-    progressLineColor: Color = MaterialTheme.colors.primaryVariant,
     onOptionsClick: (() -> Unit)? = null,
     onBackClick: (() -> Unit)? = null,
-    content: @Composable () -> Unit
 ) {
+
+    var speed by remember { mutableStateOf(state.player.playbackParameters.speed) }
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(background)
-                .padding(16.dp),
+                .padding(16.dp)
+            ,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
@@ -63,17 +72,13 @@ fun VideoPlayerControl(
             )
             TimelineControl(
                 modifier = Modifier.fillMaxWidth(),
-                progressLineColor = progressLineColor,
                 isFullScreen = state.isFullscreen.value,
                 videoDurationMs = state.videoDurationMs.value,
                 videoPositionMs = state.videoPositionMs.value,
-                content = content,
+                speed = speed,
+                control = state.control,
                 onFullScreenToggle = {state.control.setFullscreen(!state.isFullscreen.value)},
-                onProgress = {
-                                if (it!=0f) {
-                                    state.control.setVideoDurationMs(it.toLong())
-                                }
-                             },
+                onProgress = { state.control.seekTo(it.roundToLong()) },
             )
         }
     }
@@ -146,21 +151,23 @@ private fun PlaybackControl(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        IconButton(
-            modifier = Modifier
-                .size(BigIconButtonSize)
-                .padding(10.dp),
-            onClick = control::rewind
-        ) {
-            Icon(
-                modifier = Modifier.fillMaxSize(),
-                imageVector = Icons.Rounded.Replay10,
-                contentDescription = null
-            )
-        }
+//        IconButton(
+//            modifier = Modifier
+//                .size(BigIconButtonSize)
+//                .padding(10.dp),
+//            onClick = control::rewind
+//        ) {
+//            Icon(
+//                modifier = Modifier.fillMaxSize(),
+//                imageVector = Icons.Rounded.Replay10,
+//                contentDescription = null
+//            )
+//        }
         IconButton(
             modifier = Modifier.size(BigIconButtonSize),
-            onClick = { if (isPlaying) control.pause() else control.play() }
+            onClick = {
+                if (isPlaying) control.pause() else control.play()
+            }
         ) {
             Icon(
                 modifier = Modifier.fillMaxSize(),
@@ -168,37 +175,39 @@ private fun PlaybackControl(
                 contentDescription = null
             )
         }
-        IconButton(
-            modifier = Modifier
-                .size(BigIconButtonSize)
-                .padding(10.dp),
-            onClick = control::forward
-        ) {
-            Icon(
-                modifier = Modifier.fillMaxSize(),
-                imageVector = Icons.Rounded.Forward10,
-                contentDescription = null
-            )
-        }
+//        IconButton(
+//            modifier = Modifier
+//                .size(BigIconButtonSize)
+//                .padding(10.dp),
+//            onClick = control::forward
+//        ) {
+//            Icon(
+//                modifier = Modifier.fillMaxSize(),
+//                imageVector = Icons.Rounded.Forward10,
+//                contentDescription = null
+//            )
+//        }
     }
 }
 
 @Composable
 private fun TimelineControl(
     modifier: Modifier,
-    progressLineColor: Color,
     isFullScreen: Boolean,
     videoDurationMs: Long,
     videoPositionMs: Long,
+    speed: Float,
+    control: VideoPlayerControl,
     onFullScreenToggle: () -> Unit,
     onProgress: (progress:Float) -> Unit,
-    content: @Composable () -> Unit
 ) {
     // videoDurationMs 总时长
     // videoPositionMs 已播放时长
     val timestamp = remember(videoDurationMs, videoPositionMs.milliseconds.inWholeSeconds) {
         prettyVideoTimestamp(videoDurationMs.milliseconds, videoPositionMs.milliseconds)
     }
+
+    var text by remember { mutableStateOf(speed) }
 
     Column(modifier = modifier) {
         Row(
@@ -209,7 +218,20 @@ private fun TimelineControl(
             Text(text = timestamp)
             Spacer(modifier = Modifier.weight(1.0f))
 
-            content()
+            NiaDropdownMenuButton(
+                modifier = Modifier.size(BigIconButtonSize),
+                items = listOf(1.0f, 1.25f, 1.5f, 2f),
+                onItemClick = {
+                    text = it
+                    control.speed(text)
+                },
+                text = "x$text",
+                itemText = { item ->
+                    Text("$item",
+                        color=Color.White
+                    )
+                }
+            )
             AdaptiveIconButton(
                 modifier = Modifier.size(SmallIconButtonSize),
                 onClick = onFullScreenToggle
@@ -220,7 +242,6 @@ private fun TimelineControl(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(8.dp))
         Slider(
             value = videoPositionMs.toFloat(),
             valueRange = 0f..videoDurationMs.toFloat(),

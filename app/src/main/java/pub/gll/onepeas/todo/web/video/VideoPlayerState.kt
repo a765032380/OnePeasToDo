@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.video.VideoSize
 import kotlinx.coroutines.CoroutineScope
@@ -91,6 +92,20 @@ class VideoPlayerStateImpl(
 
         override fun setVideoDurationMs(videoDuration: Long) {
             videoDurationMs.value = videoDuration
+        }
+
+        override fun setVideoPositionMs(videoPosition: Long) {
+            videoPositionMs.value = videoPosition
+        }
+
+        override fun seekTo(positionMs: Long) {
+            videoPositionMs.value = positionMs
+            player.seekTo(positionMs)
+        }
+
+        override fun speed(speed: Float) {
+            val playbackParameters = PlaybackParameters(speed)
+            player.playbackParameters = playbackParameters
         }
 
         override fun setFullscreen(value: Boolean) {
@@ -188,4 +203,11 @@ interface VideoPlayerControl {
     fun setFullscreen(value: Boolean)
     fun setVideoResize(mode: ResizeMode)
     fun setVideoDurationMs(videoDurationMs: Long)
+    fun setVideoPositionMs(videoPositionMs: Long)
+    fun seekTo(positionMs: Long)
+    fun speed(speed: Float)
+
+
+
+
 }

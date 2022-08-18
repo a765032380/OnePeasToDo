@@ -1,6 +1,7 @@
 package pub.gll.onepeas.todo.web.video
 
 import android.os.Build
+import android.util.Log
 import android.view.SurfaceView
 import android.view.ViewGroup
 import androidx.compose.animation.AnimatedVisibility
@@ -8,8 +9,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
@@ -70,12 +70,47 @@ private fun VideoPlayer(
     playerState: VideoPlayerState,
     controller: @Composable () -> Unit
 ) {
+
+    val speed by remember { mutableStateOf(playerState.player.playbackParameters.speed) }
+    val isLongPress = remember { mutableStateOf(false) }
+
     Box(modifier = modifier.defaultPlayerTapGestures(playerState)) {
         AndroidView(
             modifier = Modifier.adaptiveLayout(
                 aspectRatio = playerState.videoSize.value.aspectRatio(),
                 resizeMode = playerState.videoResizeMode.value
-            ),
+            ).pointerInput(Unit) {
+                detectTapGestures(
+                    onLongPress = {
+                        isLongPress.value = true
+                        playerState.control.speed(3f)
+                        Log.e("LLLLLLL", "onLongPress")
+                    },
+                    onDoubleTap = {
+                        if (playerState.isPlaying.value) playerState.player.pause() else playerState.player.play()
+                        Log.e("LLLLLLL", "onDoubleTap")
+                    },
+                    onPress = {
+                        if (isLongPress.value) {
+                            isLongPress.value  = false
+                            if (this.tryAwaitRelease()) {
+                                playerState.control.speed(speed)
+                                Log.e("LLLLLLL", "onPress=$speed")
+                            }
+                        }
+                    },
+                    onTap = {
+                        if (playerState.isControlUiVisible.value){
+                            playerState.hideControlUi()
+                        }else{
+                            playerState.showControlUi()
+                        }
+                        Log.e("LLLLLLL", "onTap")
+                    }
+                )
+            }
+            ,
+
             factory = { context ->
                 SurfaceView(context).apply {
                     layoutParams = ViewGroup.LayoutParams(

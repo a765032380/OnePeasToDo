@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.HttpDataSource
 import pub.gll.onepeas.libbase.activity.BaseActivity
 import pub.gll.onepeas.todo.web.video.*
+import kotlin.math.roundToLong
 
 
 class M3U8PlayActivity: BaseActivity() {
@@ -60,7 +61,6 @@ class M3U8PlayActivity: BaseActivity() {
                             callback.remove()
                         }
                     })
-                    var text by remember { mutableStateOf("x1.0") }
                     if(playerState.isFullscreen.value){
                         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     }else{
@@ -86,23 +86,7 @@ class M3U8PlayActivity: BaseActivity() {
                                     onBackPressed()
                                 }
                             }
-                        ){
-                            NiaDropdownMenuButton(
-                                modifier = Modifier.size(BigIconButtonSize),
-                                items = listOf("x1.0", "x1.25", "x1.5", "x2"),
-                                onItemClick = {
-                                    text = it
-                                    val playbackParameters = PlaybackParameters(text.replace("x","").toFloat())
-                                    playerState.player.playbackParameters = playbackParameters
-                                },
-                                text = text,
-                                itemText = { item ->
-                                    androidx.compose.material.Text(item,
-                                        color=Color.White
-                                    )
-                                }
-                            )
-                        }
+                        )
                     }
 
                     LaunchedEffect(Unit) {
