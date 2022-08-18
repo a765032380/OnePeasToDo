@@ -14,6 +14,7 @@
       <module name="OnePeasToDo.ModuleHome" target="11" />
       <module name="OnePeasToDo.ModuleMine" target="11" />
       <module name="OnePeasToDo.ModuleSample" target="11" />
+      <module name="OnePeasToDo.ModuleVideo" target="11" />
       <module name="OnePeasToDo.ModuleWidget" target="11" />
     </bytecodeTargetLevel>
   </component>

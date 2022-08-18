@@ -1,5 +1,6 @@
 package pub.gll.onepeas.todo.web.video
 
+import android.util.Log
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,6 +26,7 @@ import pub.gll.onepeas.todo.web.video.icons.Forward10
 import pub.gll.onepeas.todo.web.video.icons.Fullscreen
 import pub.gll.onepeas.todo.web.video.icons.FullscreenExit
 import pub.gll.onepeas.todo.web.video.icons.MoreVert
+import kotlin.math.roundToLong
 import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
@@ -66,7 +68,12 @@ fun VideoPlayerControl(
                 videoDurationMs = state.videoDurationMs.value,
                 videoPositionMs = state.videoPositionMs.value,
                 content = content,
-                onFullScreenToggle = {state.control.setFullscreen(!state.isFullscreen.value)}
+                onFullScreenToggle = {state.control.setFullscreen(!state.isFullscreen.value)},
+                onProgress = {
+                                if (it!=0f) {
+                                    state.control.setVideoDurationMs(it.toLong())
+                                }
+                             },
             )
         }
     }
@@ -184,14 +191,15 @@ private fun TimelineControl(
     videoDurationMs: Long,
     videoPositionMs: Long,
     onFullScreenToggle: () -> Unit,
+    onProgress: (progress:Float) -> Unit,
     content: @Composable () -> Unit
 ) {
+    // videoDurationMs 总时长
+    // videoPositionMs 已播放时长
     val timestamp = remember(videoDurationMs, videoPositionMs.milliseconds.inWholeSeconds) {
         prettyVideoTimestamp(videoDurationMs.milliseconds, videoPositionMs.milliseconds)
     }
-    val progress = remember(videoPositionMs) {
-        1.0f - ((videoDurationMs - videoPositionMs) / videoDurationMs.toFloat())
-    }
+
     Column(modifier = modifier) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -213,13 +221,16 @@ private fun TimelineControl(
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
-        LinearProgressIndicator(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(2.dp),
-            progress = progress,
-            color = progressLineColor,
-            backgroundColor = Color.LightGray
+        Slider(
+            value = videoPositionMs.toFloat(),
+            valueRange = 0f..videoDurationMs.toFloat(),
+            colors = SliderDefaults.colors(
+                thumbColor = Color.White, // 圆圈的颜色
+                activeTrackColor = Color(0xFF0079D3)
+            ),
+            onValueChange = {
+                onProgress(it)
+            },
         )
     }
 }

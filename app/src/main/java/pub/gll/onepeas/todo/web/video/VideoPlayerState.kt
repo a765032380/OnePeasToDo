@@ -89,6 +89,10 @@ class VideoPlayerStateImpl(
             videoResizeMode.value = mode
         }
 
+        override fun setVideoDurationMs(videoDuration: Long) {
+            videoDurationMs.value = videoDuration
+        }
+
         override fun setFullscreen(value: Boolean) {
             controlUiLastInteractionMs = 0
             isFullscreen.value = value
@@ -183,4 +187,5 @@ interface VideoPlayerControl {
 
     fun setFullscreen(value: Boolean)
     fun setVideoResize(mode: ResizeMode)
+    fun setVideoDurationMs(videoDurationMs: Long)
 }
