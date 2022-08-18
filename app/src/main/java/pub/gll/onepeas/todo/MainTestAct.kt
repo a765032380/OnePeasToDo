@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import pub.gll.modulevideo.VideoAct
 import pub.gll.onepeas.module.car.activity.CarComposeActivity
 import pub.gll.onepeas.module.car.activity.CustomViewAct
 import pub.gll.onepeas.module.comic.comic.ComicMainAct
@@ -69,7 +70,12 @@ fun MainCompose(activity: Activity) {
         Button(onClick = {
             PlayActivity.launch(activity,Test.TEST_MP4_URL)
         }) {
-            Text(text = "M3U8PlayActivity")
+            Text(text = "PlayActivity")
+        }
+        Button(onClick = {
+            activity.startActivity(Intent(activity, VideoAct::class.java))
+        }) {
+            Text(text = "VideoAct")
         }
 
     }

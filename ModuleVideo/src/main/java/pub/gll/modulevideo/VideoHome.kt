@@ -43,12 +43,6 @@ fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
 }
 @Composable
 fun Greeting(data: LazyPagingItems<VideoItemModel>, goImagePreview:(icon:String?)->Unit) {
-//    VerticalPager(count = data.itemCount) {page ->
-//        Message(data = data[page],goImagePreview)
-//    }
-//    HorizontalPager(count = data.itemCount) {page ->
-//        Message(data = data[page],goImagePreview)
-//    }
     LazyColumn(state = rememberLazyListState()) {
         items(items = data) { item ->
             Message(data = item,goImagePreview)
@@ -102,13 +96,13 @@ fun Message(data: VideoItemModel?,goImagePreview:(icon:String?)->Unit) {
         shape = RoundedCornerShape(5.dp),
         elevation = 5.dp
     ) {
-        Column(modifier = Modifier.padding(10.dp)) {
+        Column(modifier = Modifier.padding(10.dp)
+            .clickable {
+                goImagePreview(data?.icon)
+            }) {
             Image(modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
-                .clickable {
-                    goImagePreview(data?.icon)
-                },
+                .height(300.dp),
                 painter = rememberImagePainter(data = data?.icon,
                     builder = {
                         crossfade(true)
