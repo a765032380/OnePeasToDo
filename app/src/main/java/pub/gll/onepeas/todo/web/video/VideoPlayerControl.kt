@@ -1,39 +1,28 @@
 package pub.gll.onepeas.todo.web.video
 
-import android.util.Log
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.drag
-import androidx.compose.foundation.gestures.forEachGesture
-import androidx.compose.foundation.interaction.DragInteraction
-import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import pub.gll.onepeas.todo.R
-import pub.gll.onepeas.todo.web.video.icons.*
-import pub.gll.onepeas.todo.web.video.icons.Forward10
 import pub.gll.onepeas.todo.web.video.icons.Fullscreen
 import pub.gll.onepeas.todo.web.video.icons.FullscreenExit
 import pub.gll.onepeas.todo.web.video.icons.MoreVert
+import pub.gll.onepeas.todo.web.video.icons.Pause
 import kotlin.math.roundToLong
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -48,7 +37,7 @@ fun VideoPlayerControl(
     onBackClick: (() -> Unit)? = null,
 ) {
 
-    var speed by remember { mutableStateOf(state.player.playbackParameters.speed) }
+    val speed by remember { mutableStateOf(state.player.playbackParameters.speed) }
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         Column(
             modifier = Modifier
@@ -151,18 +140,6 @@ private fun PlaybackControl(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-//        IconButton(
-//            modifier = Modifier
-//                .size(BigIconButtonSize)
-//                .padding(10.dp),
-//            onClick = control::rewind
-//        ) {
-//            Icon(
-//                modifier = Modifier.fillMaxSize(),
-//                imageVector = Icons.Rounded.Replay10,
-//                contentDescription = null
-//            )
-//        }
         IconButton(
             modifier = Modifier.size(BigIconButtonSize),
             onClick = {
@@ -175,18 +152,6 @@ private fun PlaybackControl(
                 contentDescription = null
             )
         }
-//        IconButton(
-//            modifier = Modifier
-//                .size(BigIconButtonSize)
-//                .padding(10.dp),
-//            onClick = control::forward
-//        ) {
-//            Icon(
-//                modifier = Modifier.fillMaxSize(),
-//                imageVector = Icons.Rounded.Forward10,
-//                contentDescription = null
-//            )
-//        }
     }
 }
 
@@ -243,6 +208,9 @@ private fun TimelineControl(
             }
         }
         Slider(
+            modifier = Modifier.height(10.dp)
+                .shadow(3.dp)
+            ,
             value = videoPositionMs.toFloat(),
             valueRange = 0f..videoDurationMs.toFloat(),
             colors = SliderDefaults.colors(

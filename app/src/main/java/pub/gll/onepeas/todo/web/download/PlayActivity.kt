@@ -1,5 +1,7 @@
 package pub.gll.onepeas.todo.web.download
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
@@ -21,28 +23,32 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.HttpDataSource
 import pub.gll.onepeas.libbase.activity.BaseActivity
 import pub.gll.onepeas.todo.web.video.*
-import kotlin.math.roundToLong
 
 
-class M3U8PlayActivity: BaseActivity() {
+class PlayActivity: BaseActivity() {
+    companion object{
+        private const val PLAY_ACTIVITY_PARAM_URL = "url"
+        fun launch(context: Context, url:String){
+            val intent = Intent(context, PlayActivity::class.java)
+            intent.putExtra(PLAY_ACTIVITY_PARAM_URL,url)
+            context.startActivity(intent)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window,false)
-
-//        val url = intent.getStringExtra("url")
-        val url = "http://49.232.198.163:8080/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%28%E7%AC%AC%E4%B8%89%E5%AD%A3%29%E7%AD%89%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%28%E7%AC%AC%E4%BA%8C%E5%AD%A3%29/1.%E8%A7%86%E9%A2%91/01%E5%86%92%E6%B3%A1%E3%80%81%E9%80%89%E6%8B%A9%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F.mp4"
-        url.let {
+        val url = intent.getStringExtra(PLAY_ACTIVITY_PARAM_URL)
+        url?.let {
             setContent {
                 ProvideWindowInsets {
                     val playerState = rememberVideoPlayerState()
-
+                    //返回按钮拦截
                     val callback = remember {
                         object : OnBackPressedCallback(true) {
                             override fun handleOnBackPressed() {
@@ -90,19 +96,16 @@ class M3U8PlayActivity: BaseActivity() {
                     }
 
                     LaunchedEffect(Unit) {
-//                        val s = url.replace(".m3u8",".mp4")
-
+                        val s =  if (url.contains(".m3u8")){
+                            url.replace(".m3u8",".mp4")
+                        }else{
+                            url
+                        }
                         var mHttpDataSourceFactory: HttpDataSource.Factory= DefaultHttpDataSource.Factory()
                             .setAllowCrossProtocolRedirects(true)
                         mHttpDataSourceFactory.setDefaultRequestProperties(mapOf("Authorization" to "Basic YWRtaW46YWRtaW4="))
-
-                        val defaultDataSource = DefaultDataSource.Factory(this@M3U8PlayActivity, mHttpDataSourceFactory)
-
-                        val progressiveMediaSource = ProgressiveMediaSource.Factory(defaultDataSource).createMediaSource(MediaItem.fromUri(Uri.parse(url)));
-//                        .createMediaSource(MediaItem.fromUri(Uri.parse(url)))
-//                        val mediaItem = MediaItem.Builder().setUri(Uri.parse(url))
-//                            .setDrmLicenseRequestHeaders(mapOf("Authorization" to "Basic YWRtaW46YWRtaW4="))
-//                            .build()
+                        val defaultDataSource = DefaultDataSource.Factory(this@PlayActivity, mHttpDataSourceFactory)
+                        val progressiveMediaSource = ProgressiveMediaSource.Factory(defaultDataSource).createMediaSource(MediaItem.fromUri(Uri.parse(s)))
                         playerState.player.setMediaSource(progressiveMediaSource)
                         playerState.player.prepare()
                         playerState.player.playWhenReady = true

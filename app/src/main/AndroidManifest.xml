@@ -29,7 +29,7 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
-            android:name=".web.download.M3U8PlayActivity"
+            android:name=".web.download.PlayActivity"
             android:exported="true" />
         <activity
             android:name=".MainTestAct"

@@ -1,9 +1,7 @@
 package pub.gll.onepeas.todo.web.download
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -16,14 +14,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.material.Text
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.LiveData
 import com.jeffmony.downloader.model.VideoTaskItem
 import com.jeffmony.downloader.model.VideoTaskState
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,9 +41,7 @@ class DownloadListActivity: BaseActivity() {
         setContent {
             val list = mViewModel.videoTaskList
             DownloadList(list, {
-                val intent = Intent(this,M3U8PlayActivity::class.java)
-                intent.putExtra("url",it)
-                startActivity(intent)
+                PlayActivity.launch(this,it)
             },{
                 mViewModel.download(it)
             },{

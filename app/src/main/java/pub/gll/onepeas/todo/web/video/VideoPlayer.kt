@@ -18,6 +18,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import pub.gll.onepeas.lib.log.ext.v
 
 @JvmInline
 value class ResizeMode private constructor(val value: Int) {
@@ -71,44 +72,51 @@ private fun VideoPlayer(
     controller: @Composable () -> Unit
 ) {
 
-    val speed by remember { mutableStateOf(playerState.player.playbackParameters.speed) }
+    val speed = remember { mutableStateOf(1f) }
     val isLongPress = remember { mutableStateOf(false) }
 
     Box(modifier = modifier.defaultPlayerTapGestures(playerState)) {
         AndroidView(
-            modifier = Modifier.adaptiveLayout(
-                aspectRatio = playerState.videoSize.value.aspectRatio(),
-                resizeMode = playerState.videoResizeMode.value
-            ).pointerInput(Unit) {
-                detectTapGestures(
-                    onLongPress = {
-                        isLongPress.value = true
-                        playerState.control.speed(3f)
-                        Log.e("LLLLLLL", "onLongPress")
-                    },
-                    onDoubleTap = {
-                        if (playerState.isPlaying.value) playerState.player.pause() else playerState.player.play()
-                        Log.e("LLLLLLL", "onDoubleTap")
-                    },
-                    onPress = {
-                        if (isLongPress.value) {
-                            isLongPress.value  = false
-                            if (this.tryAwaitRelease()) {
-                                playerState.control.speed(speed)
-                                Log.e("LLLLLLL", "onPress=$speed")
-                            }
-                        }
-                    },
-                    onTap = {
-                        if (playerState.isControlUiVisible.value){
-                            playerState.hideControlUi()
-                        }else{
-                            playerState.showControlUi()
-                        }
-                        Log.e("LLLLLLL", "onTap")
-                    }
+            modifier = Modifier
+                .adaptiveLayout(
+                    aspectRatio = playerState.videoSize.value.aspectRatio(),
+                    resizeMode = playerState.videoResizeMode.value
                 )
-            }
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        //长按事件
+                        onLongPress = {
+                            speed.value = playerState.player.playbackParameters.speed
+                            isLongPress.value = true
+                            playerState.control.speed(3f)
+                            Log.e("VideoPlayer", "onLongPress")
+                        },
+                        //双击事件
+                        onDoubleTap = {
+                            if (playerState.isPlaying.value) playerState.player.pause() else playerState.player.play()
+                            Log.e("VideoPlayer", "onDoubleTap")
+                        },
+                        //释放事件 this.tryAwaitRelease() 是否等待，这个方法是挂起方法，如果调用该方法，会挂起，等松手的时候才会继续执行
+                        onPress = {
+                            if (this.tryAwaitRelease()) {
+                                if (isLongPress.value) {
+                                    isLongPress.value = false
+                                    playerState.control.speed(speed.value)
+                                    Log.e("VideoPlayer", "onPress=${speed.value}")
+                                }
+                            }
+                        },
+                        //单击事件 只要点击就会触发该事件
+                        onTap = {
+                            if (playerState.isControlUiVisible.value) {
+                                playerState.hideControlUi()
+                            } else {
+                                playerState.showControlUi()
+                            }
+                            Log.e("VideoPlayer", "onTap")
+                        }
+                    )
+                }
             ,
 
             factory = { context ->
@@ -125,8 +133,8 @@ private fun VideoPlayer(
 
         AnimatedVisibility(
             visible = playerState.isControlUiVisible.value,
-            enter = fadeIn(),
-            exit = fadeOut()
+            enter = fadeIn(),//淡入动画
+            exit = fadeOut()//淡出动画
         ) {
             controller()
         }

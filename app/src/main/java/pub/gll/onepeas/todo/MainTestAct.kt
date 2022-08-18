@@ -17,7 +17,7 @@ import pub.gll.onepeas.module.car.activity.CustomViewAct
 import pub.gll.onepeas.module.comic.comic.ComicMainAct
 import pub.gll.onepeas.todo.ui.main.MainActivity
 import pub.gll.onepeas.todo.web.WebActivity
-import pub.gll.onepeas.todo.web.download.M3U8PlayActivity
+import pub.gll.onepeas.todo.web.download.PlayActivity
 
 class MainTestAct : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +67,7 @@ fun MainCompose(activity: Activity) {
             Text(text = "WebActivity")
         }
         Button(onClick = {
-            activity.startActivity(Intent(activity, M3U8PlayActivity::class.java))
+            PlayActivity.launch(activity,Test.TEST_MP4_URL)
         }) {
             Text(text = "M3U8PlayActivity")
         }
