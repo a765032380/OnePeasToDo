@@ -27,30 +27,29 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import pub.gll.modulevideo.model.VideoItemModel
 import pub.gll.modulevideo.vm.VideoVM
 import pub.gll.onepeas.libbase.Test
+import pub.gll.onepeas.libbase.arouter.Launch
 
 @Composable
 fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
     val refreshState = rememberSwipeRefreshState(isRefreshing = false)
-//    val data = homeViewModel.data.collectAsLazyPagingItems()
-//    refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
+    val data = homeViewModel.data.collectAsLazyPagingItems()
+    refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
 
     SwipeRefresh(
         state = refreshState,
         modifier = Modifier.fillMaxSize(),
         onRefresh = {
-//        data.refresh()
+        data.refresh()
     }) {
-//        Greeting(data = data){
-//
-//        }
+        Greeting(data = data)
     }
 
 }
 @Composable
-fun Greeting(data: LazyPagingItems<VideoItemModel>, goImagePreview:(icon:String?)->Unit) {
+fun Greeting(data: LazyPagingItems<VideoItemModel>) {
     LazyColumn(state = rememberLazyListState()) {
         items(items = data) { item ->
-            VideoItem(data = item,goImagePreview)
+            VideoItem(data = item)
         }
         when (data.loadState.append) {
             is LoadState.Loading -> {//加载中的尾部item展示
@@ -97,14 +96,12 @@ fun Greeting(data: LazyPagingItems<VideoItemModel>, goImagePreview:(icon:String?
 @Preview
 fun PreviewVideoItem(){
     val videoItemModel = VideoItemModel(1,"1","复仇者联盟",Test.TEST_IMAGE)
-    VideoItem(videoItemModel){
-
-    }
+    VideoItem(videoItemModel)
 }
 
 
 @Composable
-fun VideoItem(data: VideoItemModel?,goImagePreview:(icon:String?)->Unit) {
+fun VideoItem(data: VideoItemModel?) {
     Card(
         modifier = Modifier
             .padding(5.dp),
@@ -113,7 +110,7 @@ fun VideoItem(data: VideoItemModel?,goImagePreview:(icon:String?)->Unit) {
     ) {
         Column(modifier = Modifier.padding(10.dp)
             .clickable {
-                goImagePreview(data?.icon)
+                data?.icon?.let { Launch.videoPlay(it) }
             }) {
             Image(modifier = Modifier
                 .fillMaxWidth()
