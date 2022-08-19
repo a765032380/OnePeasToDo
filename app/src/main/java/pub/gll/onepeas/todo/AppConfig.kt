@@ -7,8 +7,11 @@ package pub.gll.onepeas.todo
 object AppConfig {
     private const val HOME_APP = "pub.gll.onepeas.module.home.HomeApp"
     private const val COOKBOOK_APP = "pub.gll.onepeas.module.cookbook.CookbookApp"
+    private const val VIDEO_APP = "pub.gll.modulevideo.VideoApp"
+
     var moduleApps = arrayOf(
         HOME_APP,
         COOKBOOK_APP,
+        VIDEO_APP,
     )
 }

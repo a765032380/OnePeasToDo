@@ -25,40 +25,7 @@ class MyApp : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
-        ARouter.openDebug()
-        ARouter.init(this)
-        DataStoreUtils.init(this)
-        QbSdk.initX5Environment(this, object : QbSdk.PreInitCallback {
-
-            override fun onCoreInitFinished() {
-                // 内核初始化完成，可能为系统内核，也可能为系统内核
-            }
-
-            /**
-             * 预初始化结束
-             * 由于X5内核体积较大，需要依赖网络动态下发，所以当内核不存在的时候，默认会回调false，此时将会使用系统内核代替
-             * @param isX5 是否使用X5内核
-             */
-            override fun onViewInitFinished(p0: Boolean) {
-            }
-        })
-        QbSdk.setDownloadWithoutWifi(true)
         initModuleList(AppConfig.moduleApps)
-        initWebDownload()
-    }
-    private fun initWebDownload(){
-        val file: File = VideoStorageUtils.getVideoCacheDir(this)
-        if (!file.exists()) {
-            file.mkdir()
-        }
-        val config = VideoDownloadManager.Build(this)
-            .setCacheRoot(file.absolutePath)
-            .setTimeOut(DownloadConstants.READ_TIMEOUT, DownloadConstants.CONN_TIMEOUT)
-            .setConcurrentCount(DownloadConstants.CONCURRENT)
-            .setIgnoreCertErrors(false)
-            .setShouldM3U8Merged(true)
-            .buildConfig()
-        VideoDownloadManager.getInstance().initConfig(config)
     }
     /**
      * 这个方法主要在主工程调用，其他工程不要调用

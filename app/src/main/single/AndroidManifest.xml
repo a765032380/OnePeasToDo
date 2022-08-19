@@ -11,17 +11,6 @@
     <application
         android:name=".MyApp">
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="true"
-            android:name=".ui.main.MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".web.download.DownloadListActivity"
@@ -29,7 +18,7 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
-            android:name=".web.download.PlayActivity"
+            android:name="pub.gll.modulevideo.video.PlayActivity"
             android:exported="true" />
         <activity
             android:name=".MainTestAct"
@@ -38,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".web.WebActivity"
+            android:name="pub.gll.onepeas.libbase.webview.WebActivity"
             android:theme="@style/AppTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true">

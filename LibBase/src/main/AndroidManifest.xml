@@ -12,5 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OnePeasToDo"/>
+        android:theme="@style/Theme.OnePeasToDo">
+
+
+        <activity
+            android:name="pub.gll.onepeas.libbase.webview.WebActivity"
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true">
+        </activity>
+
+    </application>
 </manifest>

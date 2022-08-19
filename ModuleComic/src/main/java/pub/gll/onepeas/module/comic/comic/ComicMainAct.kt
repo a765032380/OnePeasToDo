@@ -28,10 +28,14 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import dagger.hilt.android.AndroidEntryPoint
 import pub.gll.onepeas.lib.log.ext.e
+import pub.gll.onepeas.libbase.util.WebData
+import pub.gll.onepeas.libbase.util.toJson
 import pub.gll.onepeas.module.comic.comic.bookshelf.ComicBookShelf
 import pub.gll.onepeas.module.comic.comic.home.ComicHome
 import pub.gll.onepeas.module.comic.comic.mine.ComicMine
 import pub.gll.onepeas.module.comic.comic.ui.ComicBottomNavBarView
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class ComicMainAct : ComponentActivity() {

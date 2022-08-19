@@ -6,7 +6,17 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
-            android:name="pub.gll.modulevideo.VideoAct"
+            android:name="pub.gll.modulevideo.VideoListAct"
+            android:exported="true" />
+
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:name="pub.gll.modulevideo.video.PlayActivity"
+            android:exported="true" />
+
+        <activity
+            android:name="pub.gll.modulevideo.download.DownloadListActivity"
             android:exported="true" />
     </application>
 </manifest>

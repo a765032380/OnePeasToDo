@@ -32,8 +32,10 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import pub.gll.onepeas.libbase.Test
 import pub.gll.onepeas.libbase.activity.BaseActivity
-import pub.gll.onepeas.libbase.arouter.ArouterPath
+import pub.gll.onepeas.libbase.arouter.ARouterPath
+import pub.gll.onepeas.libbase.arouter.Launch
 import pub.gll.onepeas.libbase.ui.theme.AppTheme
 import pub.gll.onepeas.module.car.model.CarBrandItemModel
 import pub.gll.onepeas.module.car.viewmodel.CarBrandViewModel
@@ -69,7 +71,7 @@ class CarComposeActivity : BaseActivity() {
                         floatingActionButton = {
                             FloatingActionButton(
                                 onClick = {
-                                    ARouter.getInstance().build(ArouterPath.WEB_ACTIVITY).navigation()
+                                    Launch.webView(Test.TEST_VIP_VIDEO)
                                 },
                                 containerColor = AppTheme.colors.themeUi,
                                 modifier = Modifier.size(60.dp),

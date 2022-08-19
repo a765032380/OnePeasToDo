@@ -11,33 +11,38 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import pub.gll.modulevideo.model.VideoItemModel
 import pub.gll.modulevideo.vm.VideoVM
+import pub.gll.onepeas.libbase.Test
 
 @Composable
 fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
     val refreshState = rememberSwipeRefreshState(isRefreshing = false)
-    val data = homeViewModel.data.collectAsLazyPagingItems()
-    refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
+//    val data = homeViewModel.data.collectAsLazyPagingItems()
+//    refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
 
     SwipeRefresh(
         state = refreshState,
         modifier = Modifier.fillMaxSize(),
         onRefresh = {
-        data.refresh()
+//        data.refresh()
     }) {
-        Greeting(data = data){
-
-        }
+//        Greeting(data = data){
+//
+//        }
     }
 
 }
@@ -45,7 +50,7 @@ fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
 fun Greeting(data: LazyPagingItems<VideoItemModel>, goImagePreview:(icon:String?)->Unit) {
     LazyColumn(state = rememberLazyListState()) {
         items(items = data) { item ->
-            Message(data = item,goImagePreview)
+            VideoItem(data = item,goImagePreview)
         }
         when (data.loadState.append) {
             is LoadState.Loading -> {//加载中的尾部item展示
@@ -87,12 +92,22 @@ fun Greeting(data: LazyPagingItems<VideoItemModel>, goImagePreview:(icon:String?
         }
     }
 }
+
 @Composable
-fun Message(data: VideoItemModel?,goImagePreview:(icon:String?)->Unit) {
+@Preview
+fun PreviewVideoItem(){
+    val videoItemModel = VideoItemModel(1,"1","复仇者联盟",Test.TEST_IMAGE)
+    VideoItem(videoItemModel){
+
+    }
+}
+
+
+@Composable
+fun VideoItem(data: VideoItemModel?,goImagePreview:(icon:String?)->Unit) {
     Card(
         modifier = Modifier
-            .padding(5.dp)
-            .fillMaxSize(),
+            .padding(5.dp),
         shape = RoundedCornerShape(5.dp),
         elevation = 5.dp
     ) {
@@ -103,10 +118,11 @@ fun Message(data: VideoItemModel?,goImagePreview:(icon:String?)->Unit) {
             Image(modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp),
-                painter = rememberImagePainter(data = data?.icon,
-                    builder = {
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = data?.icon).apply(block = fun ImageRequest.Builder.() {
                         crossfade(true)
-                    }), contentDescription = null)
+                    }).build()
+                ), contentDescription = null)
             Text(
                 text = "${data?.name}"
             )

@@ -1,13 +1,12 @@
 package pub.gll.modulevideo.remote
 
-import android.provider.MediaStore.Video
 import pub.gll.modulevideo.model.VideoItemModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface VideoService {
 
-    @GET("tpxh")
+    @GET("video/list")
     suspend fun fetchVideo(
         @Query("page") page:Int,
         @Query("maxResult") maxResult:Int,

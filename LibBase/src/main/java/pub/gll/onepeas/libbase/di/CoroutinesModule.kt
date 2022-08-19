@@ -1,4 +1,4 @@
-package pub.gll.onepeas.libcore.di
+package pub.gll.onepeas.libbase.di
 
 import dagger.Module
 import dagger.Provides
