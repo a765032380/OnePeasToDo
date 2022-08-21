@@ -23,15 +23,19 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import coil.ImageLoader
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
+import coil.decode.VideoFrameDecoder
 import coil.request.ImageRequest
+import coil.request.Parameters
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import pub.gll.modulevideo.model.VideoItemModel
 import pub.gll.modulevideo.vm.VideoVM
 import pub.gll.onepeas.libbase.Test
 import pub.gll.onepeas.libbase.arouter.Launch
+import kotlin.random.Random
 
 @Composable
 fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
@@ -49,6 +53,12 @@ fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
     }
 
 }
+@Composable
+fun PreviewVideoItem(){
+    val videoItemModel = VideoItemModel(1,"1","复仇者联盟",Test.TEST_MP4_URL,Test.TEST_MP4_URL)
+    VideoItem(videoItemModel)
+}
+
 @Composable
 fun Greeting(data: LazyPagingItems<VideoItemModel>) {
     LazyColumn(state = rememberLazyListState()) {
@@ -109,18 +119,25 @@ fun VideoItem(data: VideoItemModel?) {
             .clickable {
                 data?.url?.let { Launch.videoPlay(it) }
             }) {
-            Image(modifier = Modifier
+            val videoFrameMicros = Random.nextLong(62_000_000L)
+            val parameters = Parameters.Builder()
+                .set(VideoFrameDecoder.VIDEO_FRAME_MICROS_KEY, videoFrameMicros)
+                .build()
+
+            AsyncImage(modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(5.dp))
                 .height(300.dp),
                 contentScale = ContentScale.FillWidth,
-                painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(LocalContext.current).data(data = data?.icon).apply(block = fun ImageRequest.Builder.() {
-                        crossfade(true)
-                    })
-                        .addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
+                model = ImageRequest.Builder(LocalContext.current)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            data(data = data?.icon)
+                            crossfade(true)
+                            parameters(parameters = parameters)
+                            addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
+                        })
                         .build()
-                ), contentDescription = null)
+                , contentDescription = null)
             Text(
                 text = "${data?.name}",
             )

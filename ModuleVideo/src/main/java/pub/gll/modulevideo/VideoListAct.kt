@@ -13,7 +13,8 @@ class VideoListAct: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            VideoHome()
+//            VideoHome()
+            PreviewVideoItem()
         }
     }
 }

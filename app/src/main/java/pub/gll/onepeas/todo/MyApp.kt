@@ -1,15 +1,8 @@
 package pub.gll.onepeas.todo
 
 import android.app.Application
-import com.alibaba.android.arouter.launcher.ARouter
-import com.jeffmony.downloader.VideoDownloadManager
-import com.jeffmony.downloader.common.DownloadConstants
-import com.jeffmony.downloader.utils.VideoStorageUtils
-import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
-import pub.gll.onepeas.libbase.di.http.DataStoreUtils
-import java.io.File
 
 
 /**

@@ -39,7 +39,7 @@ object OkHttpBuild {
             }
         }
 
-    private fun createSSLSocketFactory(): SSLSocketFactory {
+    fun createSSLSocketFactory(): SSLSocketFactory {
         lateinit var ssfFactory: SSLSocketFactory
         try {
             val sslFactory = SSLContext.getInstance("TLS")
