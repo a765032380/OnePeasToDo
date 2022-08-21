@@ -9,5 +9,10 @@ data class VideoItemModel(
     var id:String,
     @SerializedName("title")
     val name:String,
-    @SerializedName("img")
-    val icon:String)
+    @SerializedName("cover")
+    val icon:String,
+    @SerializedName("url")
+    val url:String,
+    @SerializedName("description")
+    val description:String=""
+)

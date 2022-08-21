@@ -14,5 +14,5 @@ object Test {
     /**
      * 图片测试地址
      */
-    const val TEST_IMAGE = "http://49.232.198.163:8080/来自：微信备份/mmexport1611580408711.jpg"
+    const val TEST_IMAGE = "http://49.232.198.163:8080/wx/mmexport1611580408711.jpg"
 }

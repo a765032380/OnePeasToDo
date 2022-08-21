@@ -20,9 +20,8 @@ class VideoRemoteMediator(
      * 从网络加载数据
      */
     private suspend fun loadNet(page:Int, pageSize:Int):List<VideoItemModel>{
-        val time = System.currentTimeMillis().toDateFormat("yyyy-MM-dd")
-        val result = api.fetchVideo(page,pageSize,"4c753f2f20288772bf555d0be98eede0",time)
-        return result.result.showapi_res_body.contentlist
+        val result = api.fetchVideo(page,"pageSize")
+        return result.content
     }
 
     /**
@@ -33,10 +32,11 @@ class VideoRemoteMediator(
         //第三步：插入数据库
         val item = data.map {
             VideoEntity(
-                id = it.id,
+                id = it.url,
                 page = page+ 1,
                 name = it.name,
-                icon = it.icon
+                icon = it.icon,
+                url = it.url
             )
         }
         db.withTransaction {

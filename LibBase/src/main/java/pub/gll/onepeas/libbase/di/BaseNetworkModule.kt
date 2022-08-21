@@ -45,7 +45,9 @@ class BaseNetworkModule {
     @Named("baseUrl")
     @Provides
     fun provideBaseUrl(): String {
-        return "https://way.jd.com/showapi/"
+//        return "http://49.232.198.163:8082/"
+        return "http://192.168.199.214:8082/api/"
+
     }
     @Named("videoUrl")
     @Provides

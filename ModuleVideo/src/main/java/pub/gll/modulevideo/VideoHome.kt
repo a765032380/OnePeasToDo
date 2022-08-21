@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -11,8 +12,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
@@ -92,13 +96,6 @@ fun Greeting(data: LazyPagingItems<VideoItemModel>) {
     }
 }
 
-@Composable
-@Preview
-fun PreviewVideoItem(){
-    val videoItemModel = VideoItemModel(1,"1","复仇者联盟",Test.TEST_IMAGE)
-    VideoItem(videoItemModel)
-}
-
 
 @Composable
 fun VideoItem(data: VideoItemModel?) {
@@ -110,18 +107,22 @@ fun VideoItem(data: VideoItemModel?) {
     ) {
         Column(modifier = Modifier.padding(10.dp)
             .clickable {
-                data?.icon?.let { Launch.videoPlay(it) }
+                data?.url?.let { Launch.videoPlay(it) }
             }) {
             Image(modifier = Modifier
                 .fillMaxWidth()
+                .clip(RoundedCornerShape(5.dp))
                 .height(300.dp),
+                contentScale = ContentScale.FillWidth,
                 painter = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current).data(data = data?.icon).apply(block = fun ImageRequest.Builder.() {
                         crossfade(true)
-                    }).build()
+                    })
+                        .addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
+                        .build()
                 ), contentDescription = null)
             Text(
-                text = "${data?.name}"
+                text = "${data?.name}",
             )
         }
     }

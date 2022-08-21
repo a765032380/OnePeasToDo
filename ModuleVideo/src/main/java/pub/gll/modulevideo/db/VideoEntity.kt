@@ -10,5 +10,6 @@ data class VideoEntity(
     val id:String,
     val name:String,
     val icon:String,
+    val url:String,
     override var page:Int=0,
 ): PagerEntity

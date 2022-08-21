@@ -11,7 +11,8 @@ class VideoEntity2ModelMapper: Mapper<VideoEntity, VideoItemModel> {
             id = comicHomeEntity.id,
             page = comicHomeEntity.page,
             name = comicHomeEntity.name,
-            icon = comicHomeEntity.icon
+            icon = comicHomeEntity.icon,
+            url = comicHomeEntity.url,
         )
     }
 }

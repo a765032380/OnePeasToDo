@@ -33,7 +33,7 @@ object OkHttpBuild {
                 addInterceptor(LogInterceptor())
                 addInterceptor(HeaderInterceptor())
                 //不验证证书
-//                sslSocketFactory(createSSLSocketFactory())
+                sslSocketFactory(createSSLSocketFactory(),TrustAllCerts())
                 hostnameVerifier(TrustAllNameVerifier())
                 build()
             }
