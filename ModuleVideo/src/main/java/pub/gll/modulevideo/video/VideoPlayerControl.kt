@@ -1,5 +1,6 @@
 package pub.gll.modulevideo.video
 
+import android.util.Log
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +24,7 @@ import pub.gll.modulevideo.video.icons.FullscreenExit
 import pub.gll.modulevideo.video.icons.MoreVert
 import pub.gll.modulevideo.video.icons.Pause
 import pub.gll.onepeas.module.video.R
+import kotlin.math.abs
 import kotlin.math.roundToLong
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -169,6 +171,8 @@ private fun TimelineControl(
     // videoDurationMs 总时长
     // videoPositionMs 已播放时长
     val timestamp = remember(videoDurationMs, videoPositionMs.milliseconds.inWholeSeconds) {
+        Log.e("LLLLLLL","videoDurationMs.milliseconds=${videoDurationMs.milliseconds}")
+        Log.e("LLLLLLL","videoDurationMs.milliseconds=${videoPositionMs.milliseconds}")
         prettyVideoTimestamp(videoDurationMs.milliseconds, videoPositionMs.milliseconds)
     }
 
@@ -212,7 +216,7 @@ private fun TimelineControl(
                 .shadow(3.dp)
             ,
             value = videoPositionMs.toFloat(),
-            valueRange = 0f..videoDurationMs.toFloat(),
+            valueRange = 0f..abs(videoDurationMs).toFloat(),
             colors = SliderDefaults.colors(
                 thumbColor = Color.White, // 圆圈的颜色
                 activeTrackColor = Color(0xFF0079D3)

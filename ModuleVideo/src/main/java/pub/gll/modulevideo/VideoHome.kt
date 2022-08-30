@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +39,8 @@ import pub.gll.onepeas.libbase.arouter.Launch
 import kotlin.random.Random
 
 @Composable
-fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
+fun VideoHome(lazyListState:LazyListState) {
+    val homeViewModel: VideoVM = hiltViewModel()
     val refreshState = rememberSwipeRefreshState(isRefreshing = false)
     val data = homeViewModel.data.collectAsLazyPagingItems()
     refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
@@ -49,7 +51,7 @@ fun VideoHome(homeViewModel: VideoVM = hiltViewModel()) {
         onRefresh = {
         data.refresh()
     }) {
-        Greeting(data = data)
+        Greeting(data = data,lazyListState)
     }
 
 }
@@ -60,8 +62,8 @@ fun PreviewVideoItem(){
 }
 
 @Composable
-fun Greeting(data: LazyPagingItems<VideoItemModel>) {
-    LazyColumn(state = rememberLazyListState()) {
+fun Greeting(data: LazyPagingItems<VideoItemModel>,lazyListState: LazyListState) {
+    LazyColumn(state = lazyListState) {
         items(items = data) { item ->
             VideoItem(data = item)
         }
@@ -115,11 +117,13 @@ fun VideoItem(data: VideoItemModel?) {
         shape = RoundedCornerShape(5.dp),
         elevation = 5.dp
     ) {
-        Column(modifier = Modifier.padding(10.dp)
+        Column(modifier = Modifier
+            .padding(10.dp)
             .clickable {
                 data?.url?.let { Launch.videoPlay(it) }
             }) {
-            val videoFrameMicros = Random.nextLong(62_000_000L)
+//            val videoFrameMicros = Random.nextLong(62_000_000L)
+            val videoFrameMicros = 5_000_000L
             val parameters = Parameters.Builder()
                 .set(VideoFrameDecoder.VIDEO_FRAME_MICROS_KEY, videoFrameMicros)
                 .build()
@@ -132,9 +136,7 @@ fun VideoItem(data: VideoItemModel?) {
                 model = ImageRequest.Builder(LocalContext.current)
                         .apply(block = fun ImageRequest.Builder.() {
                             data(data = data?.icon)
-                            crossfade(true)
                             parameters(parameters = parameters)
-                            addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
                         })
                         .build()
                 , contentDescription = null)

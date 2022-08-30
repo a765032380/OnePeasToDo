@@ -58,7 +58,7 @@ class VideoPlayerStateImpl(
     override val videoPositionMs = mutableStateOf(0L)
     override val videoDurationMs = mutableStateOf(0L)
 
-    override val isFullscreen = mutableStateOf(false)
+    override val isFullscreen = mutableStateOf(true)
     override val isPlaying = mutableStateOf(player.isPlaying)
     override val playerState = mutableStateOf(player.playbackState)
 

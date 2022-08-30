@@ -87,25 +87,48 @@ abstract class BaseApp:Application(), ImageLoaderFactory {
                     .build()
             }
             .okHttpClient {
+                OkHttpBuild.okHttpClient
                 // Don't limit concurrent network requests by host.
-                val dispatcher = Dispatcher().apply { maxRequestsPerHost = maxRequests }
+//                val dispatcher = Dispatcher().apply { maxRequestsPerHost = maxRequests }
 
                 // Lazily create the OkHttpClient that is used for network operations.
-                OkHttpClient.Builder().run {
-                    connectTimeout(300000L, TimeUnit.MILLISECONDS)
-                    readTimeout(300000L, TimeUnit.MILLISECONDS)
-                    writeTimeout(300000L, TimeUnit.MILLISECONDS)
-                }
-                    .dispatcher(dispatcher)
-//                    .sslSocketFactory(OkHttpBuild.createSSLSocketFactory(), TrustAllCerts())
-                    .hostnameVerifier(TrustAllNameVerifier())
-                    .addInterceptor {
-                        val request = it.request()
-                        val builder = request.newBuilder()
-                        builder.addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
-                        it.proceed(builder.build())
-                    }
-                    .build()
+//                OkHttpClient.Builder().run {
+//                    connectTimeout(30000L, TimeUnit.MILLISECONDS)
+//                    readTimeout(30000L, TimeUnit.MILLISECONDS)
+//                    writeTimeout(30000L, TimeUnit.MILLISECONDS)
+//                }
+//                    .dispatcher(dispatcher)
+//                    .addInterceptor {
+//                        val request = it.request()
+//                        val builder = request.newBuilder()
+//                        builder.addHeader("Authorization" , "Basic YWRtaW46YWRtaW4=")
+                        /**
+                         * ETag: "1D8A4A3CCD030A10569EBA38CA40B893-125"
+                         */
+//                        builder.addHeader("Content-Type" , "image/jpeg")
+//                        builder.addHeader("Server" , "AliyunOSS")
+//                        builder.addHeader("Vary" , "Origin")
+//                        builder.addHeader("x-oss-hash-crc64ecma" , "6231434286087683009")
+//                        builder.addHeader("x-oss-hash-func" , "SHA-1")
+//                        builder.addHeader("x-oss-hash-value" , "05A01F5353A930E4714C54F8BAEEB9F05493506B")
+//                        builder.addHeader("x-oss-object-type" , "Multipart")
+//                        builder.addHeader("x-oss-request-id" , "6302F8358B530133363A7B35")
+//                        builder.addHeader("x-oss-storage-class" , "Standard")
+//                        builder.addHeader("Accept" , "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8")
+//                        builder.addHeader("Accept-Encoding" , "gzip, deflate, br")
+//                        builder.addHeader("Accept-Language" , "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7")
+//                        builder.addHeader("Host" , "bj29-enet.cn-beijing.data.alicloudccp.com")
+//                        builder.addHeader("Referer" , "https://www.aliyundrive.com/")
+//                        builder.addHeader("sec-ch-ua" , "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"")
+//                        builder.addHeader("sec-ch-ua-mobile" , "?1")
+//                        builder.addHeader("sec-ch-ua-platform" , "Android")
+//                        builder.addHeader("Sec-Fetch-Dest" , "image")
+//                        builder.addHeader("Sec-Fetch-Mode" , "no-cors")
+//                        builder.addHeader("Sec-Fetch-Site" , "cross-site")
+//                        builder.addHeader("User-Agent" , "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Mobile Safari/537.36")
+//                        it.proceed(builder.build())
+//                    }
+//                    .build()
             }
             // Show a short crossfade when loading images asynchronously.
             .crossfade(true)

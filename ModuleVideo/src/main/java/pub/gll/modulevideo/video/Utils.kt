@@ -84,11 +84,13 @@ internal inline fun prettyVideoTimestamp(
  * Will split [duration] in minutes and seconds and append it to [this] in the following format "mm:ss"
  * */
 private fun StringBuilder.appendMinutesAndSeconds(duration: Duration) {
-    val minutes = duration.inWholeMinutes
-    val seconds = (duration - minutes.minutes).inWholeSeconds
-    appendDoubleDigit(minutes)
-    append(':')
-    appendDoubleDigit(seconds)
+    if (duration.isFinite()) {
+        val minutes = duration.inWholeMinutes
+        val seconds = (duration - minutes.minutes).inWholeSeconds
+        appendDoubleDigit(minutes)
+        append(':')
+        appendDoubleDigit(seconds)
+    }
 }
 
 /**

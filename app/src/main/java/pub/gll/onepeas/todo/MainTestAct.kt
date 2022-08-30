@@ -53,7 +53,7 @@ fun MainCompose(activity: Activity) {
             Text(text = "WebActivity")
         }
         Button(onClick = {
-            Launch.videoPlay(Test.TEST_MP4_URL)
+            Launch.videoPlay("http://106.54.112.102/live/livestream.flv")
         }) {
             Text(text = "PlayActivity")
         }
