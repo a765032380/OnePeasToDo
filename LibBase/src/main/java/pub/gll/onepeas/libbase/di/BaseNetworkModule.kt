@@ -52,7 +52,7 @@ class BaseNetworkModule {
     @Named("videoUrl")
     @Provides
     fun provideVideoUrl(): String {
-        return "http://49.232.198.163:8080/"
+        return "http://49.232.198.163:8082/api/"
     }
 
     @Provides

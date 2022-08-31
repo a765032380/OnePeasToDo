@@ -3,7 +3,9 @@ package pub.gll.modulevideo
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -15,13 +17,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import pub.gll.modulevideo.vm.VideoVM
 import pub.gll.onepeas.libbase.activity.BaseActivity
 import pub.gll.onepeas.libbase.arouter.ARouterPath
 import pub.gll.onepeas.libbase.widget.AppSnackBar
+import pub.gll.onepeas.libbase.widget.LabelEditView
 import pub.gll.onepeas.libbase.widget.SNACK_ERROR
 import pub.gll.onepeas.libbase.widget.popupSnackBar
 

@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pub.gll.modulevideo.remote.VideoService
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -14,7 +15,7 @@ class VideoNetworkModule {
 
     @Singleton
     @Provides
-    fun provideCookbookService(retrofit: Retrofit): VideoService {
+    fun provideCookbookService(@Named("videoUrl") retrofit: Retrofit): VideoService {
         return retrofit.create(VideoService::class.java)
     }
 

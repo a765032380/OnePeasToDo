@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import pub.gll.modulevideo.model.VideoItemModel
 
 interface VideoRepository {
-    fun fetchVideoList(): Flow<PagingData<VideoItemModel>>
+    fun fetchVideoList(key:String): Flow<PagingData<VideoItemModel>>
 }

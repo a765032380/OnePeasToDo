@@ -8,9 +8,11 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,14 +39,23 @@ fun VideoHome(lazyListState:LazyListState) {
     val refreshState = rememberSwipeRefreshState(isRefreshing = false)
     val data = homeViewModel.data.collectAsLazyPagingItems()
     refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
-
-    SwipeRefresh(
-        state = refreshState,
-        modifier = Modifier.fillMaxSize(),
-        onRefresh = {
-        data.refresh()
-    }) {
-        Greeting(data = data,lazyListState)
+    Column {
+        OutlinedTextField(value = homeViewModel.key.value, onValueChange = {
+            homeViewModel.key.value = it
+            homeViewModel.refresh()
+        },modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp),label = {
+            androidx.compose.material3.Text("搜索")
+        })
+        SwipeRefresh(
+            state = refreshState,
+            modifier = Modifier.fillMaxSize(),
+            onRefresh = {
+                data.refresh()
+            }) {
+            Greeting(data = data,lazyListState)
+        }
     }
 
 }
@@ -113,7 +124,7 @@ fun VideoItem(data: VideoItemModel?) {
         Column(modifier = Modifier
             .padding(10.dp)
             .clickable {
-                data?.url?.let { Launch.videoPlay(it) }
+                data?.url?.let { Launch.videoPlay("${Test.BASE_VIDEO_URL}$it") }
             }) {
 //            val videoFrameMicros = Random.nextLong(62_000_000L)
             val videoFrameMicros = 5_000_000L

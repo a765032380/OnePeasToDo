@@ -1,5 +1,6 @@
 package pub.gll.modulevideo.vm
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
@@ -11,12 +12,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VideoVM @Inject constructor(
-    comicHomeRepository: VideoRepository
+   val comicHomeRepository: VideoRepository
 ): ViewModel() {
 
-    var data = comicHomeRepository.fetchVideoList()
+    val key = mutableStateOf("")
+
+    var data = comicHomeRepository.fetchVideoList(key.value)
         .cachedIn(viewModelScope)
         .asLiveData()
         .asFlow()
+    fun refresh(){
+        data = comicHomeRepository.fetchVideoList(key.value)
+            .cachedIn(viewModelScope)
+            .asLiveData()
+            .asFlow()
+    }
 
 }

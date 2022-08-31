@@ -14,13 +14,14 @@ import pub.gll.onepeas.libcore.ext.toDateFormat
 @OptIn(ExperimentalPagingApi::class)
 class VideoRemoteMediator(
     val api: VideoService,
-    val db: VideoAppDatabase
+    val db: VideoAppDatabase,
+    val key: String
 ) :RemoteMediator<Int, VideoEntity>(){
     /**
      * 从网络加载数据
      */
     private suspend fun loadNet(page:Int, pageSize:Int):List<VideoItemModel>{
-        val result = api.fetchVideo(page,"pageSize")
+        val result = api.fetchVideo(page,key)
         return result.content
     }
 

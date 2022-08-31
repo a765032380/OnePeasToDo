@@ -18,14 +18,14 @@ class VideoRepositoryImpl(
     private val carBrandEntity2ModelMapper: Mapper<VideoEntity, VideoItemModel>
 ):VideoRepository {
     @OptIn(ExperimentalPagingApi::class)
-    override fun fetchVideoList(): Flow<PagingData<VideoItemModel>> {
+    override fun fetchVideoList(key:String): Flow<PagingData<VideoItemModel>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 8,//每页的条数
+                pageSize = 10,//每页的条数
                 prefetchDistance = 3,//距离底部还有多少条的时候去加载
-                initialLoadSize = 8//第一次加载的条数
+                initialLoadSize = 10//第一次加载的条数
             ),
-            remoteMediator = VideoRemoteMediator(api,database)//请求网络数据，把网络数据放到数据库里面
+            remoteMediator = VideoRemoteMediator(api,database,key)//请求网络数据，把网络数据放到数据库里面
         ) {
             database.getVideoDao().getVideoList()//从数据库里面拿数据
         }.flow
