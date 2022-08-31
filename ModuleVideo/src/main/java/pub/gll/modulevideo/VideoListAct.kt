@@ -77,7 +77,7 @@ class VideoListAct: BaseActivity() {
 
 
 @Composable
-private fun LazyListState.isScrollingUp(): Boolean {
+fun LazyListState.isScrollingUp(): Boolean {
     var previousIndex by remember(this) { mutableStateOf(firstVisibleItemIndex) }
     var previousScrollOffset by remember(this) { mutableStateOf(firstVisibleItemScrollOffset) }
     return remember(this) {

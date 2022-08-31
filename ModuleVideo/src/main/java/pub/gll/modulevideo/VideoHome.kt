@@ -1,5 +1,11 @@
 package pub.gll.modulevideo
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,8 +17,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +32,8 @@ import coil.decode.VideoFrameDecoder
 import coil.request.Parameters
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.launch
+import org.koin.ext.scope
 import pub.gll.modulevideo.model.VideoItemModel
 import pub.gll.modulevideo.video.icons.PlayArrow
 import pub.gll.modulevideo.vm.VideoVM
@@ -37,27 +44,44 @@ import pub.gll.onepeas.libbase.arouter.Launch
 fun VideoHome(lazyListState:LazyListState) {
     val homeViewModel: VideoVM = hiltViewModel()
     val refreshState = rememberSwipeRefreshState(isRefreshing = false)
+
+    val coroutineScope = rememberCoroutineScope()
     val data = homeViewModel.data.collectAsLazyPagingItems()
     refreshState.isRefreshing = data.loadState.refresh is LoadState.Loading
-    Column {
-        OutlinedTextField(value = homeViewModel.key.value, onValueChange = {
-            homeViewModel.key.value = it
-            homeViewModel.refresh()
-        },modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),label = {
-            androidx.compose.material3.Text("搜索")
-        })
+
+    Box {
         SwipeRefresh(
             state = refreshState,
             modifier = Modifier.fillMaxSize(),
             onRefresh = {
                 data.refresh()
             }) {
-            Greeting(data = data,lazyListState)
+            Greeting(data = data, lazyListState)
+        }
+        AnimatedVisibility(
+            visible = lazyListState.isScrollingUp(),
+            enter = slideInVertically(
+                // Enters by sliding in from offset -fullHeight to 0.
+                initialOffsetY = { fullHeight -> -fullHeight },
+                animationSpec = tween(durationMillis = 150, easing = LinearOutSlowInEasing)
+            ),
+            exit = slideOutVertically(
+                // Exits by sliding out from offset 0 to -fullHeight.
+                targetOffsetY = { fullHeight -> -fullHeight },
+                animationSpec = tween(durationMillis = 250, easing = FastOutLinearInEasing)
+            )
+        ) {
+            OutlinedTextField(value = homeViewModel.key.value, onValueChange = {
+                homeViewModel.key.value = it
+                homeViewModel.refresh()
+            }, modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .padding(start = 16.dp, end = 16.dp), label = {
+                androidx.compose.material3.Text("搜索")
+            })
         }
     }
-
 }
 @Composable
 fun PreviewVideoItem(){
@@ -68,6 +92,9 @@ fun PreviewVideoItem(){
 @Composable
 fun Greeting(data: LazyPagingItems<VideoItemModel>,lazyListState: LazyListState) {
     LazyColumn(state = lazyListState) {
+        item { 
+            Spacer(modifier = Modifier.height(80.dp))
+        }
         items(items = data) { item ->
             VideoItem(data = item)
         }
