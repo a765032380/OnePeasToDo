@@ -1,4 +1,4 @@
-package k04
+package pub.gll.module.algorithm.k04
 
 import org.junit.Test
 import java.io.File
@@ -35,7 +35,7 @@ private open class Tag(val tagName: String) : Element { // tagName Tag的Element
         builder.append("$indent<$tagName${renderAttributes()}>\n")
 
         for (element in elements) {
-            element.run(builder, indent + "---")
+            element.run(builder, "$indent---")
         }
 
         // </html>  还没有写闭合
@@ -44,7 +44,7 @@ private open class Tag(val tagName: String) : Element { // tagName Tag的Element
 
     // 属性拼接： href="http://bbs.xiangxueketang.cn/pins/recommended"
     // null 没有属性
-    private fun renderAttributes() : String ? {
+    private fun renderAttributes() : String {
         val builder = StringBuilder()
 
         for (key in attributes.keys) {
@@ -72,7 +72,7 @@ private open class TagClass(tagName: String) : Tag(tagName = tagName) {
     }
 
     operator fun String.unaryMinus() { // 运算符重载 -
-        elements+=TextElement(this)
+        elements+= TextElement(this)
     }
 }
 
@@ -89,7 +89,7 @@ private class Head: TagClass("head") {
     }
 }
 
-private class Title() : TagClass("title")
+private class Title : TagClass("title")
 private class H1 : Body("h1") // H2 H3 H4 H5
 private class P : Body("p")
 private class A : Body("a") {
@@ -190,7 +190,7 @@ private fun html(html: HTML.() -> Unit) : HTML // 必须返回所有结果 给 F
     return htmlObj
 }
 @Test
-fun main(vararg args : String) {
+fun main() {
 
     // +"Derry"
 
@@ -233,7 +233,7 @@ fun main(vararg args : String) {
     val file = File("DDD.html")
     file.writeText(result.toString())
 
-    // 老师能讲一下lamada中转站原理么？
+    // 老师能讲一下lambda中转站原理么？
     /*head { // 持有this == 中转站 { aaa  bbb  ccc}
 
         aaa {}
