@@ -6,7 +6,7 @@ android {
 
 dependencies {
 //    implementation project (path: ':LibBase')
-    implementation ('com.qcloud.cos:cos-android:5.9.0'){
+    implementation ('com.qcloud.cos:cos-android:5.9.5'){
         exclude group: 'com.tencent.qcloud', module: 'beacon-android-release'
     }
 
