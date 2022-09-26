@@ -4,7 +4,7 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
 
-@HiltAndroidApp
+//@HiltAndroidApp
 class HomeApp : BaseApp() {
     override fun initModuleApp(application: Application) {
 
