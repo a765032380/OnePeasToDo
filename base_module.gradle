@@ -225,9 +225,9 @@ dependencies {
     implementation "com.google.android.material:compose-theme-adapter:1.1.14"
 
     implementation "androidx.activity:activity-compose:1.5.0"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.1.1"
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.2.1'
     debugImplementation "androidx.compose.ui:ui-tooling:1.1.1"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:1.1.1"
+    debugImplementation 'androidx.compose.ui:ui-test-manifest:1.2.1'
     implementation "com.google.accompanist:accompanist-swiperefresh:0.18.0"
 
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
@@ -301,9 +301,9 @@ dependencies {
     implementation 'com.tencent.tbs:tbssdk:44199'
 
     implementation "com.github.bumptech.glide:glide:4.12.0"
-    kapt "com.github.bumptech.glide:compiler:4.12.0"
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation 'io.coil-kt:coil-video:2.1.0'
     implementation 'io.coil-kt:coil-compose:2.1.0'
-    implementation "io.coil-kt:coil-svg:2.1.0"
+    implementation 'io.coil-kt:coil-svg:2.2.1'
 }
