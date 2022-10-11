@@ -17,7 +17,6 @@ android {
             useSupportLibrary true
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
         //kotlin ARouter 的配置方式
         kapt {
             arguments {
