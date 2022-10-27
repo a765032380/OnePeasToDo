@@ -12,6 +12,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LibAlgorithm" />
+            <option value="$PROJECT_DIR$/LibAptAnnotation" />
+            <option value="$PROJECT_DIR$/LibAptProcessor" />
             <option value="$PROJECT_DIR$/LibBase" />
             <option value="$PROJECT_DIR$/LibLog" />
             <option value="$PROJECT_DIR$/LibUpLoad" />

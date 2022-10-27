@@ -22,4 +22,6 @@ dependencies {
     implementation project (path:":ModuleSample")
     implementation project (path:":ModuleVideo")
 
+    implementation project(path: ':LibAptAnnotation')
+    kapt project(path: ':LibAptProcessor')
 }
