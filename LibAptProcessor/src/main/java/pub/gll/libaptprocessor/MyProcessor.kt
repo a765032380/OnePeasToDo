@@ -21,12 +21,27 @@ class MyProcessor : AbstractProcessor() {
     override fun process(p0: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
         //拿到所有添加Print注解的成员变量
         val elements = roundEnv.getElementsAnnotatedWith(Print::class.java)
-        elements.forEach {element->
-            //拿到成员变量名
-            val simpleName = element.simpleName
-            //输出成员变量名
-            processingEnv.messager.printMessage(Diagnostic.Kind.NOTE,simpleName)
+        try {
+            val fileObject = processingEnv.filer.createSourceFile("PrintUtil")
+            val writer = fileObject.openWriter()
+            writer.write("package pub.gll.onepeas.todo;\n")
+            writer.write("\n")
+            writer.write("public class PrintUtil{\n")
 
+            elements.forEach {element->
+                //拿到成员变量名
+                val simpleName = element.simpleName
+                //输出成员变量名
+                processingEnv.messager.printMessage(Diagnostic.Kind.NOTE,simpleName)
+                writer.write("public static void print${simpleName}(){\n")
+                writer.write(" System.out.println(\"${simpleName}\");\n")
+                writer.write("}\n")
+            }
+            writer.write("}\n")
+            writer.flush()
+            writer.close()
+        }catch (e:Exception){
+            processingEnv.messager.printMessage(Diagnostic.Kind.NOTE,e.message)
         }
         return false
     }
