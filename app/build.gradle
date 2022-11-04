@@ -19,7 +19,7 @@ dependencies {
     implementation project (path:":ModuleMine")
     implementation project (path:":ModuleWidget")
     implementation project (path:":ModuleEsp8266")
-    implementation project (path:":ModuleSample")
+//    implementation project (path:":ModuleSample")
     implementation project (path:":ModuleVideo")
 
     implementation project(path: ':LibAptAnnotation')
