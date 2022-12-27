@@ -11,21 +11,27 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/LibAlgorithm" />
-            <option value="$PROJECT_DIR$/LibBase" />
-            <option value="$PROJECT_DIR$/LibLog" />
-            <option value="$PROJECT_DIR$/LibUpLoad" />
-            <option value="$PROJECT_DIR$/ModuleAccount" />
-            <option value="$PROJECT_DIR$/ModuleCar" />
-            <option value="$PROJECT_DIR$/ModuleComic" />
-            <option value="$PROJECT_DIR$/ModuleCookbook" />
-            <option value="$PROJECT_DIR$/ModuleEsp8266" />
-            <option value="$PROJECT_DIR$/ModuleHome" />
-            <option value="$PROJECT_DIR$/ModuleMine" />
-            <option value="$PROJECT_DIR$/ModuleSample" />
-            <option value="$PROJECT_DIR$/ModuleVideo" />
-            <option value="$PROJECT_DIR$/ModuleWidget" />
+            <option value="$PROJECT_DIR$/Algorithm" />
+            <option value="$PROJECT_DIR$/Annotation" />
+            <option value="$PROJECT_DIR$/Annotation/LibAptAnnotation" />
+            <option value="$PROJECT_DIR$/Annotation/LibAptProcessor" />
+            <option value="$PROJECT_DIR$/Base" />
+            <option value="$PROJECT_DIR$/Lib" />
+            <option value="$PROJECT_DIR$/Lib/LibLog" />
+            <option value="$PROJECT_DIR$/Lib/LibUpLoad" />
+            <option value="$PROJECT_DIR$/Module" />
+            <option value="$PROJECT_DIR$/Module/ModuleAccount" />
+            <option value="$PROJECT_DIR$/Module/ModuleCar" />
+            <option value="$PROJECT_DIR$/Module/ModuleComic" />
+            <option value="$PROJECT_DIR$/Module/ModuleCookbook" />
+            <option value="$PROJECT_DIR$/Module/ModuleEsp8266" />
+            <option value="$PROJECT_DIR$/Module/ModuleHome" />
+            <option value="$PROJECT_DIR$/Module/ModuleMine" />
+            <option value="$PROJECT_DIR$/Module/ModuleVideo" />
+            <option value="$PROJECT_DIR$/Module/ModuleWidget" />
+            <option value="$PROJECT_DIR$/Sample" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrcPlugin" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

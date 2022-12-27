@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import pub.gll.libaptannotation.Print
 import pub.gll.onepeas.libbase.Test
 import pub.gll.onepeas.module.car.activity.CarComposeActivity
 import pub.gll.onepeas.module.car.activity.CustomViewAct
@@ -19,6 +20,14 @@ import pub.gll.onepeas.module.comic.comic.ComicMainAct
 import pub.gll.onepeas.libbase.arouter.Launch
 
 class MainTestAct : ComponentActivity() {
+
+    @Print
+    val age:Int = 100
+
+    @Print
+    val name:String = "张三"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -66,6 +75,11 @@ fun MainCompose(activity: Activity) {
             Launch.downloadList()
         }) {
             Text(text = "DownloadListActivity")
+        }
+        Button(onClick = {
+            Launch.esp8266()
+        }) {
+            Text(text = "ESP_8266")
         }
 
     }
