@@ -2,16 +2,29 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
+      <module name="OnePeasToDo.Annotation.LibAptAnnotation" target="1.8" />
+      <module name="OnePeasToDo.Annotation.LibAptAnnotation.main" target="1.8" />
+      <module name="OnePeasToDo.Annotation.LibAptAnnotation.test" target="1.8" />
+      <module name="OnePeasToDo.Annotation.LibAptProcessor" target="1.8" />
+      <module name="OnePeasToDo.Annotation.LibAptProcessor.main" target="1.8" />
+      <module name="OnePeasToDo.Annotation.LibAptProcessor.test" target="1.8" />
       <module name="OnePeasToDo.app" target="11" />
-      <module name="OnePeasToDo.LibAptAnnotation" target="1.8" />
+      <module name="OnePeasToDo.Base" target="11" />
+      <module name="OnePeasToDo.Lib.LibLog" target="11" />
+      <module name="OnePeasToDo.Lib.LibUpLoad" target="11" />
       <module name="OnePeasToDo.LibAptAnnotation.main" target="1.8" />
       <module name="OnePeasToDo.LibAptAnnotation.test" target="1.8" />
-      <module name="OnePeasToDo.LibAptProcessor" target="1.8" />
       <module name="OnePeasToDo.LibAptProcessor.main" target="1.8" />
       <module name="OnePeasToDo.LibAptProcessor.test" target="1.8" />
-      <module name="OnePeasToDo.LibBase" target="11" />
-      <module name="OnePeasToDo.LibLog" target="11" />
-      <module name="OnePeasToDo.LibUpLoad" target="11" />
+      <module name="OnePeasToDo.Module.ModuleAccount" target="11" />
+      <module name="OnePeasToDo.Module.ModuleCar" target="11" />
+      <module name="OnePeasToDo.Module.ModuleComic" target="11" />
+      <module name="OnePeasToDo.Module.ModuleCookbook" target="11" />
+      <module name="OnePeasToDo.Module.ModuleEsp8266" target="11" />
+      <module name="OnePeasToDo.Module.ModuleHome" target="11" />
+      <module name="OnePeasToDo.Module.ModuleMine" target="11" />
+      <module name="OnePeasToDo.Module.ModuleVideo" target="11" />
+      <module name="OnePeasToDo.Module.ModuleWidget" target="11" />
       <module name="OnePeasToDo.ModuleAccount" target="11" />
       <module name="OnePeasToDo.ModuleCar" target="11" />
       <module name="OnePeasToDo.ModuleComic" target="11" />
@@ -19,9 +32,9 @@
       <module name="OnePeasToDo.ModuleEsp8266" target="11" />
       <module name="OnePeasToDo.ModuleHome" target="11" />
       <module name="OnePeasToDo.ModuleMine" target="11" />
-      <module name="OnePeasToDo.ModuleSample" target="11" />
       <module name="OnePeasToDo.ModuleVideo" target="11" />
       <module name="OnePeasToDo.ModuleWidget" target="11" />
+      <module name="OnePeasToDo.Sample" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

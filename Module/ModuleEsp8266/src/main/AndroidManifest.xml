@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application>
+
+
+        <activity
+            android:name="pub.gll.onepeas.module.esp8266.ui.Esp8266Activity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx.startup"
+            android:exported="false"
+            tools:node="merge"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="pub.gll.onepeas.module.esp8266.init.Esp8266Initializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+
+</manifest>

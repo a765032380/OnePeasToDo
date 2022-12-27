@@ -76,6 +76,11 @@ fun MainCompose(activity: Activity) {
         }) {
             Text(text = "DownloadListActivity")
         }
+        Button(onClick = {
+            Launch.esp8266()
+        }) {
+            Text(text = "ESP_8266")
+        }
 
     }
 }

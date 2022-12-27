@@ -69,21 +69,32 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "OnePeasToDo"
+//壳工程
 include ':app'
-include ':LibBase'
-include ':LibLog'
-include ':LibUpLoad'
+//基础模块
+include ':Base'
+//log模块
+include ':Lib:LibLog'
+//文件上传模块
+include ':Lib:LibUpLoad'
+//注解模块
+include ':Annotation:LibAptAnnotation'
+//注解处理器模块
+include ':Annotation:LibAptProcessor'
+//算法模块
+include ':Algorithm'
+//示例模块
+include ':Sample'
 
-include ':ModuleHome'
-include ':ModuleMine'
-include ':ModuleCookbook'
-include ':ModuleEsp8266'
-include ':ModuleAccount'
-include ':ModuleWidget'
-include ':ModuleCar'
-include ':ModuleComic'
-include ':ModuleSample'
-include ':LibAlgorithm'
-include ':ModuleVideo'
-include ':LibAptAnnotation'
-include ':LibAptProcessor'
+/****************  业务模块  **************/
+include ':Module:ModuleHome'
+include ':Module:ModuleMine'
+include ':Module:ModuleCookbook'
+include ':Module:ModuleEsp8266'
+include ':Module:ModuleAccount'
+include ':Module:ModuleWidget'
+include ':Module:ModuleCar'
+include ':Module:ModuleComic'
+include ':Module:ModuleVideo'
+/****************  业务模块  **************/
+

@@ -1,6 +1,5 @@
 package pub.gll.onepeas.todo
 
-import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import pub.gll.onepeas.libbase.BaseApp
 
@@ -18,35 +17,5 @@ class MyApp : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
-        initModuleList(AppConfig.moduleApps)
-    }
-    /**
-     * 这个方法主要在主工程调用，其他工程不要调用
-     * 通过反射的方式获取到其他module的Application
-     */
-    private fun initModuleList(list: Array<String>){
-        list.forEach {
-            try {
-                val clazz = Class.forName(it)
-                val baseApp: BaseApp = clazz.newInstance() as BaseApp
-                baseApp.initModuleApp(this)
-                baseApp.initModuleData(this)
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            } catch (e: IllegalAccessException) {
-                e.printStackTrace()
-            } catch (e: InstantiationException) {
-                e.printStackTrace()
-            }catch (e: Exception){
-                e.printStackTrace()
-            }
-        }
-    }
-    override fun initModuleApp(application: Application) {
-
-    }
-
-    override fun initModuleData(application: Application) {
-
     }
 }

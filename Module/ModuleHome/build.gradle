@@ -1,0 +1,24 @@
+
+if (!rootProject.singleModule){
+    apply plugin:  'com.android.library'
+}else {
+    apply plugin:  'com.android.application'
+}
+apply from: '../base_module.gradle'
+
+android {
+    namespace 'pub.gll.onepeas.module.home'
+
+    defaultConfig {
+        if (rootProject.singleModule) {
+            applicationId "pub.gll.onepeas.module.home"
+        }
+        versionCode rootProject.version_code
+        versionName rootProject.version_name
+    }
+}
+
+dependencies {
+    implementation project(path: ':Base')
+}
+
