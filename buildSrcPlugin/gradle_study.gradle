@@ -1,0 +1,873 @@
+
+/**============================================== Gradle 系列 （二）、Gradle 技术探索 start =============================================================*/
+//======================================= Project 常用 API start=====================================
+/**
+ * 1、获取根 Project 对象
+ */
+//println getRootProject()
+
+/**
+ * 2、获取根目录文件夹路径
+ */
+//println getRootDir()
+
+/**
+ * 3、获取当前 Project 的 build 文件夹路径
+ */
+//println getBuildDir()
+
+/**
+ * 4、获取当前父 Project 对象
+ */
+//println getParent()
+
+
+//======================================= Project 常用 API end=====================================
+
+//======================================= 扩展属性调用 start=========================================
+/**
+ * 方式一：
+ * 下面这种写法之所以能这么写
+ * 1、ext 定义的扩展属性调用的时候可以去掉 ext 前缀直接调用
+ * 2、子 Project 能拿到根 Project 中的属性和方法
+ */
+//println test
+//println test1
+//println test2
+
+
+/**
+ * 方式二：
+ */
+//2、ext 定义的扩展属性也可以通过 当前定义扩展属性的 Project 对象.ext.属性名 调用
+//println rootProject.ext.test
+//println rootProject.ext.test1
+//println test2
+
+//======================================= 扩展属性调用 end===========================================
+
+//======================================= 文件操作 API start========================================
+/**
+ * 1、file 方法应用
+ */
+//1、通过 file 方法传入一个相对路径，返回值是一个 file 对象
+//println file('../config.gradle').text
+
+//2、通过 new File 方式传入一个绝对路径
+//def file = new File('/Users/zhouying/learning/GradleDemo/config.gradle')
+//println file.text
+
+
+/**
+ * 2、files 方法应用
+ */
+//通过 files 方法传入多个相对路径，返回值是一个 ConfigurableFileCollection 即文件集合
+//files('../config.gradle','../build.gradle').each {
+//    println it.name
+//}
+//======================================= 文件操作 API end==========================================
+
+//======================================= 文件拷贝 API start========================================
+/**
+ * 1、将根目录下的 config.gradle 文件拷贝拷贝到 app 目录下
+ */
+//1、传入路径
+//copy {
+//    from getRootDir().path + "/config.gradle"
+//    into getProjectDir().path
+//}
+
+//2、传入文件
+//copy {
+//    from file('../config.gradle')
+//    into getProjectDir()
+//}
+
+/**
+ * 2、将根目录下的 gradle 文件夹下的所有文件和文件夹拷贝到 app 目录下的 gradle 文件夹
+ */
+//copy {
+//    from file('../gradle/')
+//    into getProjectDir().path + "/gradle/"
+//}
+//======================================= 文件拷贝 API end==========================================
+
+
+//======================================= 文件树映射 API start======================================
+/**
+ * 遍历根目录下的 gradle 文件夹，并打印文件及文件夹的名称
+ */
+//fileTree('../gradle/'){ FileTree fileTree ->
+//    fileTree.visit { FileTreeElement fileTreeElement ->
+//        println fileTreeElement.name
+//    }
+//}
+//======================================= 文件树映射 API end========================================
+
+//======================================= exec 外部命令执行 API start================================
+/**
+ * 使用外部命令，将我们存放的 apk 目录移动到项目的根目录
+ */
+//task taskMove() {
+//    doLast {
+//        // 在 gradle 的执行阶段去执行
+//        def sourcePath = buildDir.path + "/outputs/apk"
+//        def destinationPath = getRootDir().path
+//        def command = "mv -f $sourcePath $destinationPath"
+//        exec {
+//            try {
+//                executable "bash"
+//                args "-c", command
+//                println "The command execute is success"
+//            } catch (GradleException e) {
+//                e.printStackTrace()
+//                println "The command execute is failed"
+//            }
+//        }
+//    }
+//}
+//======================================= exec 外部命令执行 API start================================
+
+//=======================================doFirst,doLast start===========================================
+/**
+ * doFirst,doLast
+ */
+//task erdai(dependsOn: erdai1){
+//    println 'task start...'
+//
+//    doFirst {
+//        println 'doFirst1'
+//    }
+//
+//    doLast {
+//        println 'doLast1'
+//    }
+//
+//    doLast {
+//        println 'doLast2'
+//    }
+//
+//    println 'task end...'
+//}
+//======================================= doFirst,doLast end=============================================
+
+
+//======================================= task 类型 start=================================================
+
+/**
+ * Task 类型
+ */
+// 1、继承 Delete 这个类，删除根目录下的 build 文件
+//task deleteTask(type: Delete) {
+//    delete rootProject.buildDir
+//}
+//
+//通过 extends 关键字指定
+//class DeleteTask extends Delete{
+//
+//}
+//
+//DeleteTask deleteTask = tasks.create("deleteTask",DeleteTask)
+//deleteTask.delete(rootProject.buildDir)
+//task testDeleteTask(dependsOn: deleteTask)
+
+//// 2、继承 Copy 这个类
+//task copyTask(type: Copy) {
+//    //...
+//}
+//
+////通过 extends 关键字指定
+//class CopyTask extends Copy{
+//    //...
+//}
+//======================================= task 类型 end===================================================
+
+
+//======================================= Task 定义及配置 start===================================================
+//1、创建一个名为 task1 的 Task
+//task task1
+
+//2、创建一个名为 task2 的 Task，并通过闭包进行相应的配置
+//task task2{
+//    //指定 task 的分组
+//    group 'erdai666'
+//
+//    doFirst{
+//
+//    }
+//}
+
+//3、创建一个名为 task3 的 Task，该 Task 继承自 Copy 这个 Task，依赖 task2
+//task task3(type: Copy){
+//    dependsOn "task2"
+//    doLast{
+//
+//    }
+//}
+
+//4、创建一个名为 task4 的 Task 并指定了分组和描述
+//task task4(group: "erdai666", description: "task4") {
+//    doFirst {
+//
+//    }
+//
+//    doLast {
+//
+//    }
+//}
+
+//5、通过 Project 对象的 TaskContainer 创建名为 task5 的 Task
+//tasks.create("task5"){
+//
+//}
+
+//6、通过 Project 对象的 TaskContainer 创建名为 task6 的 Task
+//相对于 5 ，只是调用了不同的重载方法而已
+//tasks.create(name: "task6"){
+//
+//}
+//======================================= Task 定义及配置 end=====================================================
+
+
+//======================================= Task 执行实战 计算 build Task 耗时 start=====================================================
+//// Task 执行实战：计算 build 执行期间的耗时
+//def startBuildTime, endBuildTime
+//// 1、在 Gradle 配置阶段完成之后进行操作，
+//// 以此保证要执行的 task 配置完毕
+//this.afterEvaluate { Project project ->
+//    // 2、找到当前 project 下第一个执行的 task，即 preBuild task
+//    def preBuildTask = project.tasks.getByName("preBuild")
+//    preBuildTask.doFirst {
+//        // 3、获取第一个 task 开始执行时刻的时间戳
+//        startBuildTime = System.currentTimeMillis()
+//    }
+//    // 4、找到当前 project 下最后一个执行的 task，即 build task
+//    def buildTask = project.tasks.getByName("build")
+//    buildTask.doLast {
+//        // 5、获取最后一个 task 执行完成前一瞬间的时间戳
+//        endBuildTime = System.currentTimeMillis()
+//        // 6、输出 build 执行期间的耗时
+//        println "Current project execute time is ${endBuildTime - startBuildTime}"
+//    }
+//}
+//======================================= Task 执行实战 计算 build Task 耗时 end=======================================================
+
+//======================================= dependsOn 强依赖方式 start==================================================================
+
+/**
+ * 静态依赖
+ */
+//task taskA{
+//    doLast {
+//        println 'taskA'
+//    }
+//}
+//
+//task taskB{
+//    doLast {
+//        println 'taskB'
+//    }
+//}
+//
+//task taskC(dependsOn: taskA){//多依赖方式 dependsOn:[taskA,taskB]
+//    doLast {
+//        println 'taskC'
+//    }
+//}
+
+/**
+ * 动态依赖
+ */
+//task lib1 {
+//    doLast{
+//        println 'lib1'
+//    }
+//}
+//task lib2 {
+//    doLast{
+//        println 'lib2'
+//    }
+//}
+//task lib3 {
+//    doLast{
+//        println 'lib3'
+//    }
+//}
+//
+//// 动态指定taskX依赖所有以lib开头的task
+//task taskDynamic{
+//    // 动态指定依赖
+//    dependsOn tasks.findAll{ Task task ->
+//        return task.name.startsWith('lib')
+//    }
+//
+//    doLast {
+//        println 'taskDynamic'
+//    }
+//}
+//======================================= dependsOn 强依赖方式 end====================================================================
+
+
+
+//======================================= 通过 Task 输入输出指定执行顺序 start====================================================================
+//ext {
+//    testFile = file("${projectDir.path}/test.txt")
+//    if(testFile == null || !testFile.exists()){
+//        testFile.createNewFile()
+//    }
+//}
+//
+////输出 Task
+//task outputTask {
+//    outputs.file testFile
+//    doLast {
+//        outputs.getFiles().singleFile.withWriter { writer ->
+//            writer.append("erdai666")
+//        }
+//        println "outputTask 执行结束"
+//    }
+//}
+//
+////输入 Task
+//task inputTask(dependsOn: outputTask) {
+//    inputs.file testFile
+//    doLast {
+//        println "读取文件内容：${inputs.files.singleFile.text}"
+//        println "inputTask 执行结束"
+//    }
+//}
+//
+////测试 Task
+//task testTask(dependsOn: [outputTask, inputTask]) {
+//    doLast {
+//        println "testTask1 执行结束"
+//    }
+//}
+//======================================= 通过 Task 输入输出指定执行顺序 end====================================================================
+
+
+//======================================= 通过 API 指定执行顺序 start====================================================================
+/**
+ * mustRunAfter
+ */
+//task taskX{
+//    doLast {
+//        println 'taskX'
+//    }
+//}
+//
+//task taskY{
+//    mustRunAfter taskX
+//    doLast {
+//        println 'taskY'
+//    }
+//}
+//
+//task taskXY(dependsOn: [taskX,taskY]){
+//    doLast {
+//        println 'taskXY'
+//    }
+//}
+
+/**
+ * finalizeBy
+ */
+//task taskI{
+//    doLast {
+//        println 'taskI'
+//    }
+//}
+//
+//task taskJ{
+//    finalizedBy taskI
+//    doLast {
+//        println 'taskJ'
+//    }
+//}
+//
+//
+//task taskIJ(dependsOn: [taskI,taskJ]){
+//    doLast {
+//        println 'taskIJ'
+//    }
+//}
+//======================================= 通过 API 指定执行顺序 end======================================================================
+
+
+
+
+//======================================= 自定义 Task 挂接到 Android 构建流程 start======================================================================
+/**
+ * 方式1：
+ * 通过 dependsOn 指定
+ * 注意：单独使用 dependsOn ，必须让构建流程中的 Task 依赖我们自定义的 Task，否则我们的 Task 不会生效
+ */
+//task myCustomTask{
+//    doLast {
+//        println 'This is myCustomTask'
+//    }
+//}
+//
+//afterEvaluate {
+//    //1、找到需要的构建流程 Task
+//    def mergeDebugResources = tasks.findByName("mergeDebugResources")
+//    //2、通过 dependsOn 指定
+//    mergeDebugResources.dependsOn(myCustomTask)
+//
+//    //如果换成下面这种写法则自定义 Task 不会生效
+//    //myCustomTask.dependsOn(mergeDebugResources)
+//}
+
+/**
+ * 方式二：
+ * 通过 finalizedBy 指定
+ */
+//task myCustomTask{
+//    doLast {
+//        println 'This is myCustomTask'
+//    }
+//}
+//
+//afterEvaluate {
+//    def mergeDebugResources = tasks.findByName("mergeDebugResources")
+//    //将 myCustomTask 挂接在 mergeDebugResources 后面执行
+//    mergeDebugResources.finalizedBy(myCustomTask)
+//}
+
+/**
+ * 方式三：
+ *通过 mustRunAfter 配合 dependsOn 指定
+ */
+//task myCustomTask{
+//    doLast {
+//        println 'This is myCustomTask'
+//    }
+//}
+//
+//afterEvaluate {
+//    //在 mergeDebugResources 和 processDebugResources 之间插入 myCustomTask
+//    def processDebugResources = tasks.findByName("processDebugResources")
+//    def mergeDebugResources = tasks.findByName("mergeDebugResources")
+//    myCustomTask.mustRunAfter(mergeDebugResources)
+//    processDebugResources.dependsOn(myCustomTask)
+//}
+//======================================= 自定义 Task 挂接到 Android 构建流程 end========================================================================
+/**============================================== Gradle 系列 （二）、Gradle 技术探索 end =============================================================*/
+
+
+
+/**============================================== Gradle 系列 （三）、Gradle 插件开发 start =============================================================*/
+
+//============================================脚本插件 start ==========================================
+//相对路径
+//apply from: '../script.gradle'
+//绝对路径
+//apply from: rootDir.path + '/script.gradle'
+//println property1
+//println property2
+//============================================脚本插件 end ============================================
+
+
+//============================================对象插件 start ==========================================
+
+/**
+ * 在 build.gradle 文件中直接编写
+ */
+//apply plugin: Method1Plugin
+//class Method1Plugin implements Plugin<Project> {
+//
+//    @Override
+//    void apply(Project project) {
+//        println 'I am Method1Plugin '
+//
+//        project.task("Method1PluginTask"){
+//            doLast {
+//                println 'Method1PluginTask exec success...'
+//            }
+//        }
+//    }
+//}
+
+/**
+ * buildSrc 插件引用
+ */
+//apply plugin: 'BuildSrcPlugin'
+
+/**
+ * 自定义插件引用
+ */
+//apply plugin: 'CustomPlugin'
+
+
+//============================================对象插件 end ============================================
+/**============================================== Gradle 系列 （三）、Gradle 插件开发 end =============================================================*/
+
+
+/**============================================== Gradle 系列 （四）、Gradle 插件实战应用 start =============================================================*/
+/**
+ * Extension 介绍
+ */
+//class Animal{
+//
+//    String animalName
+//    int legs
+//
+//    void animalName(String animalName){
+//        this.animalName = animalName
+//    }
+//
+//    void legs(int legs){
+//        this.legs = legs
+//    }
+//
+//    void setAnimalName(String animalName) {
+//        this.animalName = animalName
+//    }
+//
+//    void setLegs(int legs) {
+//        this.legs = legs
+//    }
+//
+//    Animal(){
+//
+//    }
+//
+//    Animal(String animalName) {
+//        this.animalName = animalName
+//    }
+//
+//    String toString() {
+//        return "This animal is $animalName, it has $legs legs."
+//    }
+//}
+//
+//class Dog extends Animal{
+//    int age = 5
+//
+//    Dog(){
+//
+//    }
+//
+//    Dog(int age) {
+//        super("Dog")
+//        this.age = age
+//    }
+//
+//    String toString() {
+//        return super.toString() + " Its age is $age."
+//    }
+//}
+
+//====================================== ExtensionContainer create 系列方法 start ======================================
+////=================== ExtensionContainer create 第一个重载方法 =========================
+//project.extensions.create('animal1',Dog)
+//
+////=================== ExtensionContainer create 第二个重载方法 =========================
+//project.extensions.create(Animal,'animal2',Dog,10)
+//
+////=================== ExtensionContainer create 第三个重载方法 =========================
+//project.extensions.create(TypeOf.typeOf(Animal),'animal3',Dog,15)
+
+//animal1{
+//    animalName '大黄'
+//    legs 4
+//}
+//
+//animal2{
+//    animalName '二黄'
+//    legs 4
+//}
+//
+//animal3{
+//    animalName '三黄'
+//    legs 4
+//}
+//====================================== ExtensionContainer create 系列方法 end ======================================
+
+
+
+//====================================== ExtensionContainer add 系列方法 start ======================================
+////=================== ExtensionContainer add 第一个重载方法 =========================
+//project.extensions.add('animal1',Dog)
+//
+////=================== ExtensionContainer add 第二个重载方法 =========================
+//project.extensions.add(Animal,'animal2',new Dog(10))
+//
+////=================== ExtensionContainer add 第三个重载方法 =========================
+//project.extensions.add(TypeOf.typeOf(Animal),'animal3',new Dog(15))
+//
+//animal1{
+//    animalName '大黄'
+//    legs 4
+//}
+//
+////注意：add 系列第二个和第三个重载方法，当我们显示的创建了类实例，那么在进行扩展配置的时候，需要加上 = 号，否则会报错
+//animal2{
+//    animalName '二黄'
+//    legs = 4
+//}
+//
+//animal3{
+//    animalName '三黄'
+//    legs = 4
+//}
+//====================================== ExtensionContainer add 系列方法 end ======================================
+
+//project.task('testTask'){
+//    doLast {
+//        println project.animal1
+//        println project.animal2
+//        println project.animal3
+//    }
+//}
+
+/**
+ * 通过 ExtensionContainer getByName 和 findByName 系列方法查找 Extension
+ */
+//println project.extensions.getByName("animal1")
+//println project.extensions.getByName("animal2")
+//println project.extensions.getByName("animal3")
+//
+//println project.extensions.findByName("animal1")
+//println project.extensions.findByName("animal2")
+//println project.extensions.findByName("animal3")
+
+/**
+ * 嵌套 Extension
+ */
+
+//class AndroidExt{
+//
+//    int compileSdkVersionExt
+//
+//    //==================嵌套方式一 start==================================
+//    //通过定义方法配置嵌套 Extension
+//
+//    DefaultConfigExt defaultConfigExt = new DefaultConfigExt()
+//
+//
+//    /**
+//     * 方式1:
+//     * 通过 Action 创建内部 Extension，名称为方法名 defaultConfig
+//     *
+//     * @param action 可执行的动作，实质上是一个代码块
+//     */
+//    void defaultConfigExt(Action<DefaultConfigExt> action) {
+//        action.execute(defaultConfigExt)
+//    }
+//
+//    /**
+//     * 方式2:
+//     * 通过 ConfigureUtil 创建内部 Extension，名称为方法名 defaultConfig
+//     *
+//     * @param closure 闭包，实质上是一个代码块
+//     */
+//    void defaultConfigExt(Closure<DefaultConfigExt> closure) {
+//        org.gradle.util.ConfigureUtil.configure(closure, defaultConfigExt)
+//    }
+//    //==================嵌套方式一 end=====================================
+//
+//
+//    //==================嵌套方式二 start===================================
+//    //通过定义方法配置嵌套 Extension
+//
+//
+//    AndroidExt(){
+//        extensions.create('defaultConfigExt',DefaultConfigExt)
+//    }
+//    //==================嵌套方式二 end=====================================
+//
+//}
+//
+//class DefaultConfigExt{
+//    String applicationIdExt
+//    int minSdkVersionExt
+//    int targetSdkVersionExt
+//    int versionCodeExt
+//    String versionNameExt
+//
+//}
+//
+//project.extensions.create('androidExt',AndroidExt)
+//
+//androidExt {
+//    compileSdkVersionExt 30
+//    defaultConfigExt {
+//        //没去掉 = 号
+//        applicationIdExt = 'com.dream.gradledemo'
+//        minSdkVersionExt = 19
+//        targetSdkVersionExt = 30
+//        versionCodeExt = 1
+//        versionNameExt = '1.0'
+//
+//
+//        //去掉 = 号
+//        applicationIdExt  'com.dream.gradledemo'
+//        minSdkVersionExt  19
+//        targetSdkVersionExt  30
+//        versionCodeExt  1
+//        versionNameExt  '1.0'
+//
+//    }
+//}
+//
+//project.tasks.create('extensionNested'){
+//    doLast {
+//        println project.androidExt.compileSdkVersionExt
+//        println project.androidExt.defaultConfigExt.applicationIdExt
+//        println project.androidExt.defaultConfigExt.minSdkVersionExt
+//        println project.androidExt.defaultConfigExt.targetSdkVersionExt
+//        println project.androidExt.defaultConfigExt.versionCodeExt
+//        println project.androidExt.defaultConfigExt.versionNameExt
+//    }
+//}
+
+
+/**
+ * 多个 Extension
+ */
+////第一步：增加实体类配置
+//class BuildTypesConfigExt{
+//    //注意：必须要有 name 属性进行标识
+//    String name
+//    boolean minifyEnabledExt
+//    boolean zipAlignEnabled
+//    boolean debuggableExt
+//
+//    BuildTypesConfigExt(String name) {
+//        this.name = name
+//    }
+//
+//    //=====================配置与属性同名的方法================
+//    void minifyEnabledExt(boolean minifyEnabledExt) {
+//        this.minifyEnabledExt = minifyEnabledExt
+//    }
+//
+//    void zipAlignEnabled(boolean zipAlignEnabled) {
+//        this.zipAlignEnabled = zipAlignEnabled
+//    }
+//
+//    void debuggableExt(boolean debuggableExt) {
+//        this.debuggableExt = debuggableExt
+//    }
+//}
+//
+////第二步：构建命名对象容器，并添加到 Extension
+//NamedDomainObjectContainer<BuildTypesConfigExt> container = project.container(BuildTypesConfigExt)
+//project.extensions.add('buildTypesExt',container)
+//
+////第三步：进行语句块配置
+//buildTypesExt {
+//    release {
+//        minifyEnabledExt true
+//        zipAlignEnabled true
+//        debuggableExt false
+//    }
+//
+//    debug {
+//        minifyEnabledExt false
+//        zipAlignEnabled false
+//        debuggableExt true
+//    }
+//}
+//
+////第四步：编写 Task 进行测试
+//project.tasks.create("buildTypesTask"){
+//    doLast {
+//        project.buildTypesExt.each{
+//            println "$it.name: $it.minifyEnabledExt $it.zipAlignEnabled $it.debuggableExt"
+//        }
+//    }
+//}
+
+
+//class Friend{
+//    String family
+//
+//    @Inject
+//    Friend(String family){
+//        this.family = family
+//    }
+//}
+//
+//
+//
+//class User{
+//    String myName
+//    int age
+//
+//    Friend friend
+//
+//    User(Project project) {
+//        friend = project.objects.newInstance(Friend,'Test Family')
+//    }
+//
+//    void friendConfig(Action<Friend> action){
+//        action.execute(friend)
+//    }
+//}
+//
+//project.extensions.create('user',User,project)
+//
+//user{
+//    myName 'erdai'
+//    age 666
+//
+//    friendConfig{
+//        family = 'my family'
+//    }
+//}
+//
+//task myTestTask{
+//    doLast {
+//        println project.user.myName
+//        println project.user.age
+//        println project.user.friend.family
+//    }
+//}
+
+/**
+ *遍历打印一下每个构建变体的 name 和 baseName
+ */
+//afterEvaluate {
+//    project.android.applicationVariants.all{variant ->
+//        println "$variant.name $variant.baseName"
+//
+//    }
+//}
+
+/**
+ *对 applicationVariants 中的 Task 进行 Hook
+ */
+//afterEvaluate {
+//    project.android.applicationVariants.all{ variant ->
+//        def task = variant.mergeResourcesProvider
+//        println "$task.name"
+//
+//    }
+//}
+
+
+/**
+ *使用 applicationVariants 对 APK 进行重命名
+ */
+//project.android.applicationVariants.all{ variant ->
+//    variant.outputs.all{
+//        outputFileName = "${variant.baseName}" + ".apk"
+//        println outputFileName
+//    }
+//}
+
+
+/**
+ * 插件实战应用
+ */
+//apply plugin: 'XmlViewScanPlugin'
+//
+//ignore {
+//    ignoreViewList = [
+//            'TextView'
+//    ]
+//}
+
+/**============================================== Gradle 系列 （四）、Gradle 插件实战应用 end ===============================================================*/

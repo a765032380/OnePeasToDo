@@ -10,6 +10,9 @@
       <module name="OnePeasToDo.Annotation.LibAptProcessor.test" target="1.8" />
       <module name="OnePeasToDo.app" target="11" />
       <module name="OnePeasToDo.Base" target="11" />
+      <module name="OnePeasToDo.buildSrcPlugin" target="11" />
+      <module name="OnePeasToDo.buildSrcPlugin.main" target="11" />
+      <module name="OnePeasToDo.buildSrcPlugin.test" target="11" />
       <module name="OnePeasToDo.Lib.LibLog" target="11" />
       <module name="OnePeasToDo.Lib.LibUpLoad" target="11" />
       <module name="OnePeasToDo.LibAptAnnotation.main" target="1.8" />

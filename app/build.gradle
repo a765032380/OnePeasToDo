@@ -3,6 +3,7 @@
 apply plugin: 'com.android.application'
 
 apply from: '../Module/base_module.gradle'
+apply from: '../script.gradle'
 
 android {
     defaultConfig {

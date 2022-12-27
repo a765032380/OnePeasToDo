@@ -18,6 +18,9 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven{
+            url "https://plugins.gradle.org/m2/"
+        }
         maven { url "https://jitpack.io" }
         // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
@@ -51,9 +54,67 @@ buildscript {
         classpath "org.koin:koin-gradle-plugin:2.2.0-rc-3"
         //阿里 A_router
         classpath "com.alibaba:arouter-register:1.0.2"
+
+        //查看 Task 关系图插件依赖
+        classpath "gradle.plugin.com.dorongold.plugins:task-tree:1.5"
+        //上传 JitPack 插件依赖
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+
+        //引入插件依赖
+        //classpath 'com.dream:customplugin:1.0.2'
+
+        //引入插件依赖
+//        classpath 'com.dream:xmlviewscanplugin:1.0.3'
+
+        //Github 创建的 release: 1.0.0, 1.0.1, 1.0.4 是通过 com.github.dcendents.android-maven 插件上传的
+        //引入插件依赖
+//        classpath 'com.github.sweetying520:GradleDemo:1.0.4'
+
+        //Github 创建的 release: 1.0.2, 1.0.3 是通过 maven-publish 插件上传的
+        //引入插件依赖 使用 maven-publish 插件上传 JitPack 获取的依赖地址，特别长
+        //implementation 'com.github.sweetying520.GradleDemo:CustomPlugin.gradle.plugin:1.0.3'
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+//======================================= Project 常用 API start=====================================
+/**
+ * 5、获取当前 Project 及其子 Project 对象，返回值是一个 Set 集合
+ */
+//println getAllprojects()
+
+//闭包形式
+//allprojects {
+//    println it
+//}
+
+/**
+ * 6、获取当前 Project 下的所有子 Project 对象，返回值是一个 Set 集合
+ */
+//println getSubprojects()
+
+//闭包形式
+//subprojects {
+//    println it
+//}
+
+/**
+ * 9、指定工程实例，然后在闭包中对其进行相关的配置
+ */
+//project("app") {
+//    apply plugin: 'com.android.application'
+//}
+//======================================= Project 常用 API end=====================================
+
+//======================================= 扩展属性定义 start============================================
+//方式1：ext.属性名
+//ext.test = 'erdai666'
+
+//方式2：ext 后面接上一个闭包
+//ext{
+//    test1 = 'erdai777'
+//}
+//======================================= 扩展属性定义 end============================================
