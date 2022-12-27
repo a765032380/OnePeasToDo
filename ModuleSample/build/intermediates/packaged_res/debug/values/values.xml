@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tasks">
+        <item>Buy milk</item>
+        <item>Choose curtain</item>
+        <item>Plant rosemary</item>
+        <item>Finish the essay</item>
+        <item>Receive new packages</item>
+        <item>Take a photo</item>
+    </string-array>
+    <string-array name="topics">
+        <item>2 new packages arrived</item>
+        <item>DIY project recommendation</item>
+        <item>Festival next month</item>
+        <item>New flower seeds available</item>
+    </string-array>
+    <color name="black">#FF000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <plurals name="fruit_title">
+        <item quantity="one">fruit</item>
+        <item quantity="other">fruits</item>
+    </plurals>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered, singular. Used in combination with watering_needs_prefix: &apos;Watering needs: every day&apos;.">every day</item>
+        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: &apos;Watering needs: every 8 days&apos;.">every %d days</item>
+    </plurals>
+    <plurals name="watering_next">
+        <item quantity="one" translation_description="Text indicating when the the plant should next be watered, singular. Used in conjunction with last watered date. &apos;May 24, 2018 - water tomorrow.&apos;.">water tomorrow.</item>
+        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. &apos;May 24, 2018 - water in 8 days.&apos;.">water in %d days.</item>
+    </plurals>
+    <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the &apos;My garden&apos; and &apos;Plant list&apos; screens.">Picture of plant</string>
+    <string name="account_redacted">• • • • • </string>
+    <string name="accounts">Accounts</string>
+    <string name="add_plant" translation_description="Button text that prompts user to navigate to the Plant List to add plants to their empty garden.">Add plant</string>
+    <string name="add_tasks">ADD TASKS</string>
+    <string name="added_plant_to_garden" translation_description="Confirmation text that is shown when a user adds a plant to their empty garden.">Added plant to garden</string>
+    <string name="app_name">ComposeStudy</string>
+    <string name="app_title">Jetnews</string>
+    <string name="available" translation_description="Text for the header of the plant list page indicating the available plants for users to choose from.">Available Plants</string>
+    <string name="bills">Bills</string>
+    <string name="cd_collapse">Collapse</string>
+    <string name="cd_crop_square">Crop</string>
+    <string name="cd_done">Done</string>
+    <string name="cd_event">Event</string>
+    <string name="cd_expand">Expand</string>
+    <string name="cd_privacy">Privacy</string>
+    <string name="cd_restore">Restore</string>
+    <string name="due">Due</string>
+    <string name="edit">EDIT</string>
+    <string name="edit_message">Edit feature is not supported</string>
+    <string name="garden_empty" translation_description="Text that is shown on the &apos;My Garden&apos; screen when no plants have been added to the user&apos;s garden">Your garden is empty</string>
+    <string name="home">Home</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">Filter by grow zone</string>
+    <string name="menu_item_share_plant" translation_description="The label for the Share menu item">Share</string>
+    <string name="my_garden_title" translation_description="Title for the &apos;My garden&apos; screen where the user can see the list of plants that have been added to their garden.">My garden</string>
+    <string name="plant_date_header" translation_description="Text that is shown on each plant on the &apos;My Garden&apos; screen which says the word Planted to show date of planting below">Planted</string>
+    <string name="plant_detail_image_content_description" translation_description="Content description for the header / hero image that is show at the top of the plant detail screen.">Image of plant</string>
+    <string name="plant_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">Plant details</string>
+    <string name="plant_list_title" translation_description="Title for the plant list screen where the user can see a list of plants available to add to their garden.">Plant list</string>
+    <string name="popular">Popular</string>
+    <string name="read_time">%1$d min read</string>
+    <string name="refresh">Refresh</string>
+    <string name="see_all">SEE ALL</string>
+    <string name="share_text_plant" translation_description="The default messaged used when sharing a plant on SNS, etc.">Check out the %s plant in the Android Sunflower app</string>
+    <string name="sort">Sort</string>
+    <string name="tasks">Tasks</string>
+    <string name="temperature">18 ℃</string>
+    <string name="top">Top Story</string>
+    <string name="topics">Topics</string>
+    <string name="total">Total</string>
+    <string name="watered_date_header" translation_description="Text that is shown on each plant on the &apos;My Garden&apos; screen which says the word Last Watered to show date of last watering below">Last Watered</string>
+    <string name="watering_needs_prefix" translation_description="Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.">Watering needs</string>
+    <string name="weather">Weather</string>
+    <string name="work">Work</string>
+    <style name="Theme.ComposeStudy" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+</resources>

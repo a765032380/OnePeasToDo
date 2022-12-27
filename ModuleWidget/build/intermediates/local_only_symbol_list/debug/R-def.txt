@@ -1,0 +1,4 @@
+R_DEF: Internal format may change without notice
+local
+drawable icon_desktop
+xml first_glance_widget_info

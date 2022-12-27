@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="pub.gll.onepeas.module.sample" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="33" />
+
+    <application>
+        <activity
+            android:name="pub.gll.onepeas.modulesample.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name="pub.gll.onepeas.modulesample.state.todo.TodoActivity" />
+        <activity android:name="pub.gll.onepeas.modulesample.effects.EffectsActivity" />
+        <activity android:name="pub.gll.onepeas.modulesample.theming.ThemingActivity" />
+        <activity
+            android:name="pub.gll.onepeas.modulesample.state.examples.HelloComposeSateActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name="pub.gll.onepeas.modulesample.state.examples.StateRecoveryListSaverActivity" />
+        <activity android:name="pub.gll.onepeas.modulesample.state.examples.StateRecoveryMapSaverActivity" />
+        <activity android:name="pub.gll.onepeas.modulesample.state.examples.StateRecoveryParcelableActivity" />
+        <activity android:name="pub.gll.onepeas.modulesample.ContentActivity" />
+    </application>
+
+</manifest>

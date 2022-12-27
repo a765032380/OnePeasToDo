@@ -1,0 +1,39 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="pub.gll.onepeas.module.widget" >
+5
+6    <uses-sdk
+7        android:minSdkVersion="24"
+7-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml
+8        android:targetSdkVersion="33" />
+8-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml
+9
+10    <application>
+10-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:5:5-21:19
+11        <receiver
+11-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:7:9-19:20
+12            android:name="pub.gll.onepeas.module.widget.FirstGlanceWidgetReceiver"
+12-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:8:13-83
+13            android:enabled="true"
+13-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:9:13-35
+14            android:exported="false" >
+14-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:10:13-37
+15            <intent-filter>
+15-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:11:13-13:29
+16                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+16-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:12:17-84
+16-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:12:25-81
+17            </intent-filter>
+18
+19            <!-- 小部件配置信息 -->
+20            <meta-data
+20-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:16:13-18:68
+21                android:name="android.appwidget.provider"
+21-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:17:17-58
+22                android:resource="@xml/first_glance_widget_info" />
+22-->/Users/gll/StudioProjects/OnePeasToDo/ModuleWidget/src/main/AndroidManifest.xml:18:17-65
+23        </receiver>
+24    </application>
+25
+26</manifest>

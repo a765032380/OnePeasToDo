@@ -1,0 +1,126 @@
+[
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_3.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_3.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_4_thumb.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_4_thumb.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_1.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_1.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_my_garden_inactive.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_my_garden_inactive.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/layout_activity_hello_compose_state.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/layout/activity_hello_compose_state.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_detail_share.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_detail_share.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/layout_activity.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/layout/activity.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_2_thumb.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_2_thumb.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_detail_back.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_detail_back.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/xml_data_extraction_rules.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_plant_list_active.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_plant_list_active.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/font_domine_regular.ttf.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/font/domine_regular.ttf"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_5.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_5.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/font_montserrat_semibold.ttf.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/font/montserrat_semibold.ttf"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/font_montserrat_medium.ttf.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/font/montserrat_medium.ttf"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_my_garden_active.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_my_garden_active.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_plant_list_inactive.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_plant_list_inactive.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_garden_tab_selector.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/garden_tab_selector.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_tab_icon_color_selector.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/tab_icon_color_selector.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_2.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_2.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_3_thumb.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_3_thumb.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_4.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_4.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/font_montserrat_regular.ttf.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/font/montserrat_regular.ttf"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_plant_list_tab_selector.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/plant_list_tab_selector.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_5_thumb.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_5_thumb.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/xml_network_security_config.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_plus.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_plus.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_post_1_thumb.png.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/post_1_thumb.png"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/xml_backup_rules.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/font_domine_bold.ttf.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/font/domine_bold.ttf"
+    },
+    {
+        "merged": "pub.gll.onepeas.module.sample.ModuleSample-merged_res-111:/drawable_ic_filter_list_24dp.xml.flat",
+        "source": "pub.gll.onepeas.module.sample.ModuleSample-main-113:/drawable/ic_filter_list_24dp.xml"
+    }
+]

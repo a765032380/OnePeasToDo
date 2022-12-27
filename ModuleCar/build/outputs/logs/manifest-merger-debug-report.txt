@@ -1,0 +1,77 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:2:1-34:12
+	package
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:2:1-34:12
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:3:5-51
+	xmlns:android
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:5:22-76
+application
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:6:5-32:19
+activity#pub.gll.onepeas.module.car.activity.CarActivity
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:8:9-10:53
+	android:theme
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:10:13-51
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:9:13-49
+activity#pub.gll.onepeas.module.car.activity.CarComposeActivity
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:11:9-18:20
+	android:screenOrientation
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:14:13-51
+	android:hardwareAccelerated
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:16:13-47
+	android:exported
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:12:13-36
+	android:configChanges
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:15:13-74
+	android:theme
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:13:13-53
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:17:13-56
+activity#pub.gll.onepeas.module.car.activity.CustomViewAct
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:19:9-21:54
+	android:theme
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:21:13-51
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:20:13-51
+provider#androidx.startup.InitializationProvider
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:22:9-31:20
+	tools:node
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:26:13-31
+	android:authorities
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:24:13-68
+	android:exported
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:25:13-37
+	tools:replace
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:27:13-48
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:23:13-67
+meta-data#pub.gll.onepeas.module.car.init.AppInitializer
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:28:13-30:52
+	android:value
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:30:17-49
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml:29:17-78
+uses-sdk
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/ModuleCar/src/main/AndroidManifest.xml

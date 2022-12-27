@@ -1,0 +1,59 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:2:1-26:12
+	package
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:2:1-26:12
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:3:5-51
+	xmlns:android
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:5:5-25:19
+	android:supportsRtl
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:14:9-35
+	android:label
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:9:9-41
+	android:fullBackupContent
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:8:9-54
+	android:roundIcon
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:12:9-54
+	android:icon
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:11:9-43
+	android:allowBackup
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:15:9-49
+	android:networkSecurityConfig
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:13:9-69
+	android:dataExtractionRules
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:7:9-65
+	android:usesCleartextTraffic
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:10:9-44
+activity#pub.gll.onepeas.libbase.webview.WebActivity
+ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:18:9-23:20
+	android:hardwareAccelerated
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:22:13-47
+	android:configChanges
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:21:13-74
+	android:theme
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:20:13-44
+	android:name
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml:19:13-71
+uses-sdk
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+		ADDED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml
+		INJECTED from /Users/gll/StudioProjects/OnePeasToDo/LibBase/src/main/AndroidManifest.xml

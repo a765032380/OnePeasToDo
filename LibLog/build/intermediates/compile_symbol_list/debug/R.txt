@@ -1,0 +1,6 @@
+int id mLogRecycler 0x0
+int id mTVClear 0x0
+int id mTVState 0x0
+int id tag 0x0
+int layout hilog_item 0x0
+int layout hilog_view 0x0

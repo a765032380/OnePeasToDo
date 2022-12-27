@@ -1,0 +1,41 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="pub.gll.onepeas.module.video" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="24"
+6-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="33" />
+7-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml
+8
+9    <application>
+9-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:4:5-21:19
+10        <activity
+10-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:6:9-10:39
+11            android:name="pub.gll.modulevideo.VideoListAct"
+11-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:9:13-60
+12            android:configChanges="orientation|screenSize"
+12-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:7:13-59
+13            android:exported="true"
+13-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:10:13-36
+14            android:hardwareAccelerated="true" />
+14-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:8:13-47
+15        <activity
+15-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:12:9-16:39
+16            android:name="pub.gll.modulevideo.video.PlayActivity"
+16-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:15:13-66
+17            android:configChanges="orientation|screenSize"
+17-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:13:13-59
+18            android:exported="true"
+18-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:16:13-36
+19            android:hardwareAccelerated="true" />
+19-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:14:13-47
+20        <activity
+20-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:18:9-20:39
+21            android:name="pub.gll.modulevideo.download.DownloadListActivity"
+21-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:19:13-77
+22            android:exported="true" />
+22-->/Users/gll/StudioProjects/OnePeasToDo/ModuleVideo/src/main/AndroidManifest.xml:20:13-36
+23    </application>
+24
+25</manifest>

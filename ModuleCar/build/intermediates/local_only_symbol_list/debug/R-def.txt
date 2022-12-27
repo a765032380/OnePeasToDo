@@ -1,0 +1,22 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+id errorMsg
+id mCustomView
+id mIVIcon
+id mRecyclerView
+id mSwipeRefreshLayout
+id mTVTitle
+id progressBar
+id retryButton
+layout activity_car
+layout activity_custom
+layout carbrand_item
+layout network_state_item
+string app_name
