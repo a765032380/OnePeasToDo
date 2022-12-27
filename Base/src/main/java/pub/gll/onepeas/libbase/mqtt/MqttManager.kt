@@ -32,27 +32,27 @@ object MqttManager {
      * 连接
      */
     fun client(mqttOptions: MqttOptions){
-        MqttClient.mqttClient(mqttOptions)
+        MyMqttClient.mqttClient(mqttOptions)
     }
 
     /**
      * 重新连接
      */
     fun reClient(){
-        MqttClient.reClient()
+        MyMqttClient.reClient()
     }
 
     /**
      * 断开连接
      */
     fun disconnect(){
-        MqttClient.disconnect()
+        MyMqttClient.disconnect()
     }
 
     /**
      * 判断是否是在连接状态
      */
-    fun isConnected() = MqttClient.isConnected()
+    fun isConnected() = MyMqttClient.isConnected()
 
 
     /**
@@ -62,9 +62,9 @@ object MqttManager {
      */
     fun publish(str:String,pubTopic:String?=null){
         if (pubTopic==null){
-            MqttClient.publish(str)
+            MyMqttClient.publish(str)
         }else{
-            MqttClient.publish(str, pubTopic)
+            MyMqttClient.publish(str, pubTopic)
         }
     }
 }

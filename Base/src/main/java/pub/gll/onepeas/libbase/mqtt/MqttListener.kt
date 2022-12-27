@@ -8,5 +8,6 @@ interface MqttListener{
 enum class ClientState{
     ConnectedStart,//正在连接中
     ConnectedSuccess,//已连接
+    ConnectedDisconnect,//已断开连接
     ConnectedFail,//连接失败
 }

@@ -4,14 +4,14 @@ import android.util.Log
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 
-internal object MqttClient {
+internal object MyMqttClient {
     private const val TAG = "MqttClientUtil"
 
     private val persistence = MemoryPersistence()
     private var mMqttOptions: MqttOptions?=null
 
-    private val client :MqttAsyncClient by lazy {
-        MqttAsyncClient(mMqttOptions?.broker, "Client_${mMqttOptions?.uid}", persistence)
+    private val client :MqttClient by lazy {
+        MqttClient(mMqttOptions?.broker, "Client_${mMqttOptions?.uid}", persistence)
     }
 
     /**
@@ -29,8 +29,8 @@ internal object MqttClient {
         connOpts.isCleanSession = true
         return connOpts
     }
-    fun isConnected() = client.isConnected
-
+    fun isConnected() = init&&client.isConnected
+    var init = false
 
     fun mqttClient(mqttOptions: MqttOptions){
         if (mqttOptions.uid==0L){
@@ -45,22 +45,29 @@ internal object MqttClient {
         try {
             // MQTT 连接选项
             // 设置回调
+            init = true
             client.setCallback(MMqttCallback())
             // 建立连接
             Log.e(TAG,"Connecting to broker: ${mMqttOptions?.broker}")
-            client.connect(options(), "${mMqttOptions?.uid}",object :IMqttActionListener{
-                override fun onSuccess(asyncActionToken: IMqttToken?) {
-                    mqttOptions.subTopic.forEach {
-                        client.subscribe(it, mqttOptions.qos)
-                    }
-                    Log.e(TAG,"Connected")
-                    MqttManager.notifyClintStateListener(ClientState.ConnectedSuccess)
-                }
-
-                override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                    MqttManager.notifyClintStateListener(ClientState.ConnectedFail)
-                }
-            })
+//            client.connect(options(), "${mMqttOptions?.uid}",object :IMqttActionListener{
+//                override fun onSuccess(asyncActionToken: IMqttToken?) {
+//                    mqttOptions.subTopic.forEach {
+//                        client.subscribe(it, mqttOptions.qos)
+//                    }
+//                    Log.e(TAG,"Connected")
+//                    MqttManager.notifyClintStateListener(ClientState.ConnectedSuccess)
+//                }
+//
+//                override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
+//                    MqttManager.notifyClintStateListener(ClientState.ConnectedFail)
+//                }
+//            })
+            client.connect(options())
+            mqttOptions.subTopic.forEach {
+                client.subscribe(it, mqttOptions.qos)
+            }
+            Log.e(TAG,"Connected")
+            MqttManager.notifyClintStateListener(ClientState.ConnectedSuccess)
         } catch (me: MqttException) {
             Log.e(TAG,"reason " + me.reasonCode)
             Log.e(TAG,"msg " + me.message)
@@ -85,10 +92,13 @@ internal object MqttClient {
         try{
             mMqttOptions = null
             client.disconnect()
+            MqttManager.notifyClintStateListener(ClientState.ConnectedDisconnect)
             Log.e(TAG,"Disconnected")
-            client.close()
+//            client.close()
         }catch(e:Exception){
-
+            e.message?.let {
+                Log.e(TAG, it)
+            }
         }
     }
 
@@ -112,7 +122,7 @@ internal object MqttClient {
 }
 class MMqttCallback:MqttCallback{
     override fun connectionLost(cause: Throwable?) {
-        MqttClient.reClient()
+        MyMqttClient.reClient()
     }
 
     override fun messageArrived(topic: String?, message: MqttMessage?) {
