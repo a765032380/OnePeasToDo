@@ -14,15 +14,15 @@
 .cxx
 local.properties
 
-.app/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Sample/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleHome/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleMine/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleCookbook/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleEsp8266/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleAccount/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleWidget/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleCar/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleComic/src/main/java/pub/gll/onepeas/todo/MyApp.kt
-.Module/ModuleVideo/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/app/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Sample/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleHome/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleMine/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleCookbook/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleEsp8266/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleAccount/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleWidget/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleCar/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleComic/src/main/java/pub/gll/onepeas/todo/MyApp.kt
+/Module/ModuleVideo/src/main/java/pub/gll/onepeas/todo/MyApp.kt
 
