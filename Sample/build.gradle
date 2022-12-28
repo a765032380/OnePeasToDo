@@ -1,5 +1,4 @@
-apply plugin:  'com.android.application'
-apply from: '../Module/base_module.gradle'
+apply from: '../base_module.gradle'
 
 android {
     namespace 'pub.gll.onepeas.module.sample'

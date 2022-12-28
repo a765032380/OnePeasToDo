@@ -1,9 +1,8 @@
 plugins {
-    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: '../Module/base_module.gradle'
+apply from: '../base_module.gradle'
 
 android {
     namespace 'pub.gll.onepeas.libbase'

@@ -1,8 +1,7 @@
+import javax.xml.namespace.QName
 
 //根据是否独立运行，将模块作为apk还是module
-apply plugin: 'com.android.application'
-
-apply from: '../Module/base_module.gradle'
+apply from: '../base_module.gradle'
 apply from: '../script.gradle'
 
 android {
@@ -13,14 +12,14 @@ android {
 
 dependencies {
     implementation project(path: ':Base')
-    implementation project (path:":Module:ModuleAccount")
-    implementation project (path:":Module:ModuleCar")
-    implementation project (path:":Module:ModuleComic")
-    implementation project (path:":Module:ModuleCookbook")
-    implementation project (path:":Module:ModuleMine")
-    implementation project (path:":Module:ModuleWidget")
-    implementation project (path:":Module:ModuleEsp8266")
-    implementation project (path:":Module:ModuleVideo")
+    implementation project(path: ":Module:ModuleAccount")
+    implementation project(path: ":Module:ModuleCar")
+    implementation project(path: ":Module:ModuleComic")
+    implementation project(path: ":Module:ModuleCookbook")
+    implementation project(path: ":Module:ModuleMine")
+    implementation project(path: ":Module:ModuleWidget")
+    implementation project(path: ":Module:ModuleEsp8266")
+    implementation project(path: ":Module:ModuleVideo")
 
     implementation project(path: ':Annotation:LibAptAnnotation')
     kapt project(path: ':Annotation:LibAptProcessor')
