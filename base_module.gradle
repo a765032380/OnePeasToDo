@@ -26,13 +26,14 @@ task generateSources(type: Task) {
     println "----------22222-------------"
     outputs.dir outputDir
     println "----------33333-------------"
-    doFirst {
-        println "----------deleteOutputDir=${deleteOutputDir}----------"
-        if (deleteOutputDir.exists()) {
-            println "----------deleteOutputDir-------------"
-            deleteOutputDir.delete()
-        }
 
+    println "----------deleteOutputDir=${deleteOutputDir}----------"
+    if (deleteOutputDir.exists()) {
+        println "----------deleteOutputDir-------------"
+        deleteOutputDir.delete()
+    }
+
+    doFirst {
         if (isAppPlugin) {
             outputDir.exists() || outputDir.mkdirs()
             new File(outputDir, "MyApp.kt").write("package pub.gll.onepeas.todo\n" +
