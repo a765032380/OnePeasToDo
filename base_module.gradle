@@ -21,8 +21,11 @@ println "${getProjectDir()}-----isAppPlugin=${isAppPlugin}-----isUnSingleModule=
 
 task generateSources(type: Task) {
     def deleteOutputDir = file("${getProjectDir()}/src/main/java/pub/gll/onepeas/todo/MyApp.kt")
+    println "----------11111-------------"
     def outputDir = file("${getProjectDir()}/src/main/java/pub/gll/onepeas/todo")
+    println "----------22222-------------"
     outputs.dir outputDir
+    println "----------33333-------------"
     doFirst {
         println "----------deleteOutputDir=${deleteOutputDir}----------"
         if (deleteOutputDir.exists()) {
