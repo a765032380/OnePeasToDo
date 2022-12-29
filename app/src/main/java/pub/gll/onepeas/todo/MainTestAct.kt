@@ -14,9 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import pub.gll.libaptannotation.Print
 import pub.gll.onepeas.libbase.Test
-import pub.gll.onepeas.module.car.activity.CarComposeActivity
-import pub.gll.onepeas.module.car.activity.CustomViewAct
-import pub.gll.onepeas.module.comic.comic.ComicMainAct
 import pub.gll.onepeas.libbase.arouter.Launch
 
 class MainTestAct : ComponentActivity() {
@@ -42,17 +39,17 @@ fun MainCompose(activity: Activity) {
 
     Column(modifier = Modifier.verticalScroll(scrollState)) {
         Button(onClick = {
-            activity.startActivity(Intent(activity, CarComposeActivity::class.java))
+            Launch.carCompose()
         }) {
             Text(text = "CarComposeActivity")
         }
         Button(onClick = {
-            activity.startActivity(Intent(activity, CustomViewAct::class.java))
+            Launch.customView()
         }) {
             Text(text = "CustomViewAct")
         }
         Button(onClick = {
-            activity.startActivity(Intent(activity, ComicMainAct::class.java))
+            Launch.comicMain()
         }) {
             Text(text = "ComicMainAct")
         }

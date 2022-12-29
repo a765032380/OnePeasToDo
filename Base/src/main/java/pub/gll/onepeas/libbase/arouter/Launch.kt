@@ -29,6 +29,20 @@ object Launch {
             .build(ARouterPath.WEB_ACTIVITY)
             .withString("url",url)
             .navigation()
-
+    }
+    fun carCompose(){
+        ARouter.getInstance()
+            .build(ARouterPath.ACT_CAR_COMPOSE)
+            .navigation()
+    }
+    fun customView(){
+        ARouter.getInstance()
+            .build(ARouterPath.ACT_CUSTOM_VIEW)
+            .navigation()
+    }
+    fun comicMain(){
+        ARouter.getInstance()
+            .build(ARouterPath.ACT_COMIC_MAIN)
+            .navigation()
     }
 }

@@ -8,7 +8,6 @@ if ((rootProject.singleModule || isUnSingleModule) && !isFilter) {
 } else {
     apply plugin: 'com.android.library'
 }
-def isAppPlugin = project.plugins.hasPlugin('com.android.application')
 
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-android'
@@ -17,41 +16,50 @@ apply plugin: "kotlin-parcelize"
 apply plugin: "dagger.hilt.android.plugin"
 apply plugin: "androidx.navigation.safeargs.kotlin"//用于navigation传参的时候一种安全防护,非空，类型判断等。
 
-println "${getProjectDir()}-----isAppPlugin=${isAppPlugin}-----isUnSingleModule=${isUnSingleModule}-----isFilter=${isFilter}"
+println "${getProjectDir()}-----isAppPlugin=${project.plugins.hasPlugin('com.android.application')}-----isUnSingleModule=${isUnSingleModule}-----isFilter=${isFilter}"
 
-task generateSources(type: Task) {
+task deleteMyApp() {
     def deleteOutputDir = file("${getProjectDir()}/src/main/java/pub/gll/onepeas/todo/MyApp.kt")
-    println "----------11111-------------"
-    def outputDir = file("${getProjectDir()}/src/main/java/pub/gll/onepeas/todo")
-    println "----------22222-------------"
-    outputs.dir outputDir
-    println "----------33333-------------"
-
     println "----------deleteOutputDir=${deleteOutputDir}----------"
     if (deleteOutputDir.exists()) {
         println "----------deleteOutputDir-------------"
         deleteOutputDir.delete()
-    }
-
-    doFirst {
-        if (isAppPlugin) {
-            outputDir.exists() || outputDir.mkdirs()
-            new File(outputDir, "MyApp.kt").write("package pub.gll.onepeas.todo\n" +
-                    "\n" +
-                    "import dagger.hilt.android.HiltAndroidApp\n" +
-                    "import pub.gll.onepeas.libbase.BaseApp\n" +
-                    "@HiltAndroidApp\n" +
-                    "open class MyApp : BaseApp() {}")
-
-        }
     }
 }
 afterEvaluate {
     //如果是单独运行的需要动态添加MyApp
     //1、找到需要的构建流程 Task
     def mergeDebugResources = tasks.findByName("preBuild")
+    deleteMyApp.doFirst {
+        println "----------isAppPlugin=${project.plugins.hasPlugin('com.android.application')}-------------"
+        if (project.plugins.hasPlugin('com.android.application')) {
+            def outputDir = file("${getProjectDir()}/src/main/java/pub/gll/onepeas/todo")
+//            outputs.dir outputDir
+            outputDir.exists() || outputDir.mkdirs()
+            println "----------addMyApp-------------"
+            new File(outputDir, "MyApp.kt").write("package pub.gll.onepeas.todo\n" +
+                    "\n" +
+                    "import dagger.hilt.android.HiltAndroidApp\n" +
+                    "import pub.gll.onepeas.libbase.BaseApp\n" +
+                    "@HiltAndroidApp\n" +
+                    "open class MyApp : BaseApp() {}")
+            println "----------addMyAppSuccess-------------"
+        }
+    }
     //2、通过 dependsOn 指定
-    mergeDebugResources.dependsOn(generateSources)
+    mergeDebugResources.dependsOn(deleteMyApp)
+}
+
+static def addLauncher(activity){
+    def nameTag = "android:name"
+    if (activity.attributes().get("android:label")!=null){
+        activity.attributes().put("android:exported", true)
+        def intentFilter = activity.appendNode("intent-filter")
+        def action = intentFilter.appendNode("action")
+        def category = intentFilter.appendNode("category")
+        action.attributes().put(nameTag, "android.intent.action.MAIN")
+        category.attributes().put(nameTag, "android.intent.category.LAUNCHER")
+    }
 }
 android {
     compileSdk rootProject.compile_sdk
@@ -69,7 +77,6 @@ android {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
                 arg("room.schemaLocation": "$projectDir/schemas".toString())
-
             }
         }
 
@@ -98,20 +105,8 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-//            if (rootProject.singleModule) {
-//                //独立运行
-//                manifest.srcFile 'src/main/single/AndroidManifest.xml'
-//            } else {
-//                //合并到宿主
-//                manifest.srcFile 'src/main/AndroidManifest.xml'
-//                resources {
-//                    //正式版本时，排除alone文件夹下所有调试文件
-//                    exclude 'src/main/single/*'
-//                }
-//            }
         }
     }
-
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -143,7 +138,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    if (isAppPlugin) {
+    if (project.plugins.hasPlugin('com.android.application')) {
         applicationVariants.all { variant ->
             variant.outputs.all { output ->
                 def processorTask = output.processManifestProvider.getOrNull()
@@ -168,7 +163,6 @@ android {
                         e.printStackTrace()
                         return
                     }
-                    println(".....................11111......................")
                     def festmaniOutFile = new File(multiApkManifestOutputDirectory.get().getAsFile(), "AndroidManifest.xml")
                     println(".....................festmaniOutFile=${festmaniOutFile}......................")
                     def festmaniXml = new groovy.xml.XmlParser(false, false).parseText(festmaniOutFile.getText("UTF-8"))
@@ -178,18 +172,28 @@ android {
                         festmaniXml.application[0].attributes().put(nameTag, "pub.gll.onepeas.todo.MyApp")
                     }
                     def nodes = festmaniXml.application[0].'*'.findAll {
-                        it.name() == 'activity' && it.attribute(exportedTag) == null
+                        it.name() == 'activity'
                     }
                     println(".....................nodes=${nodes}......................")
-                    def activity = nodes[0]
-                    activity.attributes().put("android:exported", true)
-                    def intentFilter = activity.appendNode("intent-filter")
-                    def action = intentFilter.appendNode("action")
-                    def category = intentFilter.appendNode("category")
-                    action.attributes().put(nameTag, "android.intent.action.MAIN")
-                    category.attributes().put(nameTag, "android.intent.category.LAUNCHER")
-
-
+                    def haveMain =  false
+                    nodes.each { activity ->
+                        def metaData = activity.'*'.findAll {
+                            it.name() == 'meta-data'
+                        }
+                        metaData.each {
+                            if (it.attributes().get("android:value")=="true"&&it.attributes().get("android:name")=="main"){
+                                if (haveMain){
+                                    throw Exception("只允许存在一个main,请检查<meta-data android:name=\"main\" android:value=\"true\" />是否多次配置")
+                                }
+                                haveMain = true
+                                addLauncher(activity)
+                            }
+                        }
+                    }
+                    println(".....................haveMain=${haveMain}......................")
+                    nodes.each {activity->
+                        addLauncher(activity)
+                    }
                     festmaniXml.application[0].attributes().each {
                         println(".....................${it}......................")
                     }

@@ -15,7 +15,11 @@ object ARouterPath {
 
     const val WEB_ACTIVITY  = "/web/activity"
 
-    const val ESP_8266  = "/act/esp8266"
+    const val ESP_8266  = "/esp/esp8266"
+
+    const val ACT_CAR_COMPOSE  = "/car/car_compose"
+    const val ACT_CUSTOM_VIEW  = "/car/custom_view"
+    const val ACT_COMIC_MAIN  = "/comic/comic_main"
 
 
 

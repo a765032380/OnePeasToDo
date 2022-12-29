@@ -24,16 +24,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import dagger.hilt.android.AndroidEntryPoint
 import pub.gll.onepeas.lib.log.ext.e
+import pub.gll.onepeas.libbase.arouter.ARouterPath
 import pub.gll.onepeas.module.comic.comic.bookshelf.ComicBookShelf
 import pub.gll.onepeas.module.comic.comic.home.ComicHome
 import pub.gll.onepeas.module.comic.comic.mine.ComicMine
 import pub.gll.onepeas.module.comic.comic.ui.ComicBottomNavBarView
 
 @AndroidEntryPoint
+@Route(path = ARouterPath.ACT_COMIC_MAIN)
 class ComicMainAct : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

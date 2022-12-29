@@ -25,6 +25,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -33,6 +34,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import pub.gll.onepeas.libbase.Test
 import pub.gll.onepeas.libbase.activity.BaseActivity
+import pub.gll.onepeas.libbase.arouter.ARouterPath
 import pub.gll.onepeas.libbase.arouter.Launch
 import pub.gll.onepeas.libbase.ui.theme.AppTheme
 import pub.gll.onepeas.module.car.model.CarBrandItemModel
@@ -41,6 +43,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
+@Route(path = ARouterPath.ACT_CAR_COMPOSE)
 class CarComposeActivity : BaseActivity() {
 
     @Inject
