@@ -13,6 +13,9 @@
       <module name="OnePeasToDo.buildSrcPlugin" target="11" />
       <module name="OnePeasToDo.buildSrcPlugin.main" target="11" />
       <module name="OnePeasToDo.buildSrcPlugin.test" target="11" />
+      <module name="OnePeasToDo.customtransformplugin" target="11" />
+      <module name="OnePeasToDo.customtransformplugin.main" target="11" />
+      <module name="OnePeasToDo.customtransformplugin.test" target="11" />
       <module name="OnePeasToDo.Lib.LibLog" target="11" />
       <module name="OnePeasToDo.Lib.LibUpLoad" target="11" />
       <module name="OnePeasToDo.LibAptAnnotation.main" target="1.8" />

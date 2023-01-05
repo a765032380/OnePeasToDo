@@ -33,7 +33,7 @@ abstract class BaseApp:Application(), ImageLoaderFactory {
         }
         ARouter.init(this)
         DataStoreUtils.init(this)
-//        initLog()
+        initLog()
         initWebView()
     }
     private fun initLog(){

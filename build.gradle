@@ -48,7 +48,9 @@ buildscript {
         maven { url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
 
         maven { url 'https://artifact.bytedance.com/repository/pangle' }
-
+        maven {
+            url('repo')
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
@@ -80,6 +82,7 @@ buildscript {
         //Github 创建的 release: 1.0.2, 1.0.3 是通过 maven-publish 插件上传的
         //引入插件依赖 使用 maven-publish 插件上传 JitPack 获取的依赖地址，特别长
         //implementation 'com.github.sweetying520.GradleDemo:CustomPlugin.gradle.plugin:1.0.3'
+//        classpath "com.dream:customtransformplugin:1.0.0"
     }
 }
 

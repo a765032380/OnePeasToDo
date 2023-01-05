@@ -25,4 +25,12 @@ dependencies {
 
     implementation project(path: ':Annotation:LibAptAnnotation')
     kapt project(path: ':Annotation:LibAptProcessor')
+
+
+    //asm
+    implementation 'org.ow2.asm:asm:9.2'
+    implementation 'org.ow2.asm:asm-util:9.2'
+    implementation 'org.ow2.asm:asm-commons:9.2'
+    //Javassist
+    implementation 'org.javassist:javassist:3.29.2-GA'
 }
