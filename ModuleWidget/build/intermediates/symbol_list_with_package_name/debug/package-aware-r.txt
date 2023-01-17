@@ -1,3 +1,0 @@
-pub.gll.onepeas.module.widget
-drawable icon_desktop
-xml first_glance_widget_info

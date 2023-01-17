@@ -1,2 +1,0 @@
-pub.gll.onepeas.module.video
-drawable baseline_arrow_back_24

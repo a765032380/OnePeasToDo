@@ -1,7 +1,0 @@
-pub.gll.onepeas.lib.log
-id mLogRecycler
-id mTVClear
-id mTVState
-id tag
-layout hilog_item
-layout hilog_view
